@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A63E38318CF019A0087189A /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E37E18CF019A0087189A /* MFSideMenuContainerViewController.m */; };
+		3A63E38418CF019A0087189A /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38018CF019A0087189A /* MFSideMenuShadow.m */; };
+		3A63E38518CF019A0087189A /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38218CF019A0087189A /* UIViewController+MFSideMenuAdditions.m */; };
+		3A63E38918CF01B10087189A /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38718CF01B10087189A /* SideMenuViewController.m */; };
+		3A63E38A18CF01B10087189A /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A63E38818CF01B10087189A /* SideMenuViewController.xib */; };
+		3A63E38F18CF02B10087189A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38D18CF02B10087189A /* MainViewController.m */; };
+		3A63E39018CF02B10087189A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A63E38E18CF02B10087189A /* MainViewController.xib */; };
+		3A9A5EC218A0F682008034C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC118A0F682008034C6 /* Foundation.framework */; };
+		3A9A5EC418A0F682008034C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC318A0F682008034C6 /* CoreGraphics.framework */; };
+		3A9A5EC618A0F682008034C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC518A0F682008034C6 /* UIKit.framework */; };
+		3A9A5ECC18A0F682008034C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5ECA18A0F682008034C6 /* InfoPlist.strings */; };
+		3A9A5ECE18A0F682008034C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A5ECD18A0F682008034C6 /* main.m */; };
+		3A9A5ED218A0F682008034C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A5ED118A0F682008034C6 /* AppDelegate.m */; };
+		3A9A5ED418A0F682008034C6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5ED318A0F682008034C6 /* Images.xcassets */; };
+		3A9A5EDB18A0F682008034C6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EDA18A0F682008034C6 /* XCTest.framework */; };
+		3A9A5EDC18A0F682008034C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC118A0F682008034C6 /* Foundation.framework */; };
+		3A9A5EDD18A0F682008034C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC518A0F682008034C6 /* UIKit.framework */; };
+		3A9A5EE518A0F682008034C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5EE318A0F682008034C6 /* InfoPlist.strings */; };
+		3A9A5EE718A0F682008034C6 /* TravelWorldPassportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A5EE618A0F682008034C6 /* TravelWorldPassportTests.m */; };
+		3A9A5EF518A0F6DA008034C6 /* TWPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A5EF318A0F6DA008034C6 /* TWPLoginViewController.m */; };
+		3A9A5EF618A0F6DA008034C6 /* TWPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5EF418A0F6DA008034C6 /* TWPLoginViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3A9A5EDE18A0F682008034C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A9A5EB618A0F682008034C6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A9A5EBD18A0F682008034C6;
+			remoteInfo = TravelWorldPassport;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3A63E37C18CF019A0087189A /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		3A63E37D18CF019A0087189A /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		3A63E37E18CF019A0087189A /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		3A63E37F18CF019A0087189A /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
+		3A63E38018CF019A0087189A /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
+		3A63E38118CF019A0087189A /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
+		3A63E38218CF019A0087189A /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		3A63E38618CF01B10087189A /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideMenuViewController.h; path = "Controllers/Side Menu/SideMenuViewController.h"; sourceTree = "<group>"; };
+		3A63E38718CF01B10087189A /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideMenuViewController.m; path = "Controllers/Side Menu/SideMenuViewController.m"; sourceTree = "<group>"; };
+		3A63E38818CF01B10087189A /* SideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SideMenuViewController.xib; path = "Controllers/Side Menu/SideMenuViewController.xib"; sourceTree = "<group>"; };
+		3A63E38C18CF02B10087189A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = "Controllers/Main View/MainViewController.h"; sourceTree = "<group>"; };
+		3A63E38D18CF02B10087189A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = "Controllers/Main View/MainViewController.m"; sourceTree = "<group>"; };
+		3A63E38E18CF02B10087189A /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = "Controllers/Main View/MainViewController.xib"; sourceTree = "<group>"; };
+		3A9A5EBE18A0F682008034C6 /* TravelWorldPassport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelWorldPassport.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9A5EC118A0F682008034C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3A9A5EC318A0F682008034C6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3A9A5EC518A0F682008034C6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3A9A5EC918A0F682008034C6 /* TravelWorldPassport-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TravelWorldPassport-Info.plist"; sourceTree = "<group>"; };
+		3A9A5ECB18A0F682008034C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A9A5ECD18A0F682008034C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A9A5ECF18A0F682008034C6 /* TravelWorldPassport-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TravelWorldPassport-Prefix.pch"; sourceTree = "<group>"; };
+		3A9A5ED018A0F682008034C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3A9A5ED118A0F682008034C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3A9A5ED318A0F682008034C6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3A9A5ED918A0F682008034C6 /* TravelWorldPassportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelWorldPassportTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9A5EDA18A0F682008034C6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		3A9A5EE218A0F682008034C6 /* TravelWorldPassportTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TravelWorldPassportTests-Info.plist"; sourceTree = "<group>"; };
+		3A9A5EE418A0F682008034C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A9A5EE618A0F682008034C6 /* TravelWorldPassportTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TravelWorldPassportTests.m; sourceTree = "<group>"; };
+		3A9A5EF218A0F6DA008034C6 /* TWPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWPLoginViewController.h; path = Controllers/Login/TWPLoginViewController.h; sourceTree = "<group>"; };
+		3A9A5EF318A0F6DA008034C6 /* TWPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWPLoginViewController.m; path = Controllers/Login/TWPLoginViewController.m; sourceTree = "<group>"; };
+		3A9A5EF418A0F6DA008034C6 /* TWPLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWPLoginViewController.xib; path = Controllers/Login/TWPLoginViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A9A5EBB18A0F682008034C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9A5EC418A0F682008034C6 /* CoreGraphics.framework in Frameworks */,
+				3A9A5EC618A0F682008034C6 /* UIKit.framework in Frameworks */,
+				3A9A5EC218A0F682008034C6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A9A5ED618A0F682008034C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9A5EDB18A0F682008034C6 /* XCTest.framework in Frameworks */,
+				3A9A5EDD18A0F682008034C6 /* UIKit.framework in Frameworks */,
+				3A9A5EDC18A0F682008034C6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A63E37918CF01380087189A /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				3A63E38618CF01B10087189A /* SideMenuViewController.h */,
+				3A63E38718CF01B10087189A /* SideMenuViewController.m */,
+				3A63E38818CF01B10087189A /* SideMenuViewController.xib */,
+			);
+			name = "Side Menu";
+			sourceTree = "<group>";
+		};
+		3A63E37A18CF01700087189A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3A63E37B18CF019A0087189A /* MFSideMenu */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		3A63E37B18CF019A0087189A /* MFSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				3A63E37C18CF019A0087189A /* MFSideMenu.h */,
+				3A63E37D18CF019A0087189A /* MFSideMenuContainerViewController.h */,
+				3A63E37E18CF019A0087189A /* MFSideMenuContainerViewController.m */,
+				3A63E37F18CF019A0087189A /* MFSideMenuShadow.h */,
+				3A63E38018CF019A0087189A /* MFSideMenuShadow.m */,
+				3A63E38118CF019A0087189A /* UIViewController+MFSideMenuAdditions.h */,
+				3A63E38218CF019A0087189A /* UIViewController+MFSideMenuAdditions.m */,
+			);
+			name = MFSideMenu;
+			path = Utils/MFSideMenu;
+			sourceTree = "<group>";
+		};
+		3A63E38B18CF02930087189A /* Main View */ = {
+			isa = PBXGroup;
+			children = (
+				3A63E38C18CF02B10087189A /* MainViewController.h */,
+				3A63E38D18CF02B10087189A /* MainViewController.m */,
+				3A63E38E18CF02B10087189A /* MainViewController.xib */,
+			);
+			name = "Main View";
+			sourceTree = "<group>";
+		};
+		3A9A5EB518A0F682008034C6 = {
+			isa = PBXGroup;
+			children = (
+				3A9A5EC718A0F682008034C6 /* TravelWorldPassport */,
+				3A9A5EE018A0F682008034C6 /* TravelWorldPassportTests */,
+				3A9A5EC018A0F682008034C6 /* Frameworks */,
+				3A9A5EBF18A0F682008034C6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A9A5EBF18A0F682008034C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A9A5EBE18A0F682008034C6 /* TravelWorldPassport.app */,
+				3A9A5ED918A0F682008034C6 /* TravelWorldPassportTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A9A5EC018A0F682008034C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A9A5EC118A0F682008034C6 /* Foundation.framework */,
+				3A9A5EC318A0F682008034C6 /* CoreGraphics.framework */,
+				3A9A5EC518A0F682008034C6 /* UIKit.framework */,
+				3A9A5EDA18A0F682008034C6 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A9A5EC718A0F682008034C6 /* TravelWorldPassport */ = {
+			isa = PBXGroup;
+			children = (
+				3A63E37A18CF01700087189A /* Utils */,
+				3A9A5EF018A0F691008034C6 /* Controllers */,
+				3A9A5ED018A0F682008034C6 /* AppDelegate.h */,
+				3A9A5ED118A0F682008034C6 /* AppDelegate.m */,
+				3A9A5ED318A0F682008034C6 /* Images.xcassets */,
+				3A9A5EC818A0F682008034C6 /* Supporting Files */,
+			);
+			path = TravelWorldPassport;
+			sourceTree = "<group>";
+		};
+		3A9A5EC818A0F682008034C6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A9A5EC918A0F682008034C6 /* TravelWorldPassport-Info.plist */,
+				3A9A5ECA18A0F682008034C6 /* InfoPlist.strings */,
+				3A9A5ECD18A0F682008034C6 /* main.m */,
+				3A9A5ECF18A0F682008034C6 /* TravelWorldPassport-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A9A5EE018A0F682008034C6 /* TravelWorldPassportTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A9A5EE618A0F682008034C6 /* TravelWorldPassportTests.m */,
+				3A9A5EE118A0F682008034C6 /* Supporting Files */,
+			);
+			path = TravelWorldPassportTests;
+			sourceTree = "<group>";
+		};
+		3A9A5EE118A0F682008034C6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A9A5EE218A0F682008034C6 /* TravelWorldPassportTests-Info.plist */,
+				3A9A5EE318A0F682008034C6 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A9A5EF018A0F691008034C6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A63E38B18CF02930087189A /* Main View */,
+				3A63E37918CF01380087189A /* Side Menu */,
+				3A9A5EF118A0F6AD008034C6 /* Login */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3A9A5EF118A0F6AD008034C6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3A9A5EF218A0F6DA008034C6 /* TWPLoginViewController.h */,
+				3A9A5EF318A0F6DA008034C6 /* TWPLoginViewController.m */,
+				3A9A5EF418A0F6DA008034C6 /* TWPLoginViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A9A5EBD18A0F682008034C6 /* TravelWorldPassport */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A9A5EEA18A0F683008034C6 /* Build configuration list for PBXNativeTarget "TravelWorldPassport" */;
+			buildPhases = (
+				3A9A5EBA18A0F682008034C6 /* Sources */,
+				3A9A5EBB18A0F682008034C6 /* Frameworks */,
+				3A9A5EBC18A0F682008034C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TravelWorldPassport;
+			productName = TravelWorldPassport;
+			productReference = 3A9A5EBE18A0F682008034C6 /* TravelWorldPassport.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3A9A5ED818A0F682008034C6 /* TravelWorldPassportTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A9A5EED18A0F683008034C6 /* Build configuration list for PBXNativeTarget "TravelWorldPassportTests" */;
+			buildPhases = (
+				3A9A5ED518A0F682008034C6 /* Sources */,
+				3A9A5ED618A0F682008034C6 /* Frameworks */,
+				3A9A5ED718A0F682008034C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A9A5EDF18A0F682008034C6 /* PBXTargetDependency */,
+			);
+			name = TravelWorldPassportTests;
+			productName = TravelWorldPassportTests;
+			productReference = 3A9A5ED918A0F682008034C6 /* TravelWorldPassportTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A9A5EB618A0F682008034C6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Chirag Patel";
+				TargetAttributes = {
+					3A9A5ED818A0F682008034C6 = {
+						TestTargetID = 3A9A5EBD18A0F682008034C6;
+					};
+				};
+			};
+			buildConfigurationList = 3A9A5EB918A0F682008034C6 /* Build configuration list for PBXProject "TravelWorldPassport" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3A9A5EB518A0F682008034C6;
+			productRefGroup = 3A9A5EBF18A0F682008034C6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A9A5EBD18A0F682008034C6 /* TravelWorldPassport */,
+				3A9A5ED818A0F682008034C6 /* TravelWorldPassportTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A9A5EBC18A0F682008034C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A63E38A18CF01B10087189A /* SideMenuViewController.xib in Resources */,
+				3A9A5EF618A0F6DA008034C6 /* TWPLoginViewController.xib in Resources */,
+				3A63E39018CF02B10087189A /* MainViewController.xib in Resources */,
+				3A9A5ECC18A0F682008034C6 /* InfoPlist.strings in Resources */,
+				3A9A5ED418A0F682008034C6 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A9A5ED718A0F682008034C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9A5EE518A0F682008034C6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A9A5EBA18A0F682008034C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9A5EF518A0F6DA008034C6 /* TWPLoginViewController.m in Sources */,
+				3A63E38318CF019A0087189A /* MFSideMenuContainerViewController.m in Sources */,
+				3A63E38418CF019A0087189A /* MFSideMenuShadow.m in Sources */,
+				3A63E38F18CF02B10087189A /* MainViewController.m in Sources */,
+				3A63E38518CF019A0087189A /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				3A9A5ED218A0F682008034C6 /* AppDelegate.m in Sources */,
+				3A63E38918CF01B10087189A /* SideMenuViewController.m in Sources */,
+				3A9A5ECE18A0F682008034C6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A9A5ED518A0F682008034C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9A5EE718A0F682008034C6 /* TravelWorldPassportTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3A9A5EDF18A0F682008034C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A9A5EBD18A0F682008034C6 /* TravelWorldPassport */;
+			targetProxy = 3A9A5EDE18A0F682008034C6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3A9A5ECA18A0F682008034C6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A9A5ECB18A0F682008034C6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3A9A5EE318A0F682008034C6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A9A5EE418A0F682008034C6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A9A5EE818A0F683008034C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3A9A5EE918A0F683008034C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3A9A5EEB18A0F683008034C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
+				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3A9A5EEC18A0F683008034C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
+				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		3A9A5EEE18A0F683008034C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TravelWorldPassport.app/TravelWorldPassport";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TravelWorldPassportTests/TravelWorldPassportTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		3A9A5EEF18A0F683008034C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TravelWorldPassport.app/TravelWorldPassport";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
+				INFOPLIST_FILE = "TravelWorldPassportTests/TravelWorldPassportTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A9A5EB918A0F682008034C6 /* Build configuration list for PBXProject "TravelWorldPassport" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A9A5EE818A0F683008034C6 /* Debug */,
+				3A9A5EE918A0F683008034C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A9A5EEA18A0F683008034C6 /* Build configuration list for PBXNativeTarget "TravelWorldPassport" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A9A5EEB18A0F683008034C6 /* Debug */,
+				3A9A5EEC18A0F683008034C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A9A5EED18A0F683008034C6 /* Build configuration list for PBXNativeTarget "TravelWorldPassportTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A9A5EEE18A0F683008034C6 /* Debug */,
+				3A9A5EEF18A0F683008034C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A9A5EB618A0F682008034C6 /* Project object */;
+}
