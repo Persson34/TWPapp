@@ -7,7 +7,7 @@
 //
 
 #import "MKNetworkEngine.h"
-typedef void (^TWPResponse)(NSString* responseString,NSError *theError);
+typedef void (^TWPResponse)(NSData* responseString,NSError *theError);
 @interface TWPEngine : MKNetworkEngine {
     
 }

@@ -9,10 +9,19 @@
 #import "MainViewController.h"
 #import "SideMenuViewController.h"
 #import "MFSideMenu.h"
+#import "UIImageView+MKNetworkKitAdditions.h"
+#import "StampCell.h"
 
-@interface MainViewController ()
+
+@interface MainViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
+    __weak IBOutlet UICollectionView *stampsCollectionView;
     
+    __weak IBOutlet UIImageView *userprofileImgView;
+    __weak IBOutlet UILabel *usernameLabel;
+    __weak IBOutlet UILabel *stampCountLabel;
+    __weak IBOutlet UILabel *locationLabel;
+    __weak IBOutlet UILabel *followerCounLbl;
 }
 
 - (IBAction)menuBtnTapped:(id)sender;
@@ -34,7 +43,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [stampsCollectionView registerNib:[UINib nibWithNibName:@"StampCell" bundle:nil] forCellWithReuseIdentifier:@"StampCell"];
     // Do any additional setup after loading the view from its nib.
+    [self configureView];
+    SideMenuViewController *sideController = (SideMenuViewController*)[self.menuContainerViewController leftMenuViewController];
+    [sideController configureForUser:self.currentUser];
+    
 }
 
 - (IBAction)menuBtnTapped:(id)sender {
@@ -50,6 +64,43 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section
+{
+    return [self.currentUser.stamps count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    StampCell *cell =(StampCell*) [collectionView dequeueReusableCellWithReuseIdentifier:@"StampCell" forIndexPath:indexPath];
+    
+    [self configureCell:cell forItemAtIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)configureCell:(StampCell *)cell
+   forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Stamps *currentStamp = [self.currentUser.stamps objectAtIndex:indexPath.row];
+   // NSLog(@"Stamp details %@",currentStamp);
+    [cell configureForStamp:currentStamp];
+    
+}
+
+
+
+# pragma mark - UICustomization
+- (void)configureView {
+    
+    usernameLabel.text = self.currentUser.username;
+    stampCountLabel.text = self.currentUser.stampCount;
+    followerCounLbl.text = self.currentUser.followersCount;
+    [userprofileImgView setImageFromURL:[NSURL URLWithString:self.currentUser.userProfile]];
+    
 }
 
 @end

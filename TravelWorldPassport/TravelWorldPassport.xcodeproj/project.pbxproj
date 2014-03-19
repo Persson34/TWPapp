@@ -41,6 +41,13 @@
 		3AB37A7D18D0885300EFCDA2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A7218D0885300EFCDA2 /* Reachability.m */; };
 		3AB37A7F18D0886B00EFCDA2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB37A7E18D0886B00EFCDA2 /* QuartzCore.framework */; };
 		3AB37A8218D0888800EFCDA2 /* TWPEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A8118D0888800EFCDA2 /* TWPEngine.m */; };
+		8F1EFC9418D976EE00D1FE43 /* StampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9318D976EE00D1FE43 /* StampCell.m */; };
+		8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9518D9771100D1FE43 /* StampCell.xib */; };
+		8F519ECC18D9A0F000DE0B3C /* ADDeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F519ECB18D9A0F000DE0B3C /* ADDeviceUtil.m */; };
+		8FE6C64818D875070027DEB7 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64318D875060027DEB7 /* Location.m */; };
+		8FE6C64918D875070027DEB7 /* Stamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64518D875060027DEB7 /* Stamps.m */; };
+		8FE6C64A18D875070027DEB7 /* TWPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64718D875060027DEB7 /* TWPUser.m */; };
+		8FE6C64D18D876140027DEB7 /* ImageDownloadEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64C18D876140027DEB7 /* ImageDownloadEngine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +119,20 @@
 		3AB37A7E18D0886B00EFCDA2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3AB37A8018D0888800EFCDA2 /* TWPEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWPEngine.h; path = Network/TWPEngine.h; sourceTree = "<group>"; };
 		3AB37A8118D0888800EFCDA2 /* TWPEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWPEngine.m; path = Network/TWPEngine.m; sourceTree = "<group>"; };
+		8F1EFC9218D976EE00D1FE43 /* StampCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StampCell.h; path = "Controllers/Main View/StampCell.h"; sourceTree = "<group>"; };
+		8F1EFC9318D976EE00D1FE43 /* StampCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StampCell.m; path = "Controllers/Main View/StampCell.m"; sourceTree = "<group>"; };
+		8F1EFC9518D9771100D1FE43 /* StampCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StampCell.xib; path = "Controllers/Main View/StampCell.xib"; sourceTree = "<group>"; };
+		8F519ECA18D9A0F000DE0B3C /* ADDeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDeviceUtil.h; sourceTree = "<group>"; };
+		8F519ECB18D9A0F000DE0B3C /* ADDeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDeviceUtil.m; sourceTree = "<group>"; };
+		8FE6C64118D875060027DEB7 /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModels.h; sourceTree = "<group>"; };
+		8FE6C64218D875060027DEB7 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		8FE6C64318D875060027DEB7 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		8FE6C64418D875060027DEB7 /* Stamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stamps.h; sourceTree = "<group>"; };
+		8FE6C64518D875060027DEB7 /* Stamps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stamps.m; sourceTree = "<group>"; };
+		8FE6C64618D875060027DEB7 /* TWPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWPUser.h; sourceTree = "<group>"; };
+		8FE6C64718D875060027DEB7 /* TWPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPUser.m; sourceTree = "<group>"; };
+		8FE6C64B18D876140027DEB7 /* ImageDownloadEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloadEngine.h; sourceTree = "<group>"; };
+		8FE6C64C18D876140027DEB7 /* ImageDownloadEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloadEngine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +173,8 @@
 		3A63E37A18CF01700087189A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8F519ECA18D9A0F000DE0B3C /* ADDeviceUtil.h */,
+				8F519ECB18D9A0F000DE0B3C /* ADDeviceUtil.m */,
 				3A63E37B18CF019A0087189A /* MFSideMenu */,
 			);
 			name = Utils;
@@ -178,6 +201,9 @@
 				3A63E38C18CF02B10087189A /* MainViewController.h */,
 				3A63E38D18CF02B10087189A /* MainViewController.m */,
 				3A63E38E18CF02B10087189A /* MainViewController.xib */,
+				8F1EFC9218D976EE00D1FE43 /* StampCell.h */,
+				8F1EFC9318D976EE00D1FE43 /* StampCell.m */,
+				8F1EFC9518D9771100D1FE43 /* StampCell.xib */,
 			);
 			name = "Main View";
 			sourceTree = "<group>";
@@ -216,6 +242,7 @@
 		3A9A5EC718A0F682008034C6 /* TravelWorldPassport */ = {
 			isa = PBXGroup;
 			children = (
+				8FE6C64018D870F80027DEB7 /* Models */,
 				3AB37A5918D087FC00EFCDA2 /* Network */,
 				3A63E37A18CF01700087189A /* Utils */,
 				3A9A5EF018A0F691008034C6 /* Controllers */,
@@ -290,6 +317,8 @@
 				3AB37A7018D0885300EFCDA2 /* Reachability */,
 				3AB37A8018D0888800EFCDA2 /* TWPEngine.h */,
 				3AB37A8118D0888800EFCDA2 /* TWPEngine.m */,
+				8FE6C64B18D876140027DEB7 /* ImageDownloadEngine.h */,
+				8FE6C64C18D876140027DEB7 /* ImageDownloadEngine.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -324,6 +353,20 @@
 			);
 			name = Reachability;
 			path = Network/Reachability;
+			sourceTree = "<group>";
+		};
+		8FE6C64018D870F80027DEB7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8FE6C64118D875060027DEB7 /* DataModels.h */,
+				8FE6C64218D875060027DEB7 /* Location.h */,
+				8FE6C64318D875060027DEB7 /* Location.m */,
+				8FE6C64418D875060027DEB7 /* Stamps.h */,
+				8FE6C64518D875060027DEB7 /* Stamps.m */,
+				8FE6C64618D875060027DEB7 /* TWPUser.h */,
+				8FE6C64718D875060027DEB7 /* TWPUser.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +416,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Chirag Patel";
 				TargetAttributes = {
+					3A9A5EBD18A0F682008034C6 = {
+						DevelopmentTeam = FDW4F9TAMW;
+					};
 					3A9A5ED818A0F682008034C6 = {
 						TestTargetID = 3A9A5EBD18A0F682008034C6;
 					};
@@ -402,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A63E38A18CF01B10087189A /* SideMenuViewController.xib in Resources */,
+				8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */,
 				3A9A5EF618A0F6DA008034C6 /* TWPLoginViewController.xib in Resources */,
 				3A63E39018CF02B10087189A /* MainViewController.xib in Resources */,
 				3A9A5ECC18A0F682008034C6 /* InfoPlist.strings in Resources */,
@@ -425,9 +472,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AB37A7C18D0885300EFCDA2 /* MKNetworkOperation.m in Sources */,
+				8FE6C64D18D876140027DEB7 /* ImageDownloadEngine.m in Sources */,
+				8FE6C64818D875070027DEB7 /* Location.m in Sources */,
 				3AB37A7318D0885300EFCDA2 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				3A9A5EF518A0F6DA008034C6 /* TWPLoginViewController.m in Sources */,
 				3A63E38318CF019A0087189A /* MFSideMenuContainerViewController.m in Sources */,
+				8F1EFC9418D976EE00D1FE43 /* StampCell.m in Sources */,
 				3A63E38418CF019A0087189A /* MFSideMenuShadow.m in Sources */,
 				3A63E38F18CF02B10087189A /* MainViewController.m in Sources */,
 				3A63E38518CF019A0087189A /* UIViewController+MFSideMenuAdditions.m in Sources */,
@@ -435,9 +485,12 @@
 				3AB37A7618D0885300EFCDA2 /* NSDictionary+RequestEncoding.m in Sources */,
 				3A9A5ED218A0F682008034C6 /* AppDelegate.m in Sources */,
 				3AB37A7D18D0885300EFCDA2 /* Reachability.m in Sources */,
+				8FE6C64A18D875070027DEB7 /* TWPUser.m in Sources */,
 				3AB37A7418D0885300EFCDA2 /* NSData+MKBase64.m in Sources */,
 				3AB37A7B18D0885300EFCDA2 /* MKNetworkEngine.m in Sources */,
 				3A63E38918CF01B10087189A /* SideMenuViewController.m in Sources */,
+				8F519ECC18D9A0F000DE0B3C /* ADDeviceUtil.m in Sources */,
+				8FE6C64918D875070027DEB7 /* Stamps.m in Sources */,
 				3AB37A7918D0885300EFCDA2 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				3AB37A8218D0888800EFCDA2 /* TWPEngine.m in Sources */,
 				3A9A5ECE18A0F682008034C6 /* main.m in Sources */,
@@ -562,12 +615,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Naresh Kumar (GC9U6VDNGA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
 				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E1657A65-6804-4DA6-9E69-DCB37513E7F0";
+				PROVISIONING_PROFILE = "2B336B8B-F521-4948-8518-C1B5DC8B080C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -577,12 +630,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Naresh Kumar (GC9U6VDNGA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
 				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E1657A65-6804-4DA6-9E69-DCB37513E7F0";
+				PROVISIONING_PROFILE = "2B336B8B-F521-4948-8518-C1B5DC8B080C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataModels.h"
 
 @interface MainViewController : UIViewController
+{
+    
+}
+@property (nonatomic,strong)TWPUser *currentUser;
 
 @end

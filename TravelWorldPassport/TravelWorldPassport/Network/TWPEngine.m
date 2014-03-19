@@ -29,7 +29,7 @@
     NSDictionary *paramDict = @{@"email":userName,@"pwd":password};
     MKNetworkOperation *op = [self operationWithURLString:@"http://test.travelworldpassport.com/nl/app/login" params:paramDict httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        theResponse([completedOperation responseString],nil);
+        theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
         theResponse(nil,error);
     }];

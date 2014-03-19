@@ -7,10 +7,14 @@
 //
 
 #import "SideMenuViewController.h"
+#import "DataModels.h"
+#import "UIImageView+MKNetworkKitAdditions.h"
 
 @interface SideMenuViewController ()
 {
     
+    __weak IBOutlet UIImageView *userProfilePic;
+    __weak IBOutlet UILabel *usernameLabel;
 }
 
 - (IBAction)editBtnTapped:(id)sender;
@@ -35,6 +39,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)configureForUser:(TWPUser *)theUser{
+    [userProfilePic setImageFromURL:[NSURL URLWithString:theUser.userProfile]];
+    usernameLabel.text = theUser.username;
 }
 
 #pragma mark UI button actions

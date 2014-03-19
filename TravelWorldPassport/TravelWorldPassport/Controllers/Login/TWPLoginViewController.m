@@ -11,8 +11,11 @@
 #import "MBProgressHUD.h"
 #import "Reachability.h"
 #import "TWPEngine.h"
+#import "TWPUser.h"
+#import "ADDeviceUtil.h"
 
-@interface TWPLoginViewController ()
+
+@interface TWPLoginViewController ()<UITextFieldDelegate>
 {
     __weak IBOutlet UIView *loginView;
     __weak IBOutlet UITextField *unameField;
@@ -85,13 +88,16 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [unameField resignFirstResponder];
     [pwdField resignFirstResponder];
-    [[TWPEngine sharedEngine] loginWithUserName:unameField.text andPassword:pwdField.text onCompletion:^(NSString *responseData, NSError *theError) {
+    [[TWPEngine sharedEngine] loginWithUserName:unameField.text andPassword:pwdField.text onCompletion:^(NSData *responseData, NSError *theError) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         //NSString *responseString = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",responseData);
-//        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
-//        NSLog(@"%@",responseDict);
+ //       NSLog(@"%@",responseData);
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"Response dict %@",responseDictionary);
+        TWPUser *theUser = [TWPUser modelObjectWithDictionary:responseDictionary];
+ 
         MainViewController *mainController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+        mainController.currentUser = theUser;
         [self.navigationController pushViewController:mainController animated:YES];
     }];
 }
@@ -106,8 +112,24 @@
 #pragma mark - UITextField Delegate methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == pwdField) {
+        if (![ADDeviceUtil isIPhone5]) {
+            // Need to raise the login view.
+            loginView.frame = CGRectMake(loginView.frame.origin.x, loginView.frame.origin.y+40, loginView.frame.size.width, loginView.frame.size.height);
+        }
+    }
+    
     [textField resignFirstResponder];
     return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField == pwdField) {
+        if (![ADDeviceUtil isIPhone5]) {
+            // Need to raise the login view.
+            loginView.frame = CGRectMake(loginView.frame.origin.x, loginView.frame.origin.y-40, loginView.frame.size.width, loginView.frame.size.height);
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

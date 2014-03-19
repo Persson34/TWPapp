@@ -10,6 +10,8 @@
 #import "TWPLoginViewController.h"
 #import "SideMenuViewController.h"
 #import "MFSideMenuContainerViewController.h"
+#import "UIImageView+MKNetworkKitAdditions.h"
+#import "ImageDownloadEngine.h"
 
 @implementation AppDelegate
 
@@ -28,6 +30,7 @@
     self.window.rootViewController = container;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    [UIImageView setDefaultEngine:[ImageDownloadEngine sharedEngine]];
     return YES;
 }
 
