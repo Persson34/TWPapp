@@ -11,7 +11,7 @@
 #import "MFSideMenu.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "StampCell.h"
-
+#import "NewStampViewController.h"
 
 @interface MainViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -57,6 +57,8 @@
 }
 
 - (IBAction)addBtnTapped:(id)sender {
+    NewStampViewController *aNewStampController = [[NewStampViewController alloc]initWithNibName:@"NewStampViewController" bundle:nil];
+    [self presentViewController:aNewStampController animated:YES completion:nil];
     
 }
 

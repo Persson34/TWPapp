@@ -44,6 +44,19 @@
 		8F1EFC9418D976EE00D1FE43 /* StampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9318D976EE00D1FE43 /* StampCell.m */; };
 		8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9518D9771100D1FE43 /* StampCell.xib */; };
 		8F519ECC18D9A0F000DE0B3C /* ADDeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F519ECB18D9A0F000DE0B3C /* ADDeviceUtil.m */; };
+		8F844B4F18DAB6B40040DC7A /* NewStampViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B4D18DAB6B40040DC7A /* NewStampViewController.m */; };
+		8F844B5018DAB6B40040DC7A /* NewStampViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B4E18DAB6B40040DC7A /* NewStampViewController.xib */; };
+		8F844B5A18DAC3510040DC7A /* Avenir Next.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5218DAC3510040DC7A /* Avenir Next.ttc */; };
+		8F844B5B18DAC3510040DC7A /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5318DAC3510040DC7A /* BebasNeue.otf */; };
+		8F844B5C18DAC3510040DC7A /* Intro Inline.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5418DAC3510040DC7A /* Intro Inline.otf */; };
+		8F844B5D18DAC3510040DC7A /* Intro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5518DAC3510040DC7A /* Intro.otf */; };
+		8F844B5E18DAC3510040DC7A /* JennaSue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5618DAC3510040DC7A /* JennaSue.ttf */; };
+		8F844B5F18DAC3510040DC7A /* Lobster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5718DAC3510040DC7A /* Lobster.ttf */; };
+		8F844B6018DAC3510040DC7A /* Metropolis 1920.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5818DAC3510040DC7A /* Metropolis 1920.otf */; };
+		8F844B6118DAC3510040DC7A /* Oranienbaum-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5918DAC3510040DC7A /* Oranienbaum-Regular.ttf */; };
+		8F844B6918DAD3B10040DC7A /* AVCamCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B6418DAD3B10040DC7A /* AVCamCaptureManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8F844B6A18DAD3B10040DC7A /* AVCamRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B6618DAD3B10040DC7A /* AVCamRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8F844B6B18DAD3B10040DC7A /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B6818DAD3B10040DC7A /* AVCamUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8FE6C64818D875070027DEB7 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64318D875060027DEB7 /* Location.m */; };
 		8FE6C64918D875070027DEB7 /* Stamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64518D875060027DEB7 /* Stamps.m */; };
 		8FE6C64A18D875070027DEB7 /* TWPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64718D875060027DEB7 /* TWPUser.m */; };
@@ -124,6 +137,23 @@
 		8F1EFC9518D9771100D1FE43 /* StampCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StampCell.xib; path = "Controllers/Main View/StampCell.xib"; sourceTree = "<group>"; };
 		8F519ECA18D9A0F000DE0B3C /* ADDeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDeviceUtil.h; sourceTree = "<group>"; };
 		8F519ECB18D9A0F000DE0B3C /* ADDeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDeviceUtil.m; sourceTree = "<group>"; };
+		8F844B4C18DAB6B40040DC7A /* NewStampViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewStampViewController.h; sourceTree = "<group>"; };
+		8F844B4D18DAB6B40040DC7A /* NewStampViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewStampViewController.m; sourceTree = "<group>"; };
+		8F844B4E18DAB6B40040DC7A /* NewStampViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewStampViewController.xib; sourceTree = "<group>"; };
+		8F844B5218DAC3510040DC7A /* Avenir Next.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Avenir Next.ttc"; sourceTree = "<group>"; };
+		8F844B5318DAC3510040DC7A /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
+		8F844B5418DAC3510040DC7A /* Intro Inline.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Intro Inline.otf"; sourceTree = "<group>"; };
+		8F844B5518DAC3510040DC7A /* Intro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intro.otf; sourceTree = "<group>"; };
+		8F844B5618DAC3510040DC7A /* JennaSue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JennaSue.ttf; sourceTree = "<group>"; };
+		8F844B5718DAC3510040DC7A /* Lobster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster.ttf; sourceTree = "<group>"; };
+		8F844B5818DAC3510040DC7A /* Metropolis 1920.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis 1920.otf"; sourceTree = "<group>"; };
+		8F844B5918DAC3510040DC7A /* Oranienbaum-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oranienbaum-Regular.ttf"; sourceTree = "<group>"; };
+		8F844B6318DAD3B10040DC7A /* AVCamCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamCaptureManager.h; sourceTree = "<group>"; };
+		8F844B6418DAD3B10040DC7A /* AVCamCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamCaptureManager.m; sourceTree = "<group>"; };
+		8F844B6518DAD3B10040DC7A /* AVCamRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamRecorder.h; sourceTree = "<group>"; };
+		8F844B6618DAD3B10040DC7A /* AVCamRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamRecorder.m; sourceTree = "<group>"; };
+		8F844B6718DAD3B10040DC7A /* AVCamUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamUtilities.h; sourceTree = "<group>"; };
+		8F844B6818DAD3B10040DC7A /* AVCamUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamUtilities.m; sourceTree = "<group>"; };
 		8FE6C64118D875060027DEB7 /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModels.h; sourceTree = "<group>"; };
 		8FE6C64218D875060027DEB7 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		8FE6C64318D875060027DEB7 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
@@ -242,6 +272,7 @@
 		3A9A5EC718A0F682008034C6 /* TravelWorldPassport */ = {
 			isa = PBXGroup;
 			children = (
+				8F844B6218DAD3B10040DC7A /* Camera */,
 				8FE6C64018D870F80027DEB7 /* Models */,
 				3AB37A5918D087FC00EFCDA2 /* Network */,
 				3A63E37A18CF01700087189A /* Utils */,
@@ -257,6 +288,7 @@
 		3A9A5EC818A0F682008034C6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8F844B5118DAC3500040DC7A /* fonts */,
 				3A9A5EC918A0F682008034C6 /* TravelWorldPassport-Info.plist */,
 				3A9A5ECA18A0F682008034C6 /* InfoPlist.strings */,
 				3A9A5ECD18A0F682008034C6 /* main.m */,
@@ -286,6 +318,7 @@
 		3A9A5EF018A0F691008034C6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8F844B4B18DAB66B0040DC7A /* NewStamp */,
 				3A63E38B18CF02930087189A /* Main View */,
 				3A63E37918CF01380087189A /* Side Menu */,
 				3A9A5EF118A0F6AD008034C6 /* Login */,
@@ -353,6 +386,45 @@
 			);
 			name = Reachability;
 			path = Network/Reachability;
+			sourceTree = "<group>";
+		};
+		8F844B4B18DAB66B0040DC7A /* NewStamp */ = {
+			isa = PBXGroup;
+			children = (
+				8F844B4C18DAB6B40040DC7A /* NewStampViewController.h */,
+				8F844B4D18DAB6B40040DC7A /* NewStampViewController.m */,
+				8F844B4E18DAB6B40040DC7A /* NewStampViewController.xib */,
+			);
+			name = NewStamp;
+			path = Controllers/NewStamp;
+			sourceTree = "<group>";
+		};
+		8F844B5118DAC3500040DC7A /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8F844B5218DAC3510040DC7A /* Avenir Next.ttc */,
+				8F844B5318DAC3510040DC7A /* BebasNeue.otf */,
+				8F844B5418DAC3510040DC7A /* Intro Inline.otf */,
+				8F844B5518DAC3510040DC7A /* Intro.otf */,
+				8F844B5618DAC3510040DC7A /* JennaSue.ttf */,
+				8F844B5718DAC3510040DC7A /* Lobster.ttf */,
+				8F844B5818DAC3510040DC7A /* Metropolis 1920.otf */,
+				8F844B5918DAC3510040DC7A /* Oranienbaum-Regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		8F844B6218DAD3B10040DC7A /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				8F844B6318DAD3B10040DC7A /* AVCamCaptureManager.h */,
+				8F844B6418DAD3B10040DC7A /* AVCamCaptureManager.m */,
+				8F844B6518DAD3B10040DC7A /* AVCamRecorder.h */,
+				8F844B6618DAD3B10040DC7A /* AVCamRecorder.m */,
+				8F844B6718DAD3B10040DC7A /* AVCamUtilities.h */,
+				8F844B6818DAD3B10040DC7A /* AVCamUtilities.m */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		8FE6C64018D870F80027DEB7 /* Models */ = {
@@ -447,12 +519,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F844B5C18DAC3510040DC7A /* Intro Inline.otf in Resources */,
 				3A63E38A18CF01B10087189A /* SideMenuViewController.xib in Resources */,
 				8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */,
+				8F844B5B18DAC3510040DC7A /* BebasNeue.otf in Resources */,
 				3A9A5EF618A0F6DA008034C6 /* TWPLoginViewController.xib in Resources */,
+				8F844B5E18DAC3510040DC7A /* JennaSue.ttf in Resources */,
+				8F844B5F18DAC3510040DC7A /* Lobster.ttf in Resources */,
 				3A63E39018CF02B10087189A /* MainViewController.xib in Resources */,
+				8F844B5A18DAC3510040DC7A /* Avenir Next.ttc in Resources */,
+				8F844B5D18DAC3510040DC7A /* Intro.otf in Resources */,
+				8F844B6118DAC3510040DC7A /* Oranienbaum-Regular.ttf in Resources */,
+				8F844B6018DAC3510040DC7A /* Metropolis 1920.otf in Resources */,
 				3A9A5ECC18A0F682008034C6 /* InfoPlist.strings in Resources */,
 				3A9A5ED418A0F682008034C6 /* Images.xcassets in Resources */,
+				8F844B5018DAB6B40040DC7A /* NewStampViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,10 +567,14 @@
 				3A9A5ED218A0F682008034C6 /* AppDelegate.m in Sources */,
 				3AB37A7D18D0885300EFCDA2 /* Reachability.m in Sources */,
 				8FE6C64A18D875070027DEB7 /* TWPUser.m in Sources */,
+				8F844B6B18DAD3B10040DC7A /* AVCamUtilities.m in Sources */,
+				8F844B6918DAD3B10040DC7A /* AVCamCaptureManager.m in Sources */,
+				8F844B4F18DAB6B40040DC7A /* NewStampViewController.m in Sources */,
 				3AB37A7418D0885300EFCDA2 /* NSData+MKBase64.m in Sources */,
 				3AB37A7B18D0885300EFCDA2 /* MKNetworkEngine.m in Sources */,
 				3A63E38918CF01B10087189A /* SideMenuViewController.m in Sources */,
 				8F519ECC18D9A0F000DE0B3C /* ADDeviceUtil.m in Sources */,
+				8F844B6A18DAD3B10040DC7A /* AVCamRecorder.m in Sources */,
 				8FE6C64918D875070027DEB7 /* Stamps.m in Sources */,
 				3AB37A7918D0885300EFCDA2 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				3AB37A8218D0888800EFCDA2 /* TWPEngine.m in Sources */,

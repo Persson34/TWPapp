@@ -24,6 +24,16 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BebasNeue.otf</string>
+		<string>Intro Inline.otf</string>
+		<string>Intro.otf</string>
+		<string>JennaSue.ttf</string>
+		<string>Metropolis 1920.otf</string>
+		<string>Oranienbaum-Regular.ttf</string>
+		<string>Lobster.ttf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
