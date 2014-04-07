@@ -90,6 +90,11 @@
     [pwdField resignFirstResponder];
     [[TWPEngine sharedEngine] loginWithUserName:unameField.text andPassword:pwdField.text onCompletion:^(NSData *responseData, NSError *theError) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if (theError || responseData == nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Please try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
         //NSString *responseString = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
  //       NSLog(@"%@",responseData);
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];

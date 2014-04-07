@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A160BD518EEA9E00077B8C3 /* SingleStampViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A160BD318EEA9E00077B8C3 /* SingleStampViewController.m */; };
+		3A160BD618EEA9E00077B8C3 /* SingleStampViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A160BD418EEA9E00077B8C3 /* SingleStampViewController.xib */; };
+		3A160BDA18EEB4470077B8C3 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A160BD918EEB4470077B8C3 /* KxMenu.m */; };
+		3A160BDD18EEB6000077B8C3 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A160BDC18EEB6000077B8C3 /* Accounts.framework */; };
+		3A160BDF18EEB6060077B8C3 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A160BDE18EEB6060077B8C3 /* Social.framework */; };
 		3A63E38318CF019A0087189A /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E37E18CF019A0087189A /* MFSideMenuContainerViewController.m */; };
 		3A63E38418CF019A0087189A /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38018CF019A0087189A /* MFSideMenuShadow.m */; };
 		3A63E38518CF019A0087189A /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38218CF019A0087189A /* UIViewController+MFSideMenuAdditions.m */; };
@@ -14,6 +19,11 @@
 		3A63E38A18CF01B10087189A /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A63E38818CF01B10087189A /* SideMenuViewController.xib */; };
 		3A63E38F18CF02B10087189A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38D18CF02B10087189A /* MainViewController.m */; };
 		3A63E39018CF02B10087189A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A63E38E18CF02B10087189A /* MainViewController.xib */; };
+		3A6E358018F26F0600A88133 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E357F18F26F0600A88133 /* Security.framework */; };
+		3A6E358218F26F0D00A88133 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358118F26F0D00A88133 /* AdSupport.framework */; };
+		3A6E358518F26F1B00A88133 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358318F26F1B00A88133 /* CoreTelephony.framework */; };
+		3A6E358618F26F1B00A88133 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358418F26F1B00A88133 /* CoreText.framework */; };
+		3A6E663818E54ED00085447D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E663718E54ED00085447D /* CoreLocation.framework */; };
 		3A9A5EC218A0F682008034C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC118A0F682008034C6 /* Foundation.framework */; };
 		3A9A5EC418A0F682008034C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC318A0F682008034C6 /* CoreGraphics.framework */; };
 		3A9A5EC618A0F682008034C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC518A0F682008034C6 /* UIKit.framework */; };
@@ -74,6 +84,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A160BD218EEA9E00077B8C3 /* SingleStampViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingleStampViewController.h; path = Controllers/SingleStampView/SingleStampViewController.h; sourceTree = "<group>"; };
+		3A160BD318EEA9E00077B8C3 /* SingleStampViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SingleStampViewController.m; path = Controllers/SingleStampView/SingleStampViewController.m; sourceTree = "<group>"; };
+		3A160BD418EEA9E00077B8C3 /* SingleStampViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SingleStampViewController.xib; path = Controllers/SingleStampView/SingleStampViewController.xib; sourceTree = "<group>"; };
+		3A160BD818EEB4470077B8C3 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KxMenu.h; path = Utils/KxMenu/KxMenu.h; sourceTree = "<group>"; };
+		3A160BD918EEB4470077B8C3 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KxMenu.m; path = Utils/KxMenu/KxMenu.m; sourceTree = "<group>"; };
+		3A160BDC18EEB6000077B8C3 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		3A160BDE18EEB6060077B8C3 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3A63E37C18CF019A0087189A /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
 		3A63E37D18CF019A0087189A /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
 		3A63E37E18CF019A0087189A /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
@@ -87,6 +104,11 @@
 		3A63E38C18CF02B10087189A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = "Controllers/Main View/MainViewController.h"; sourceTree = "<group>"; };
 		3A63E38D18CF02B10087189A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = "Controllers/Main View/MainViewController.m"; sourceTree = "<group>"; };
 		3A63E38E18CF02B10087189A /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = "Controllers/Main View/MainViewController.xib"; sourceTree = "<group>"; };
+		3A6E357F18F26F0600A88133 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3A6E358118F26F0D00A88133 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		3A6E358318F26F1B00A88133 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3A6E358418F26F1B00A88133 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3A6E663718E54ED00085447D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3A9A5EBE18A0F682008034C6 /* TravelWorldPassport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelWorldPassport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9A5EC118A0F682008034C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A9A5EC318A0F682008034C6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -170,6 +192,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6E358518F26F1B00A88133 /* CoreTelephony.framework in Frameworks */,
+				3A6E358618F26F1B00A88133 /* CoreText.framework in Frameworks */,
+				3A6E358218F26F0D00A88133 /* AdSupport.framework in Frameworks */,
+				3A6E358018F26F0600A88133 /* Security.framework in Frameworks */,
+				3A160BDF18EEB6060077B8C3 /* Social.framework in Frameworks */,
+				3A160BDD18EEB6000077B8C3 /* Accounts.framework in Frameworks */,
+				3A6E663818E54ED00085447D /* CoreLocation.framework in Frameworks */,
 				3AB37A7F18D0886B00EFCDA2 /* QuartzCore.framework in Frameworks */,
 				3A9A5EC418A0F682008034C6 /* CoreGraphics.framework in Frameworks */,
 				3A9A5EC618A0F682008034C6 /* UIKit.framework in Frameworks */,
@@ -190,6 +219,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A160BD118EEA99A0077B8C3 /* SingleStampView */ = {
+			isa = PBXGroup;
+			children = (
+				3A160BD218EEA9E00077B8C3 /* SingleStampViewController.h */,
+				3A160BD318EEA9E00077B8C3 /* SingleStampViewController.m */,
+				3A160BD418EEA9E00077B8C3 /* SingleStampViewController.xib */,
+			);
+			name = SingleStampView;
+			sourceTree = "<group>";
+		};
+		3A160BD718EEB3CB0077B8C3 /* KxMenu */ = {
+			isa = PBXGroup;
+			children = (
+				3A160BD818EEB4470077B8C3 /* KxMenu.h */,
+				3A160BD918EEB4470077B8C3 /* KxMenu.m */,
+			);
+			name = KxMenu;
+			sourceTree = "<group>";
+		};
 		3A63E37918CF01380087189A /* Side Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +251,7 @@
 		3A63E37A18CF01700087189A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3A160BD718EEB3CB0077B8C3 /* KxMenu */,
 				8F519ECA18D9A0F000DE0B3C /* ADDeviceUtil.h */,
 				8F519ECB18D9A0F000DE0B3C /* ADDeviceUtil.m */,
 				3A63E37B18CF019A0087189A /* MFSideMenu */,
@@ -260,6 +309,13 @@
 		3A9A5EC018A0F682008034C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A6E358318F26F1B00A88133 /* CoreTelephony.framework */,
+				3A6E358418F26F1B00A88133 /* CoreText.framework */,
+				3A6E358118F26F0D00A88133 /* AdSupport.framework */,
+				3A6E357F18F26F0600A88133 /* Security.framework */,
+				3A160BDE18EEB6060077B8C3 /* Social.framework */,
+				3A160BDC18EEB6000077B8C3 /* Accounts.framework */,
+				3A6E663718E54ED00085447D /* CoreLocation.framework */,
 				3AB37A7E18D0886B00EFCDA2 /* QuartzCore.framework */,
 				3A9A5EC118A0F682008034C6 /* Foundation.framework */,
 				3A9A5EC318A0F682008034C6 /* CoreGraphics.framework */,
@@ -318,6 +374,7 @@
 		3A9A5EF018A0F691008034C6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3A160BD118EEA99A0077B8C3 /* SingleStampView */,
 				8F844B4B18DAB66B0040DC7A /* NewStamp */,
 				3A63E38B18CF02930087189A /* Main View */,
 				3A63E37918CF01380087189A /* Side Menu */,
@@ -523,6 +580,7 @@
 				3A63E38A18CF01B10087189A /* SideMenuViewController.xib in Resources */,
 				8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */,
 				8F844B5B18DAC3510040DC7A /* BebasNeue.otf in Resources */,
+				3A160BD618EEA9E00077B8C3 /* SingleStampViewController.xib in Resources */,
 				3A9A5EF618A0F6DA008034C6 /* TWPLoginViewController.xib in Resources */,
 				8F844B5E18DAC3510040DC7A /* JennaSue.ttf in Resources */,
 				8F844B5F18DAC3510040DC7A /* Lobster.ttf in Resources */,
@@ -576,8 +634,10 @@
 				8F519ECC18D9A0F000DE0B3C /* ADDeviceUtil.m in Sources */,
 				8F844B6A18DAD3B10040DC7A /* AVCamRecorder.m in Sources */,
 				8FE6C64918D875070027DEB7 /* Stamps.m in Sources */,
+				3A160BD518EEA9E00077B8C3 /* SingleStampViewController.m in Sources */,
 				3AB37A7918D0885300EFCDA2 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				3AB37A8218D0888800EFCDA2 /* TWPEngine.m in Sources */,
+				3A160BDA18EEB4470077B8C3 /* KxMenu.m in Sources */,
 				3A9A5ECE18A0F682008034C6 /* main.m in Sources */,
 				3AB37A7718D0885300EFCDA2 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				3AB37A7818D0885300EFCDA2 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
@@ -698,14 +758,15 @@
 		3A9A5EEB18A0F683008034C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Naresh Kumar (GC9U6VDNGA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
 				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2B336B8B-F521-4948-8518-C1B5DC8B080C";
+				PROVISIONING_PROFILE = "224F32EB-71F1-4E40-A885-F43E06C0E9FD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -713,14 +774,15 @@
 		3A9A5EEC18A0F683008034C6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Naresh Kumar (GC9U6VDNGA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
 				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2B336B8B-F521-4948-8518-C1B5DC8B080C";
+				PROVISIONING_PROFILE = "224F32EB-71F1-4E40-A885-F43E06C0E9FD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

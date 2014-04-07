@@ -27,7 +27,22 @@
 -(void)loginWithUserName:(NSString*)userName andPassword:(NSString*)password onCompletion:(TWPResponse)theResponse
 {
     NSDictionary *paramDict = @{@"email":userName,@"pwd":password};
-    MKNetworkOperation *op = [self operationWithURLString:@"http://test.travelworldpassport.com/nl/app/login" params:paramDict httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/nl/app/login" params:paramDict httpMethod:@"POST"];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        NSLog(@"Response String %@",[completedOperation responseString]);
+        theResponse([completedOperation responseData],nil);
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        theResponse(nil,error);
+    }];
+    
+    [self enqueueOperation:op];
+}
+
+- (void)uploadStamp:(NSString *)userId andImage:(UIImage*)uploadImg onCompletion:(TWPResponse)theResponse{
+    NSData *data = UIImagePNGRepresentation(uploadImg);
+    NSDictionary *paramDict = @{@"userId": userId};
+    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/nl/app/savestamp" params:paramDict httpMethod:@"POST"];
+    [op addData:data forKey:@"imageData" mimeType:@"image/png" fileName:@"upload.png"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
@@ -36,4 +51,5 @@
     
     [self enqueueOperation:op];
 }
+
 @end

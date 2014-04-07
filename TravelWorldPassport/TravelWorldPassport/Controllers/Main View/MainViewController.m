@@ -12,6 +12,7 @@
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "StampCell.h"
 #import "NewStampViewController.h"
+#import "SingleStampViewController.h"
 
 @interface MainViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -40,6 +41,11 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [stampsCollectionView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,6 +64,7 @@
 
 - (IBAction)addBtnTapped:(id)sender {
     NewStampViewController *aNewStampController = [[NewStampViewController alloc]initWithNibName:@"NewStampViewController" bundle:nil];
+    [aNewStampController setTheUser:self.currentUser];
     [self presentViewController:aNewStampController animated:YES completion:nil];
     
 }
@@ -84,13 +91,19 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    Stamps *currentStamp = [self.currentUser.stamps objectAtIndex:indexPath.row];
+    SingleStampViewController *aController = [[SingleStampViewController alloc] initWithNibName:@"SingleStampViewController" bundle:nil];
+    [aController setSelectedImageURL:currentStamp.stampUrl];
+    [self.navigationController pushViewController:aController animated:YES];
+}
+
 - (void)configureCell:(StampCell *)cell
    forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Stamps *currentStamp = [self.currentUser.stamps objectAtIndex:indexPath.row];
    // NSLog(@"Stamp details %@",currentStamp);
     [cell configureForStamp:currentStamp];
-    
 }
 
 
@@ -99,8 +112,8 @@
 - (void)configureView {
     
     usernameLabel.text = self.currentUser.username;
-    stampCountLabel.text = self.currentUser.stampCount;
-    followerCounLbl.text = self.currentUser.followersCount;
+    stampCountLabel.text = [NSString stringWithFormat:@"%d",(int)self.currentUser.stampCount];
+    followerCounLbl.text = [NSString stringWithFormat:@"%d",(int)self.currentUser.followersCount];
     [userprofileImgView setImageFromURL:[NSURL URLWithString:self.currentUser.userProfile]];
     
 }

@@ -11,15 +11,15 @@
 
 @interface TWPUser : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSString *stampCount;
-@property (nonatomic, strong) NSArray *stamps;
+@property (nonatomic, assign) double stampCount;
+@property (nonatomic, strong) NSMutableArray *stamps;
 @property (nonatomic, assign) double userId;
 @property (nonatomic, strong) NSString *userProfile;
 @property (nonatomic, strong) NSString *code;
 @property (nonatomic, strong) Location *location;
 @property (nonatomic, strong) NSString *meta;
 @property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *followersCount;
+@property (nonatomic, assign) double followersCount;
 
 + (TWPUser *)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

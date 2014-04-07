@@ -15,5 +15,5 @@ typedef void (^TWPResponse)(NSData* responseString,NSError *theError);
 + (TWPEngine *)sharedEngine;
 
 -(void)loginWithUserName:(NSString*)userName andPassword:(NSString*)password onCompletion:(TWPResponse)theResponse ;
-
+- (void)uploadStamp:(NSString *)userId andImage:(UIImage*)uploadImg onCompletion:(TWPResponse)theResponse;
 @end
