@@ -15,7 +15,7 @@
 
 @import AddressBook;
 
-@interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate> {
+@interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
     
     __weak IBOutlet UIPageControl *pageControl;
     BOOL pageControlBeingUsed;
@@ -38,6 +38,7 @@
     __weak IBOutlet UIButton *crossBtn;
     __weak IBOutlet UIButton *shareBtn;
     __weak IBOutlet UIView *stamp6EditView;
+    __weak IBOutlet UIView *stamp7EditView;
     __weak IBOutlet UILabel *stamp6Lbl1;
     __weak IBOutlet UILabel *stamp6Lbl2;
     __weak IBOutlet UILabel *stamp7Lbl1;
@@ -56,7 +57,11 @@
     UIImage *takenPicture;
     AVCamCaptureManager *captureManager;
     UITextField *hiddenTextField;
+    
+    // Share options
+//    UIActivityViewController *anActivityController;
 }
+- (IBAction)goBackTapped:(id)sender;
 
 - (IBAction)crossBtnTapped:(id)sender;
 - (IBAction)shareBtnTapped:(id)sender;
@@ -100,9 +105,9 @@
     [self.view sendSubviewToBack:hiddenTextField];
     [self startUpdatingLocation];
     [self setupLabelFonts];
-    [stampsScroll setContentSize:CGSizeMake(3522, 405)];
+    [stampsScroll setContentSize:CGSizeMake(3522, 387)]; // Need to change this.
     // Do any additional setup after loading the view from its nib.
-    swipeLabel.font = [UIFont fontWithName:@"Intro" size:16.0f];
+//    swipeLabel.font = [UIFont fontWithName:@"Intro" size:16.0f];
    // [swipeLabel sizeToFit];
   //  stampsScroll.userInteractionEnabled = YES;
    // [stampsScroll setBackgroundColor:[UIColor redColor]];
@@ -195,6 +200,7 @@
     
     stamp6EditView.layer.borderWidth = 2.0f;
     stamp6EditView.layer.borderColor = [UIColor whiteColor].CGColor;
+    // Naresh taken out
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     recognizer.numberOfTapsRequired = 1;
     [stamp6Lbl1 addGestureRecognizer:recognizer];
@@ -334,6 +340,13 @@
 }
 
 - (IBAction)galleryTapped:(id)sender {
+    
+    UIImagePickerController *anImagePicker= [[UIImagePickerController alloc]init];
+    anImagePicker.delegate = self;
+    anImagePicker.allowsEditing = YES;
+   
+    anImagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:anImagePicker animated:YES completion:nil];
 }
 
 # pragma mark - AVCamCaptureDelegate
@@ -364,6 +377,10 @@
     CGImageRelease(imageRef);
     
     return cropped;
+}
+
+- (IBAction)goBackTapped:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)crossBtnTapped:(id)sender {
@@ -397,13 +414,68 @@
             UIView *currentView = (UIView*)[[stampsScroll subviews] objectAtIndex:pageControl.currentPage];
             UIView *view = (UIView*)[[stampsScroll subviews] objectAtIndex:i];
             if ([view isEqual:currentView]) {
+//                 UIGraphicsBeginImageContext(view.frame.size);//CGSizeMake(284, 332)
+                UIGraphicsBeginImageContextWithOptions(view.frame.size, FALSE, 0.0);
+               CGContextRef context = UIGraphicsGetCurrentContext();
+                // Get all the subviews
+                for (id aSubView  in view.subviews) {
+                    NSLog(@"Class %@",[aSubView class]);
+                    if ([aSubView isKindOfClass:[UILabel class]]) {
+                        NSLog(@"Label got");
+                        UILabel *theLabel = (UILabel*)aSubView;
+                        NSString *theText = theLabel.text;
+                        /*[theText drawAtPoint:CGPointMake(x, y)
+                         withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:8], NSForegroundColorAttributeName:[UIColor whiteColor] }];
+                         */
+                        /// Make a copy of the default paragraph style
+                        NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+                        /// Set line break mode
+                        paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+                        /// Set text alignment
+                        paragraphStyle.alignment = theLabel.textAlignment;
+                        [theText drawInRect:theLabel.frame withAttributes:@{NSFontAttributeName:theLabel.font,NSForegroundColorAttributeName:theLabel.textColor,NSParagraphStyleAttributeName:paragraphStyle}]; // Draw text instead of label
+                    }
+                   else if ([aSubView isKindOfClass:[UIImageView class]]) {
+                        UIImageView *theImage = (UIImageView*)aSubView;
+                        UIImage *stampBg =theImage.image;
+                        [stampBg drawInRect:CGRectMake(0, 0, stampBg.size.width, stampBg.size.height)];
+                    }
+                   else if ([aSubView isKindOfClass:[UIView class]]) {
+                        NSLog(@"UIView with some subviews"); // This case happens with only one of the templates
+                        UIView *singleSubView = (UIView*)aSubView;
+                       if (aSubView == stamp6EditView) {
+                           // Get the frame and draw a rectangle with that dimension
+                           CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+                           CGContextSetLineWidth(context, 2.0f);
+                           CGContextStrokeRect(context, singleSubView.frame);
+                       }
+                       if (aSubView == stamp7EditView) {
+                           CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+                           CGContextSetLineWidth(context, 2.0f);
+                           CGContextFillRect(context, singleSubView.frame);
+                       }
+                       
+                        
+
+                    }
+                    
+                }
 //                NSLog(@"view tag is %d",view.tag);
 //                NSLog(@"%@",NSStringFromCGRect(view.frame));
-                UIGraphicsBeginImageContext(view.frame.size);//CGSizeMake(284, 332)
-                [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+               
+              //  [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//                UIImage *stampImg = [UIImage imageNamed:@"Stamp1.png"];
+//                [stampImg drawInRect:CGRectMake(0, 0, stampImg.size.width, stampImg.size.height)];
+//                UILabel *aLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 30, 100.0f, 20.0f)];
+//                aLabel.text = @"Hello";
+//                [aLabel.text drawAtPoint:CGPointMake(40, 50) withAttributes:nil];
                 UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+              
                 UIGraphicsEndImageContext();
-                UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(14, 14, 284, 332)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
+//                UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(14, 14, 284, 332)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
+                 UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(28, 28, 568, 664)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
+                NSLog(@"Image size %@ and scale is %f",NSStringFromCGSize(img.size),img.scale);
+             
                 UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
                 [self uploadStamp:img];
                 return;
@@ -416,8 +488,10 @@
               inImage:(UIImage*) bgImage
               atPoint:(CGPoint)  point
 {
-    UIGraphicsBeginImageContextWithOptions(bgImage.size, FALSE, 0.0);
-    [bgImage drawInRect:CGRectMake( 0, 0, bgImage.size.width, bgImage.size.height)];
+   // UIGraphicsBeginImageContextWithOptions(bgImage.size, FALSE, 0.0);
+    CGRect newRect = CGRectMake(0, 0, 2.0*bgImage.size.width, bgImage.size.height*2.0);
+    UIGraphicsBeginImageContext(newRect.size );
+    [bgImage drawInRect:CGRectMake( 0, 0, bgImage.size.width*2.0f, bgImage.size.height*2.0f)];
     [fgImage drawInRect:CGRectMake( point.x, point.y, fgImage.size.width, fgImage.size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -438,9 +512,33 @@
         NSLog(@"%@",responseDictionary);
         Stamps *newStamp = [[Stamps alloc] initWithDictionary:responseDictionary];
         [theUser.stamps addObject:newStamp];
-        [self dismissViewControllerAnimated:YES completion:^{
-        }];
+        [self dismissViewControllerAnimated:YES completion:nil];
+//        [self dismissViewControllerAnimated:YES completion:^{
+//        }];
+        // Show the share stuff
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        anActivityController =[[UIActivityViewController alloc]initWithActivityItems:@[stampImage] applicationActivities:nil];
+//        [self presentViewController:anActivityController animated:YES completion:nil];
+//        anActivityController.completionHandler = ^(NSString *activityType, BOOL completed){
+//            
+//        };
+//        
+//    });
+       
     }];
+}
+
+#pragma mark - UIImagePicker delegate
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    // Put the image here.
+    takenPicture = [info objectForKey:UIImagePickerControllerOriginalImage ];//[captureManager1 takenImage];
+    imgView.image = [self imageByCropping:[self imageByScaling:takenPicture] toRect:CGRectMake(14, 57, 286, 335)];
+    //[self.view bringSubviewToFront:imgView];
+    cameraBtn.hidden = YES;
+    galleryBtn.hidden = YES;
+    shareBtn.hidden = NO;
+    crossBtn.hidden = NO;
 }
 
 #pragma mark - UIScrollView Delegate

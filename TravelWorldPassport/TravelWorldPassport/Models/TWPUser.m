@@ -1,7 +1,7 @@
 //
 //  TWPUser.m
 //
-//  Created by Naresh Kumar D on 3/18/14
+//  Created by Self Devalapally on 4/25/14
 //  Copyright (c) 2014 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,10 +15,11 @@ NSString *const kTWPUserStamps = @"stamps";
 NSString *const kTWPUserUserId = @"userId";
 NSString *const kTWPUserUserProfile = @"user_profile";
 NSString *const kTWPUserCode = @"code";
+NSString *const kTWPUserSurname = @"surname";
 NSString *const kTWPUserLocation = @"location";
 NSString *const kTWPUserMeta = @"meta";
-NSString *const kTWPUserUsername = @"username";
 NSString *const kTWPUserFollowersCount = @"followersCount";
+NSString *const kTWPUserName = @"name";
 
 
 @interface TWPUser ()
@@ -34,10 +35,11 @@ NSString *const kTWPUserFollowersCount = @"followersCount";
 @synthesize userId = _userId;
 @synthesize userProfile = _userProfile;
 @synthesize code = _code;
+@synthesize surname = _surname;
 @synthesize location = _location;
 @synthesize meta = _meta;
-@synthesize username = _username;
 @synthesize followersCount = _followersCount;
+@synthesize name = _name;
 
 
 + (TWPUser *)modelObjectWithDictionary:(NSDictionary *)dict
@@ -66,14 +68,15 @@ NSString *const kTWPUserFollowersCount = @"followersCount";
        [parsedStamps addObject:[Stamps modelObjectWithDictionary:(NSDictionary *)receivedStamps]];
     }
 
-    self.stamps = [NSMutableArray arrayWithArray:parsedStamps];
+    self.stamps = [[NSArray arrayWithArray:parsedStamps]mutableCopy];
             self.userId = [[self objectOrNilForKey:kTWPUserUserId fromDictionary:dict] doubleValue];
             self.userProfile = [self objectOrNilForKey:kTWPUserUserProfile fromDictionary:dict];
             self.code = [self objectOrNilForKey:kTWPUserCode fromDictionary:dict];
+            self.surname = [self objectOrNilForKey:kTWPUserSurname fromDictionary:dict];
             self.location = [Location modelObjectWithDictionary:[dict objectForKey:kTWPUserLocation]];
             self.meta = [self objectOrNilForKey:kTWPUserMeta fromDictionary:dict];
-            self.username = [self objectOrNilForKey:kTWPUserUsername fromDictionary:dict];
             self.followersCount = [[self objectOrNilForKey:kTWPUserFollowersCount fromDictionary:dict] doubleValue];
+            self.name = [self objectOrNilForKey:kTWPUserName fromDictionary:dict];
 
     }
     
@@ -99,10 +102,11 @@ NSMutableArray *tempArrayForStamps = [NSMutableArray array];
     [mutableDict setValue:[NSNumber numberWithDouble:self.userId] forKey:kTWPUserUserId];
     [mutableDict setValue:self.userProfile forKey:kTWPUserUserProfile];
     [mutableDict setValue:self.code forKey:kTWPUserCode];
+    [mutableDict setValue:self.surname forKey:kTWPUserSurname];
     [mutableDict setValue:[self.location dictionaryRepresentation] forKey:kTWPUserLocation];
     [mutableDict setValue:self.meta forKey:kTWPUserMeta];
-    [mutableDict setValue:self.username forKey:kTWPUserUsername];
     [mutableDict setValue:[NSNumber numberWithDouble:self.followersCount] forKey:kTWPUserFollowersCount];
+    [mutableDict setValue:self.name forKey:kTWPUserName];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -120,6 +124,9 @@ NSMutableArray *tempArrayForStamps = [NSMutableArray array];
 }
 
 
+-(NSString*)getFullName{
+    return [NSString stringWithFormat:@"%@ %@",self.surname,self.name];
+}
 #pragma mark - NSCoding Methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -131,10 +138,11 @@ NSMutableArray *tempArrayForStamps = [NSMutableArray array];
     self.userId = [aDecoder decodeDoubleForKey:kTWPUserUserId];
     self.userProfile = [aDecoder decodeObjectForKey:kTWPUserUserProfile];
     self.code = [aDecoder decodeObjectForKey:kTWPUserCode];
+    self.surname = [aDecoder decodeObjectForKey:kTWPUserSurname];
     self.location = [aDecoder decodeObjectForKey:kTWPUserLocation];
     self.meta = [aDecoder decodeObjectForKey:kTWPUserMeta];
-    self.username = [aDecoder decodeObjectForKey:kTWPUserUsername];
     self.followersCount = [aDecoder decodeDoubleForKey:kTWPUserFollowersCount];
+    self.name = [aDecoder decodeObjectForKey:kTWPUserName];
     return self;
 }
 
@@ -146,10 +154,11 @@ NSMutableArray *tempArrayForStamps = [NSMutableArray array];
     [aCoder encodeDouble:_userId forKey:kTWPUserUserId];
     [aCoder encodeObject:_userProfile forKey:kTWPUserUserProfile];
     [aCoder encodeObject:_code forKey:kTWPUserCode];
+    [aCoder encodeObject:_surname forKey:kTWPUserSurname];
     [aCoder encodeObject:_location forKey:kTWPUserLocation];
     [aCoder encodeObject:_meta forKey:kTWPUserMeta];
-    [aCoder encodeObject:_username forKey:kTWPUserUsername];
     [aCoder encodeDouble:_followersCount forKey:kTWPUserFollowersCount];
+    [aCoder encodeObject:_name forKey:kTWPUserName];
 }
 
 

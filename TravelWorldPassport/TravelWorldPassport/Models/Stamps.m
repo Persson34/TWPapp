@@ -1,7 +1,7 @@
 //
 //  Stamps.m
 //
-//  Created by Naresh Kumar D on 3/18/14
+//  Created by Self Devalapally on 4/25/14
 //  Copyright (c) 2014 __MyCompanyName__. All rights reserved.
 //
 
@@ -37,7 +37,7 @@ NSString *const kStampsStampUrl = @"stampUrl";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.stampId = [self objectOrNilForKey:kStampsStampId fromDictionary:dict];
+            self.stampId = [[self objectOrNilForKey:kStampsStampId fromDictionary:dict] doubleValue];
             self.stampUrl = [self objectOrNilForKey:kStampsStampUrl fromDictionary:dict];
 
     }
@@ -49,7 +49,7 @@ NSString *const kStampsStampUrl = @"stampUrl";
 - (NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
-    [mutableDict setValue:self.stampId forKey:kStampsStampId];
+    [mutableDict setValue:[NSNumber numberWithDouble:self.stampId] forKey:kStampsStampId];
     [mutableDict setValue:self.stampUrl forKey:kStampsStampUrl];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
@@ -74,7 +74,7 @@ NSString *const kStampsStampUrl = @"stampUrl";
 {
     self = [super init];
 
-    self.stampId = [aDecoder decodeObjectForKey:kStampsStampId];
+    self.stampId = [aDecoder decodeDoubleForKey:kStampsStampId];
     self.stampUrl = [aDecoder decodeObjectForKey:kStampsStampUrl];
     return self;
 }
@@ -82,7 +82,7 @@ NSString *const kStampsStampUrl = @"stampUrl";
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 
-    [aCoder encodeObject:_stampId forKey:kStampsStampId];
+    [aCoder encodeDouble:_stampId forKey:kStampsStampId];
     [aCoder encodeObject:_stampUrl forKey:kStampsStampUrl];
 }
 

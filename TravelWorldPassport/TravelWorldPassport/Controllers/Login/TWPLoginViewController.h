@@ -11,9 +11,12 @@
 @interface TWPLoginViewController : UIViewController
 {
     
+    __weak IBOutlet UIButton *forgotPwdBtn;
+    __weak IBOutlet UIButton *registerBtn;
 }
 
 - (IBAction)registerBtnTapped:(id)sender;
 - (IBAction)signInBtnTapped:(id)sender;
+-(void)sendLoginWithFBRequest;
 
 @end

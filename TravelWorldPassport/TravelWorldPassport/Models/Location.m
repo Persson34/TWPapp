@@ -1,14 +1,18 @@
 //
 //  Location.m
 //
-//  Created by Naresh Kumar D on 3/18/14
+//  Created by Self Devalapally on 4/25/14
 //  Copyright (c) 2014 __MyCompanyName__. All rights reserved.
 //
 
 #import "Location.h"
+#import "Initializer.h"
+#import "Cloner.h"
 
 
 NSString *const kLocationIsInitialized = @"__isInitialized__";
+NSString *const kLocationInitializer = @"__initializer__";
+NSString *const kLocationCloner = @"__cloner__";
 
 
 @interface Location ()
@@ -20,6 +24,8 @@ NSString *const kLocationIsInitialized = @"__isInitialized__";
 @implementation Location
 
 @synthesize isInitialized = _isInitialized;
+@synthesize initializer = _initializer;
+@synthesize cloner = _cloner;
 
 
 + (Location *)modelObjectWithDictionary:(NSDictionary *)dict
@@ -36,6 +42,8 @@ NSString *const kLocationIsInitialized = @"__isInitialized__";
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
             self.isInitialized = [[self objectOrNilForKey:kLocationIsInitialized fromDictionary:dict] boolValue];
+            self.initializer = [Initializer modelObjectWithDictionary:[dict objectForKey:kLocationInitializer]];
+            self.cloner = [Cloner modelObjectWithDictionary:[dict objectForKey:kLocationCloner]];
 
     }
     
@@ -47,6 +55,8 @@ NSString *const kLocationIsInitialized = @"__isInitialized__";
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     [mutableDict setValue:[NSNumber numberWithBool:self.isInitialized] forKey:kLocationIsInitialized];
+    [mutableDict setValue:[self.initializer dictionaryRepresentation] forKey:kLocationInitializer];
+    [mutableDict setValue:[self.cloner dictionaryRepresentation] forKey:kLocationCloner];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -71,6 +81,8 @@ NSString *const kLocationIsInitialized = @"__isInitialized__";
     self = [super init];
 
     self.isInitialized = [aDecoder decodeBoolForKey:kLocationIsInitialized];
+    self.initializer = [aDecoder decodeObjectForKey:kLocationInitializer];
+    self.cloner = [aDecoder decodeObjectForKey:kLocationCloner];
     return self;
 }
 
@@ -78,6 +90,8 @@ NSString *const kLocationIsInitialized = @"__isInitialized__";
 {
 
     [aCoder encodeBool:_isInitialized forKey:kLocationIsInitialized];
+    [aCoder encodeObject:_initializer forKey:kLocationInitializer];
+    [aCoder encodeObject:_cloner forKey:kLocationCloner];
 }
 
 

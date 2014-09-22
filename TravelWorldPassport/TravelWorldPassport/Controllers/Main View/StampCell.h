@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageDownloadEngine.h"
 @class Stamps;
 
 @interface StampCell : UICollectionViewCell{
     
+    __weak IBOutlet UIButton *deleteBtn;
     __weak IBOutlet UIImageView *stampImageView;
+    MKNetworkOperation *downloadOp;
+    BOOL isDeleteMode;
 }
+@property (nonatomic,strong)void(^onDeleteTap)(StampCell *cell);
 -(void)configureForStamp:(Stamps*)theStamp;
+
+
 @end

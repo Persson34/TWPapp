@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @class TWPUser;
-@interface SideMenuViewController : UIViewController
+@interface SideMenuViewController : UIViewController{
+    
+}
 -(void)configureForUser:(TWPUser*)theUser;
-
+- (void)updateMenuView;
 @end

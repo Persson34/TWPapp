@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "profLocation.png"
+      "filename" : "profileMap.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "profLocation@2x.png"
+      "filename" : "profileMap@2x.png"
     }
   ],
   "info" : {

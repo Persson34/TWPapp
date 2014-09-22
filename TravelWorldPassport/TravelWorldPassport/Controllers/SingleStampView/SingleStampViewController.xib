@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingleStampViewController">
             <connections>
                 <outlet property="backImgView" destination="7L8-6e-3ZH" id="8OI-wn-o0V"/>
+                <outlet property="buyBtn" destination="3nk-Yd-uQW" id="tDw-b1-xxv"/>
                 <outlet property="selectedImgView" destination="jY0-Jp-9gH" id="igN-ye-guE"/>
                 <outlet property="sendBtn" destination="dzP-32-2aG" id="UEV-SM-vd0"/>
                 <outlet property="stampView" destination="I8N-5i-yjw" id="OuM-Qs-dOm"/>
@@ -18,12 +19,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="singleStampBg-1" id="px7-D0-wSQ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="555"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tinyLogo" id="F4O-FY-rxZ">
-                    <rect key="frame" x="130" y="10" width="61" height="27"/>
+                    <rect key="frame" x="115" y="3" width="90" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="P4T-aj-p5k">
-                    <rect key="frame" x="20" y="11" width="25" height="25"/>
+                    <rect key="frame" x="15" y="5" width="36" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" image="backIcon">
@@ -34,7 +39,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dzP-32-2aG">
-                    <rect key="frame" x="275" y="11" width="25" height="25"/>
+                    <rect key="frame" x="279" y="4" width="30" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" image="sendIcon">
@@ -42,16 +47,6 @@
                     </state>
                     <connections>
                         <action selector="sendBtnTapped:" destination="-1" eventType="touchUpInside" id="gml-9P-I9m"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uFH-cN-4qK">
-                    <rect key="frame" x="20" y="515" width="113" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" image="buyStamp">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="buyBtnTapped:" destination="-1" eventType="touchUpInside" id="Uuz-J9-81J"/>
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t7X-Bo-hA6">
@@ -63,28 +58,40 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="I8N-5i-yjw" userLabel="stampView">
-                    <rect key="frame" x="25" y="120" width="270" height="312"/>
+                    <rect key="frame" x="0.0" y="99" width="320" height="370"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stampBg" id="7L8-6e-3ZH">
-                            <rect key="frame" x="0.0" y="0.0" width="270" height="312"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="jY0-Jp-9gH">
-                            <rect key="frame" x="12" y="11" width="245" height="287"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="singleStampBg-1" id="jY0-Jp-9gH">
+                            <rect key="frame" x="15" y="14" width="290" height="336"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="singleStampBg" id="7L8-6e-3ZH">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="370"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3nk-Yd-uQW">
+                    <rect key="frame" x="0.0" y="511" width="320" height="57"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <state key="normal" backgroundImage="buy stamp">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="buyBtnTapped:" destination="-1" eventType="touchUpInside" id="9gZ-gw-dkW"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="0.21568627450980393" green="0.20784313725490194" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
-        <image name="backIcon" width="26" height="25"/>
-        <image name="buyStamp" width="113" height="33"/>
-        <image name="sendIcon" width="20" height="25"/>
-        <image name="stampBg" width="270" height="312"/>
-        <image name="tinyLogo" width="61" height="27"/>
+        <image name="backIcon" width="36" height="36"/>
+        <image name="buy stamp" width="320" height="57"/>
+        <image name="sendIcon" width="30" height="38"/>
+        <image name="singleStampBg" width="320" height="370"/>
+        <image name="singleStampBg-1" width="320" height="553"/>
+        <image name="tinyLogo" width="90" height="40"/>
     </resources>
 </document>

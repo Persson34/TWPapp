@@ -14,5 +14,5 @@
     
 }
 @property (nonatomic,strong)TWPUser *currentUser;
-
+- (void)editProfile;
 @end
