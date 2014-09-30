@@ -119,7 +119,7 @@
     // Prepare the dictionary
     //email, pwd, name, lastname
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *userDictionary = @{@"email":mailField.text,@"pwd":passwordField.text,@"name":surnameField.text,@"lastname":nameField.text};
+    NSDictionary *userDictionary = @{@"email":mailField.text,@"pwd":passwordField.text,@"name":nameField.text,@"lastname":surnameField.text};
     [[TWPEngine sharedEngine]registerUser:userDictionary onCompletion:^(NSData *responseString, NSError *theError) {
         NSString *response = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
         NSLog(@"Response from server %@",response);
