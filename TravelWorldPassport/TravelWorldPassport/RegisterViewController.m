@@ -12,16 +12,22 @@
 #import "MBProgressHud.h"
 #import "UIViewController+MFSideMenuAdditions.h"
 #import "MFSideMenuContainerViewController.h"
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Resize.h"
+#import "UIImage+UIImage_fixOrientation.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 
-@interface RegisterViewController ()<UITextFieldDelegate,UIScrollViewDelegate,UIAlertViewDelegate>{
+@interface RegisterViewController ()<UITextFieldDelegate,UIScrollViewDelegate,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>{
     
+    __weak IBOutlet UIButton *profileBtn;
     __weak IBOutlet UIScrollView *bgScrollView;
     __weak IBOutlet UITextField *repeatPwdField;
     __weak IBOutlet UITextField *passwordField;
     __weak IBOutlet UITextField *mailField;
     __weak IBOutlet UITextField *surnameField;
     __weak IBOutlet UITextField *nameField;
+    UIImage* originalUserImage;
 }
 - (IBAction)saveTapped:(id)sender;
 
@@ -86,6 +92,58 @@
     }
     return YES;
 }
+
+
+- (IBAction)profileImageBtnTapped:(id)sender {
+    UIActionSheet *aSheet = [[UIActionSheet alloc] initWithTitle:@"Take Profile Picture" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take new picture",@"Select from photo gallery", nil];
+    [aSheet showInView:self.view];
+}
+
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // Get the selected image.
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    originalUserImage = [[image fixOrientation]resizedImage:CGSizeMake(320, 320) interpolationQuality:kCGInterpolationHigh];;
+    UIImage *roundedImage  = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(160, 160) interpolationQuality:kCGInterpolationHigh];
+    roundedImage = [roundedImage roundedCornerImage:80.0f borderSize:1.0f];
+
+    [profileBtn setImage:roundedImage forState:UIControlStateNormal];
+    // profileBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    // profileBtn.layer.borderWidth = 1.0f;
+    // profileBtn.layer.cornerRadius = 10.0f;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"camera");
+        [self selectPhotoFrom:0];
+    }
+    else if (buttonIndex == 1) {
+        [self selectPhotoFrom:1];
+    }
+    else {
+        NSLog(@"cancel");
+    }
+}
+
+- (void)selectPhotoFrom:(int)tag {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init] ;
+    imagePicker.delegate = self;
+    if (tag == 0) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+    }
+    else {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePicker.allowsEditing = YES;
+
+    imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
 - (IBAction)saveTapped:(id)sender {
     // Validate the form
     if([nameField.text isEqualToString:@""]){
