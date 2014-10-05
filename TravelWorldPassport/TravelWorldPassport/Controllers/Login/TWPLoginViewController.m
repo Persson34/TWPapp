@@ -15,6 +15,7 @@
 #import "ADDeviceUtil.h"
 #import "AppDelegate.h"
 #import "RegisterViewController.h"
+#import "MFSideMenuContainerViewController.h"
 
 
 @interface TWPLoginViewController ()<UITextFieldDelegate>
@@ -55,7 +56,8 @@
     pwdField.font = [UIFont fontWithName:@"LucidaGrande" size:14.0f];
     registerBtn.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:14.0f];
     forgotPwdBtn.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:14.0f];
-    
+    MFSideMenuContainerViewController* menuContainerViewController=[UIApplication sharedApplication].keyWindow.rootViewController;
+    menuContainerViewController.panMode=MFSideMenuPanModeNone;
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor blackColor]];    
     

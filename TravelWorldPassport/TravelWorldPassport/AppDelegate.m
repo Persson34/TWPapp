@@ -31,6 +31,8 @@
                                                     containerWithCenterViewController:navController
                                                     leftMenuViewController:leftSideMenuController
                                                     rightMenuViewController:nil];
+
+    container.panMode=MFSideMenuPanModeNone;
     self.window.rootViewController = container;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

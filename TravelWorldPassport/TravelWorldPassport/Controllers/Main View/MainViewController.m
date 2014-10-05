@@ -65,6 +65,8 @@
     SideMenuViewController *sideController = (SideMenuViewController*)[self.menuContainerViewController leftMenuViewController];
     [sideController configureForUser:self.currentUser];
     [[(AppDelegate*)[[UIApplication sharedApplication] delegate] leftSideMenuController] updateMenuView];
+    MFSideMenuContainerViewController* menuContainerViewController=[UIApplication sharedApplication].keyWindow.rootViewController;
+    menuContainerViewController.panMode=MFSideMenuPanModeDefault;
     for (UILabel *aLabel in allLabels) {
         aLabel.font = [UIFont fontWithName:@"LucidaGrande" size:10.0f];
     }
