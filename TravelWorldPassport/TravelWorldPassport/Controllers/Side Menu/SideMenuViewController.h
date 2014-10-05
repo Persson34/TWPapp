@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 @class TWPUser;
+
+@protocol SideMenuViewControllerDelegate <NSObject>
+-(void)requestProfileEdit;
+
+@end
+
 @interface SideMenuViewController : UIViewController{
     
 }
+@property (nonatomic,weak) id<SideMenuViewControllerDelegate>delegate;
 -(void)configureForUser:(TWPUser*)theUser;
-- (void)updateMenuView;
+
 @end

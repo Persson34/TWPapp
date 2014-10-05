@@ -19,7 +19,7 @@
 @interface SideMenuViewController ()
 {
     IBOutletCollection(UIButton) NSArray *allButtons;
-    MainViewController *controller;
+
     __weak IBOutlet UIImageView *userProfilePic;
     __weak IBOutlet UILabel *usernameLabel;
     TWPUser *currentUser;
@@ -74,16 +74,12 @@
     usernameLabel.text = [theUser getFullName];
 }
 
-- (void)updateMenuView {
-    UINavigationController *navController = self.menuContainerViewController.centerViewController;
-    controller = (MainViewController*)[[navController viewControllers] objectAtIndex:1];
-}
 
 #pragma mark UI button actions
 
 - (IBAction)editBtnTapped:(id)sender {
-    if ([controller respondsToSelector:@selector(editProfile)]) {
-        [(MainViewController*)controller editProfile];
+    if ([_delegate respondsToSelector:@selector(requestProfileEdit)]) {
+        [_delegate requestProfileEdit];
     }
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
 }

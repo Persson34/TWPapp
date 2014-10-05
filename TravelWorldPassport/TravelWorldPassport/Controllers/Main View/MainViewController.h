@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DataModels.h"
+#import "SideMenuViewController.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <SideMenuViewControllerDelegate>
 {
     
 }

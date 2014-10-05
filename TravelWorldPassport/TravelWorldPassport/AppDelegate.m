@@ -15,9 +15,17 @@
 #import <VenmoTouch/VenmoTouch.h>
 #import "TWPEngine.h"
 #import "DataModels.h"
+#import "MainViewController.h"
 
+@interface AppDelegate()
+{
+
+}
+@property (strong, nonatomic) SideMenuViewController *leftSideMenuController;
+@property (strong, nonatomic) MFSideMenuContainerViewController* rootController;
+@end
 @implementation AppDelegate
-@synthesize leftSideMenuController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -26,14 +34,14 @@
     TWPLoginViewController *loginController = [[TWPLoginViewController alloc] initWithNibName:@"TWPLoginViewController" bundle:nil];
      navController= [[UINavigationController alloc] initWithRootViewController:loginController];
     navController.navigationBarHidden = YES;
-    leftSideMenuController = [[SideMenuViewController alloc] initWithNibName:@"SideMenuViewController" bundle:nil];
-    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+    _leftSideMenuController = [[SideMenuViewController alloc] initWithNibName:@"SideMenuViewController" bundle:nil];
+    self.rootController= [MFSideMenuContainerViewController
                                                     containerWithCenterViewController:navController
-                                                    leftMenuViewController:leftSideMenuController
+                                                    leftMenuViewController:_leftSideMenuController
                                                     rightMenuViewController:nil];
 
-    container.panMode=MFSideMenuPanModeNone;
-    self.window.rootViewController = container;
+    self.rootController.panMode=MFSideMenuPanModeNone;
+    self.window.rootViewController = self.rootController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     [UIImageView setDefaultEngine:[ImageDownloadEngine sharedEngine]];
@@ -59,6 +67,23 @@
     
     return YES;
 }
+
+-(void)showHome
+{
+    MainViewController *mainController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    mainController.currentUser = self.loggedUser;
+    navController=[[UINavigationController alloc] initWithRootViewController:mainController];
+    self.rootController.centerViewController=navController;
+    navController.navigationBarHidden = YES;
+    self.rootController.panMode=MFSideMenuPanModeDefault;
+    self.leftSideMenuController.delegate=mainController;
+}
+
+-(void)showLogin
+{
+
+}
+
 
 - (void)initVTClient {
     if ([BT_ENVIRONMENT isEqualToString:@"sandbox"]) {

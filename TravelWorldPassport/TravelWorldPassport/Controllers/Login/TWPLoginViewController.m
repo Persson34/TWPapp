@@ -59,7 +59,7 @@
     MFSideMenuContainerViewController* menuContainerViewController=[UIApplication sharedApplication].keyWindow.rootViewController;
     menuContainerViewController.panMode=MFSideMenuPanModeNone;
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-//    [self.navigationController.navigationBar setBackgroundColor:[UIColor blackColor]];    
+//    [self.navigationController.navigationBar setBackgroundColor:[UIColor blackColor]];
     
 }
 
@@ -231,11 +231,9 @@
                 [currentShipping saveShippingDict];
             }];
         }
-        MainViewController *mainController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-        mainController.currentUser = theUser;
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];//)
         appDelegate.loggedUser = theUser;
-        [self.navigationController pushViewController:mainController animated:YES];
+        [appDelegate showHome];
     }];
 }
 

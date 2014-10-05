@@ -15,6 +15,10 @@
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
 #import "UIImage+UIImage_fixOrientation.h"
+#import "TWPShipping.h"
+#import "AppDelegate.h"
+#import "TWPUser.h"
+#import "MainViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 
@@ -178,6 +182,7 @@
     //email, pwd, name, lastname
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *userDictionary = @{@"email":mailField.text,@"pwd":passwordField.text,@"name":nameField.text,@"lastname":surnameField.text};
+    __weak TWPEngine * wEngine=[TWPEngine sharedEngine];
     [[TWPEngine sharedEngine]registerUser:userDictionary onCompletion:^(NSData *responseString, NSError *theError) {
         NSString *response = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
         NSLog(@"Response from server %@",response);
@@ -185,8 +190,7 @@
              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
              NSDictionary *resultDict  = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
              if ([resultDict[@"meta"] isEqualToString:@"OK"]) {
-                 UIAlertView *successAlert = [[UIAlertView alloc]initWithTitle:@"Success!" message:@"You are registered successfully. Please login again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                 [successAlert show];
+                 [self makeLoginCall];
              }
              
          });
@@ -195,6 +199,40 @@
    
     
 }
+
+
+- (void)makeLoginCall {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[TWPEngine sharedEngine] loginWithUserName:mailField.text andPassword:passwordField.text onCompletion:^(NSData *responseData, NSError *theError) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        if (theError || responseData == nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Please try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
+//        NSString *responseString = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
+//        NSLog(@"%@",responseString);
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"Response dictionary %@",responseDictionary);
+        TWPUser *theUser = [TWPUser modelObjectWithDictionary:responseDictionary];
+//        [TWPShipping getStoredShippingDict];
+        //  NSLog(@"Shipping %@",[TWPShipping getStoredShippingDict]);
+        if([TWPShipping getStoredShippingDict]==nil){
+            // Call , get and store the shipping address
+            [[TWPEngine sharedEngine]getUserAddress:[NSString stringWithFormat:@"%d",(int)theUser.userId] onCompletion:^(NSData *responseString, NSError *theError) {
+                NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
+                TWPShipping *currentShipping = [TWPShipping modelObjectWithDictionary:respDict];
+                [currentShipping saveShippingDict];
+            }];
+        }
+
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];//)
+        appDelegate.loggedUser = theUser;
+        [appDelegate showHome];
+
+    }];
+}
+
 - (BOOL) validateEmail: (NSString *) candidate {
     NSString *emailRegex =
     @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
