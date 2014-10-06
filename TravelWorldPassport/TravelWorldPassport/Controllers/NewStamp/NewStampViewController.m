@@ -15,7 +15,8 @@
 
 @import AddressBook;
 
-@interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
+@interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,
+        UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate> {
     
     __weak IBOutlet UIPageControl *pageControl;
     BOOL pageControlBeingUsed;
@@ -200,49 +201,20 @@
     
     stamp6EditView.layer.borderWidth = 2.0f;
     stamp6EditView.layer.borderColor = [UIColor whiteColor].CGColor;
-    // Naresh taken out
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp6Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp6Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp7Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp7Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp8Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp8Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp8Lbl3 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp9Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp9Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp10Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp10Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp11Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp11Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp11Lbl3 addGestureRecognizer:recognizer];
+    // Naresh taken out - Chirag taken out as weel
+    NSArray* interactiveLabels=@[stamp6Lbl1,stamp6Lbl2,stamp7Lbl1,stamp7Lbl2,stamp8Lbl1,stamp8Lbl2,stamp8Lbl3,
+            stamp9Lbl1,stamp9Lbl2,stamp10Lbl1,stamp10Lbl2,stamp11Lbl1,stamp11Lbl2,stamp11Lbl3];
+
+    for(UILabel *label in interactiveLabels)
+    {
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        recognizer.numberOfTapsRequired = 1;
+        [label addGestureRecognizer:recognizer];
+        label.layer.borderWidth=1.0f;
+        label.layer.borderColor=[UIColor colorWithRed:17/255.0 green:168/255.0 blue:171/255.0 alpha:1.0].CGColor;
+        label.text=@"Type here";
+    }
+
 }
 
 - (void)startUpdatingLocation {
@@ -251,10 +223,13 @@
     if (!locationManager) {
         locationManager = [[CLLocationManager alloc] init];
     }
+    if([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+    {
+        [locationManager requestWhenInUseAuthorization];
+    }
     locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.pausesLocationUpdatesAutomatically = NO;
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    locationManager.distanceFilter = 100;
     [locationManager startUpdatingLocation];
 }
 
@@ -323,10 +298,19 @@
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to find user's location" message:@"Please try again" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Try Again", nil];
+    alert.delegate=self;
     [alert show];
-    [locationManager stopUpdatingLocation];
+    [self startUpdatingLocation];
     //    locationManager.delegate = nil;
+}
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex==1)
+    {
+        [self startUpdatingLocation];
+    }
 }
 
 - (void)didReceiveMemoryWarning
