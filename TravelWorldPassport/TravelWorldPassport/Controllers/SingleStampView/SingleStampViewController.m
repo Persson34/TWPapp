@@ -12,6 +12,7 @@
 #import "DMActivityInstagram.h"
 #import "ImageDownloadEngine.h"
 #import "KxMenu.h"
+#import "MBProgressHUD.h"
 
 @interface SingleStampViewController () <UIDocumentInteractionControllerDelegate>
 {
@@ -47,10 +48,12 @@
     [super viewDidLoad];
     
     [selectedImgView setImageWithURL:[NSURL URLWithString:selectedImageURL]];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[ImageDownloadEngine sharedEngine]imageAtURL:[NSURL URLWithString:selectedImageURL] completionHandler:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
         imageToShare = fetchedImage;
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     // Do any additional setup after loading the view from its nib.
     // Initiate UIImage download for this.
