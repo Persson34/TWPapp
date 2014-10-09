@@ -21,4 +21,6 @@
 @property (strong, nonatomic) TWPUser *loggedUser; // This is requred for all round access
 
 - (void)showHome;
+
+- (void)logOut;
 @end

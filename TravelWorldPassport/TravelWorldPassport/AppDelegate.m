@@ -17,6 +17,9 @@
 #import "DataModels.h"
 #import "MainViewController.h"
 
+
+static NSString* const kUserProfileKey=@"kUserProfileKey";
+
 @interface AppDelegate()
 {
 
@@ -43,7 +46,20 @@
     self.rootController.panMode=MFSideMenuPanModeNone;
     self.window.rootViewController = self.rootController;
     self.window.backgroundColor = [UIColor whiteColor];
+
+
     [self.window makeKeyAndVisible];
+
+    NSData* userData=[[NSUserDefaults standardUserDefaults] objectForKey:kUserProfileKey];
+    if(userData)
+    {
+        TWPUser *user=[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+        if(user)
+        {
+            self.loggedUser=user;
+            [self showHome];
+        }
+    }
     [UIImageView setDefaultEngine:[ImageDownloadEngine sharedEngine]];
     //[self addDummyAddress];
     [self initVTClient];
@@ -68,6 +84,11 @@
     return YES;
 }
 
+- (void)setLoggedUser:(TWPUser *)loggedUser {
+    _loggedUser = loggedUser;
+    [self serializeLoggedUser];
+}
+
 -(void)showHome
 {
     MainViewController *mainController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
@@ -81,7 +102,16 @@
 
 -(void)showLogin
 {
+    TWPLoginViewController *loginController = [[TWPLoginViewController alloc] initWithNibName:@"TWPLoginViewController" bundle:nil];
+    navController= [[UINavigationController alloc] initWithRootViewController:loginController];
+    navController.navigationBarHidden = YES;
+    self.rootController.menuState=MFSideMenuStateClosed;
+    self.rootController.centerViewController=navController;
+    self.rootController.panMode=MFSideMenuPanModeNone;
+}
 
+- (void)logOut {
+    [self showLogin];
 }
 
 
@@ -224,8 +254,15 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    [self serializeLoggedUser];
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)serializeLoggedUser {
+    NSData* userData= [NSKeyedArchiver archivedDataWithRootObject:self.loggedUser];
+    [[NSUserDefaults standardUserDefaults] setObject:userData forKey:kUserProfileKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

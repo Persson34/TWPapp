@@ -15,6 +15,7 @@
 #import "MainViewController.h"
 #import "MFSideMenu.h"
 #import "TWPUser.h"
+#import "AppDelegate.h"
 
 @interface SideMenuViewController ()
 {
@@ -52,10 +53,15 @@
         aBtn.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:15.0f];
     }
     usernameLabel.font =  [UIFont fontWithName:@"LucidaGrande" size:14.0f];
+    if(currentUser)
+    {
+        [self configureForUser:currentUser];
+    }
 }
 
 -(void)configureForUser:(TWPUser *)theUser{
     currentUser = theUser;
+
     //[userProfilePic setImageFromURL:[NSURL URLWithString:theUser.userProfile]];
     [[ImageDownloadEngine sharedEngine]imageAtURL:[NSURL URLWithString:theUser.userProfile] completionHandler:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
         UIImage *roundedImage  = [fetchedImage resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(112, 112) interpolationQuality:kCGInterpolationHigh];
@@ -82,6 +88,10 @@
         [_delegate requestProfileEdit];
     }
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+}
+- (IBAction)signoutBtnTapped:(id)sender {
+    AppDelegate* appDelegate=[[UIApplication sharedApplication] delegate];
+    [appDelegate logOut];
 }
 
 - (IBAction)billingBtnTapped:(id)sender {
