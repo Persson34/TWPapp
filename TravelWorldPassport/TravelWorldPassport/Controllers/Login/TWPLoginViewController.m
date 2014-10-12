@@ -48,6 +48,8 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"";
+
+    loginView.translatesAutoresizingMaskIntoConstraints=NO;
     [self.view addSubview:loginView];
     loginView.alpha = 0.0f;
     // Do any additional setup after loading the view from its nib.
@@ -70,6 +72,11 @@
 }
 
 - (IBAction)signInBtnTapped:(id)sender {
+    NSLayoutConstraint *centerX=[NSLayoutConstraint constraintWithItem:loginView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    NSLayoutConstraint *centerY=[NSLayoutConstraint constraintWithItem:loginView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    NSLayoutConstraint *widths=[NSLayoutConstraint constraintWithItem:loginView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0];
+    NSLayoutConstraint *heights=[NSLayoutConstraint constraintWithItem:loginView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0];
+    [self.view  addConstraints:@[centerY,centerX,widths,heights]];
     [UIView animateWithDuration:0.3 animations:^{
         loginView.alpha = 1.0f;
     } completion:^(BOOL finished) {

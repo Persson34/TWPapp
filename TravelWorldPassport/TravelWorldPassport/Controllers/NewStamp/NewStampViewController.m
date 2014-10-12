@@ -54,6 +54,7 @@
     __weak IBOutlet UILabel *stamp11Lbl1;
     __weak IBOutlet UILabel *stamp11Lbl2;
     __weak IBOutlet UILabel *stamp11Lbl3;
+            IBOutlet UIView *_contentView;
     int selectedLblTag;
     UIImage *takenPicture;
     AVCamCaptureManager *captureManager;
@@ -104,6 +105,8 @@
     hiddenTextField.delegate = self;
     [self.view addSubview:hiddenTextField];
     [self.view sendSubviewToBack:hiddenTextField];
+    [stampsScroll addSubview:_contentView];
+//    stampsScroll.contentSize=_contentView.bounds.size;
     [self startUpdatingLocation];
     [self setupLabelFonts];
     [stampsScroll setContentSize:CGSizeMake(3522, 387)]; // Need to change this.
@@ -171,7 +174,7 @@
 }
 
 - (void)setupLabelFonts {
-    //set font
+//    //set font
     stamp1Lbl.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
     stamp2Lbl.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
     loc2Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
@@ -302,8 +305,6 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to find user's location" message:@"Please try again" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Try Again", nil];
     alert.delegate=self;
     [alert show];
-    [self startUpdatingLocation];
-    //    locationManager.delegate = nil;
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
