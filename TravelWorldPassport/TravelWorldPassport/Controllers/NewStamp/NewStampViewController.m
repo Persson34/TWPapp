@@ -12,7 +12,7 @@
 #import "TWPEngine.h"
 #import "TWPUser.h"
 #import "Stamps.h"
-
+#import "AppDelegate.h"
 @import AddressBook;
 
 @interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,
@@ -497,7 +497,10 @@
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"%@",responseDictionary);
         Stamps *newStamp = [[Stamps alloc] initWithDictionary:responseDictionary];
+        theUser.stampCount+=1;
         [theUser.stamps addObject:newStamp];
+        AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [appDelegate serializeLoggedUser];
         [self dismissViewControllerAnimated:YES completion:nil];
 //        [self dismissViewControllerAnimated:YES completion:^{
 //        }];

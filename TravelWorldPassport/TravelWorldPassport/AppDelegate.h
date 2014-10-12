@@ -23,4 +23,5 @@
 - (void)showHome;
 
 - (void)logOut;
+- (void)serializeLoggedUser;
 @end
