@@ -394,10 +394,10 @@
 //    UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    for (int i = 0; i < [[stampsScroll subviews] count]; i++) {
-        if ([[[stampsScroll subviews] objectAtIndex:i] isKindOfClass:[UIView class]]) {
-            UIView *currentView = (UIView*)[[stampsScroll subviews] objectAtIndex:pageControl.currentPage];
-            UIView *view = (UIView*)[[stampsScroll subviews] objectAtIndex:i];
+    for (int i = 0; i < [[_contentView subviews] count]; i++) {
+        if ([[[_contentView subviews] objectAtIndex:i] isKindOfClass:[UIView class]]) {
+            UIView *currentView = (UIView*)[[_contentView subviews] objectAtIndex:pageControl.currentPage];
+            UIView *view = (UIView*)[[_contentView subviews] objectAtIndex:i];
             if ([view isEqual:currentView]) {
 //                 UIGraphicsBeginImageContext(view.frame.size);//CGSizeMake(284, 332)
                 UIGraphicsBeginImageContextWithOptions(view.frame.size, FALSE, 0.0);
