@@ -34,6 +34,7 @@
     __weak IBOutlet UILabel *loc9Lbl;
     __weak IBOutlet UILabel *loc10Lbl;
     __weak IBOutlet UILabel *loc11Lbl;
+    __weak IBOutlet UILabel *loc12Lbl;
     __weak IBOutlet UIButton *galleryBtn;
     __weak IBOutlet UIButton *cameraBtn;
     __weak IBOutlet UIButton *crossBtn;
@@ -54,6 +55,7 @@
     __weak IBOutlet UILabel *stamp11Lbl1;
     __weak IBOutlet UILabel *stamp11Lbl2;
     __weak IBOutlet UILabel *stamp11Lbl3;
+    __weak IBOutlet UILabel *stamp12Lbl1;
             IBOutlet UIView *_contentView;
     int selectedLblTag;
     UIImage *takenPicture;
@@ -109,7 +111,9 @@
 //    stampsScroll.contentSize=_contentView.bounds.size;
     [self startUpdatingLocation];
     [self setupLabelFonts];
-    [stampsScroll setContentSize:CGSizeMake(3522, 387)]; // Need to change this.
+    NSInteger numOfSlides=12;
+    pageControl.numberOfPages=numOfSlides;
+    [stampsScroll setContentSize:CGSizeMake(2+numOfSlides*320, 387)]; // Need to change this.
     // Do any additional setup after loading the view from its nib.
 //    swipeLabel.font = [UIFont fontWithName:@"Intro" size:16.0f];
    // [swipeLabel sizeToFit];
@@ -187,6 +191,7 @@
     loc9Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc10Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc11Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
+    loc12Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     stamp6Lbl1.font = [UIFont fontWithName:@"Intro-Inline" size:20.0f];
     stamp6Lbl2.font = [UIFont fontWithName:@"Intro-Inline" size:20.0f];
     stamp7Lbl1.font = [UIFont fontWithName:@"BebasNeue" size:30.0f];
@@ -201,12 +206,13 @@
     stamp11Lbl1.font = [UIFont fontWithName:@"Intro" size:25.0f];
     stamp11Lbl2.font = [UIFont fontWithName:@"Lobster" size:20.0f];
     stamp11Lbl3.font = [UIFont fontWithName:@"Intro" size:25.0f];
+    stamp12Lbl1.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
     
     stamp6EditView.layer.borderWidth = 2.0f;
     stamp6EditView.layer.borderColor = [UIColor whiteColor].CGColor;
     // Naresh taken out - Chirag taken out as weel
     NSArray* interactiveLabels=@[stamp6Lbl1,stamp6Lbl2,stamp7Lbl1,stamp7Lbl2,stamp8Lbl1,stamp8Lbl2,stamp8Lbl3,
-            stamp9Lbl1,stamp9Lbl2,stamp10Lbl1,stamp10Lbl2,stamp11Lbl1,stamp11Lbl2,stamp11Lbl3];
+            stamp9Lbl1,stamp9Lbl2,stamp10Lbl1,stamp10Lbl2,stamp11Lbl1,stamp11Lbl2,stamp11Lbl3,stamp12Lbl1];
 
     for(UILabel *label in interactiveLabels)
     {
@@ -267,33 +273,28 @@
                                objectForKey:(NSString *)kABPersonAddressStateKey];
             
             NSLog(@"%@ %@ %@", country,city, state);
+            UILabel*lbl=[self valueForKey:@"loc2Lbl"];
+            lbl.text=state;
+
+            for (int i =2; i<=12; i++) {
+                NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
+                UILabel*locLabel=[self valueForKey:str];
+                if(city)
+                {
+                    locLabel.text = [NSString stringWithFormat:@"%@, %@",city,country];
+                }else{
+                    locLabel.text = [NSString stringWithFormat:@"%@, %@",state,country];
+                }
+                
+            }
+            
             if (city == nil) {
                 stamp1Lbl.text = state;
                 stamp2Lbl.text = state;
-                loc2Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc3Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc4Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc5Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc6Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc7Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc8Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc9Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc10Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc11Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
             }
             else {
                 stamp1Lbl.text = city;
                 stamp2Lbl.text = state;
-                loc2Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc3Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc4Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc5Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc6Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc7Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc8Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc9Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc10Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc11Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
             }
         }
     }];
@@ -615,6 +616,9 @@
         case 14:
             stamp11Lbl3.text = searchStr;
             break;
+        case 15:
+            stamp12Lbl1.text = searchStr;
+
         default:
             break;
     }
