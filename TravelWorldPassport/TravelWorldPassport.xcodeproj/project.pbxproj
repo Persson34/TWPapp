@@ -82,6 +82,97 @@
 		3AE799AF190E10A5002C989C /* TWPShipping.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE799AE190E10A5002C989C /* TWPShipping.m */; };
 		6E64511B19D495DD0000FF6D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511919D495DD0000FF6D /* Podfile */; };
 		6E64511C19D495DD0000FF6D /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */; };
+		6E973BF019EB08E000926121 /* UIImage+UIImage_fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E283DEB19232FD5002CA62F /* UIImage+UIImage_fixOrientation.m */; };
+		6E973BF119EB08E000926121 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E363D18F2AB4000A88133 /* EditProfileViewController.m */; };
+		6E973BF219EB08E000926121 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC45E191763010060AB28 /* RegisterViewController.m */; };
+		6E973BF319EB08E000926121 /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A13547919064CC800D8A2E1 /* CheckoutViewController.m */; };
+		6E973BF419EB08E000926121 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F3B69191751D4006D6ED1 /* UIImage+Alpha.m */; };
+		6E973BF519EB08E000926121 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6F18D0885300EFCDA2 /* MKNetworkOperation.m */; };
+		6E973BF619EB08E000926121 /* ImageDownloadEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64C18D876140027DEB7 /* ImageDownloadEngine.m */; };
+		6E973BF719EB08E000926121 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64318D875060027DEB7 /* Location.m */; };
+		6E973BF819EB08E000926121 /* NSAlert+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A5C18D0885300EFCDA2 /* NSAlert+MKNetworkKitAdditions.m */; };
+		6E973BF919EB08E000926121 /* TWPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A5EF318A0F6DA008034C6 /* TWPLoginViewController.m */; };
+		6E973BFA19EB08E000926121 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E37E18CF019A0087189A /* MFSideMenuContainerViewController.m */; };
+		6E973BFB19EB08E000926121 /* StampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9318D976EE00D1FE43 /* StampCell.m */; };
+		6E973BFC19EB08E000926121 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38018CF019A0087189A /* MFSideMenuShadow.m */; };
+		6E973BFD19EB08E000926121 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38D18CF02B10087189A /* MainViewController.m */; };
+		6E973BFE19EB08E000926121 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38218CF019A0087189A /* UIViewController+MFSideMenuAdditions.m */; };
+		6E973BFF19EB08E000926121 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6018D0885300EFCDA2 /* NSDate+RFC1123.m */; };
+		6E973C0019EB08E000926121 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6218D0885300EFCDA2 /* NSDictionary+RequestEncoding.m */; };
+		6E973C0119EB08E000926121 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A5ED118A0F682008034C6 /* AppDelegate.m */; };
+		6E973C0219EB08E000926121 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A7218D0885300EFCDA2 /* Reachability.m */; };
+		6E973C0319EB08E000926121 /* TWPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64718D875060027DEB7 /* TWPUser.m */; };
+		6E973C0419EB08E000926121 /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B6818DAD3B10040DC7A /* AVCamUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6E973C0519EB08E000926121 /* AVCamCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B6418DAD3B10040DC7A /* AVCamCaptureManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6E973C0619EB08E000926121 /* TWPShipping.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE799AE190E10A5002C989C /* TWPShipping.m */; };
+		6E973C0719EB08E000926121 /* NewStampViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B4D18DAB6B40040DC7A /* NewStampViewController.m */; };
+		6E973C0819EB08E000926121 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A5E18D0885300EFCDA2 /* NSData+MKBase64.m */; };
+		6E973C0919EB08E000926121 /* DMResizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA73A64191CA923000FB97C /* DMResizerViewController.m */; };
+		6E973C0A19EB08E000926121 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6C18D0885300EFCDA2 /* MKNetworkEngine.m */; };
+		6E973C0B19EB08E000926121 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A63E38718CF01B10087189A /* SideMenuViewController.m */; };
+		6E973C0C19EB08E000926121 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F3B6B191751D4006D6ED1 /* UIImage+Resize.m */; };
+		6E973C0D19EB08E000926121 /* ADDeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F519ECB18D9A0F000DE0B3C /* ADDeviceUtil.m */; };
+		6E973C0E19EB08E000926121 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F3B6D191751D4006D6ED1 /* UIImage+RoundedCorner.m */; };
+		6E973C0F19EB08E000926121 /* AVCamRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F844B6618DAD3B10040DC7A /* AVCamRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6E973C1019EB08E000926121 /* Stamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE6C64518D875060027DEB7 /* Stamps.m */; };
+		6E973C1119EB08E000926121 /* DMActivityInstagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA73A62191CA923000FB97C /* DMActivityInstagram.m */; };
+		6E973C1219EB08E000926121 /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96A4C1190943AA008CEEBD /* PaymentViewController.m */; };
+		6E973C1319EB08E000926121 /* Initializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB806B190A69BE006C5D51 /* Initializer.m */; };
+		6E973C1419EB08E000926121 /* DMColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA73A72191CA996000FB97C /* DMColorPickerView.m */; };
+		6E973C1519EB08E000926121 /* SingleStampViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A160BD318EEA9E00077B8C3 /* SingleStampViewController.m */; };
+		6E973C1619EB08E000926121 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6818D0885300EFCDA2 /* UIImageView+MKNetworkKitAdditions.m */; };
+		6E973C1719EB08E000926121 /* TWPEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A8118D0888800EFCDA2 /* TWPEngine.m */; };
+		6E973C1819EB08E000926121 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A160BD918EEB4470077B8C3 /* KxMenu.m */; };
+		6E973C1919EB08E000926121 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A5ECD18A0F682008034C6 /* main.m */; };
+		6E973C1A19EB08E000926121 /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6418D0885300EFCDA2 /* NSString+MKNetworkKitAdditions.m */; };
+		6E973C1B19EB08E000926121 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6618D0885300EFCDA2 /* UIAlertView+MKNetworkKitAdditions.m */; };
+		6E973C1C19EB08E000926121 /* Cloner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB8069190A69BE006C5D51 /* Cloner.m */; };
+		6E973C1D19EB08E000926121 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB37A6A18D0885300EFCDA2 /* MBProgressHUD.m */; };
+		6E973C1F19EB08E000926121 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3055251920DC2600DA2832 /* ImageIO.framework */; };
+		6E973C2019EB08E000926121 /* VenmoTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E363618F2867100A88133 /* VenmoTouch.framework */; };
+		6E973C2119EB08E000926121 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358318F26F1B00A88133 /* CoreTelephony.framework */; };
+		6E973C2219EB08E000926121 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358418F26F1B00A88133 /* CoreText.framework */; };
+		6E973C2319EB08E000926121 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358118F26F0D00A88133 /* AdSupport.framework */; };
+		6E973C2419EB08E000926121 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E30551C1920DBDF00DA2832 /* SDWebImage.framework */; };
+		6E973C2519EB08E000926121 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E357F18F26F0600A88133 /* Security.framework */; };
+		6E973C2619EB08E000926121 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A160BDE18EEB6060077B8C3 /* Social.framework */; };
+		6E973C2719EB08E000926121 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A160BDC18EEB6000077B8C3 /* Accounts.framework */; };
+		6E973C2819EB08E000926121 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E663718E54ED00085447D /* CoreLocation.framework */; };
+		6E973C2919EB08E000926121 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0F3B7819175249006D6ED1 /* FacebookSDK.framework */; };
+		6E973C2A19EB08E000926121 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB37A7E18D0886B00EFCDA2 /* QuartzCore.framework */; };
+		6E973C2B19EB08E000926121 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC318A0F682008034C6 /* CoreGraphics.framework */; };
+		6E973C2C19EB08E000926121 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC518A0F682008034C6 /* UIKit.framework */; };
+		6E973C2D19EB08E000926121 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9A5EC118A0F682008034C6 /* Foundation.framework */; };
+		6E973C2E19EB08E000926121 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6311E4969CAE4CFA9E6DC220 /* libPods.a */; };
+		6E973C3019EB08E000926121 /* DMResizerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EA73A65191CA923000FB97C /* DMResizerViewController.xib */; };
+		6E973C3119EB08E000926121 /* Intro Inline.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5418DAC3510040DC7A /* Intro Inline.otf */; };
+		6E973C3219EB08E000926121 /* instagram~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EA73A69191CA923000FB97C /* instagram~ipad@2x.png */; };
+		6E973C3319EB08E000926121 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A63E38818CF01B10087189A /* SideMenuViewController.xib */; };
+		6E973C3419EB08E000926121 /* StampCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9518D9771100D1FE43 /* StampCell.xib */; };
+		6E973C3519EB08E000926121 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5318DAC3510040DC7A /* BebasNeue.otf */; };
+		6E973C3619EB08E000926121 /* instagram@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EA73A67191CA923000FB97C /* instagram@2x.png */; };
+		6E973C3719EB08E000926121 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E363E18F2AB4000A88133 /* EditProfileViewController.xib */; };
+		6E973C3819EB08E000926121 /* SingleStampViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A160BD418EEA9E00077B8C3 /* SingleStampViewController.xib */; };
+		6E973C3919EB08E000926121 /* TWPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5EF418A0F6DA008034C6 /* TWPLoginViewController.xib */; };
+		6E973C3A19EB08E000926121 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */; };
+		6E973C3B19EB08E000926121 /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A96A4C2190943AA008CEEBD /* PaymentViewController.xib */; };
+		6E973C3C19EB08E000926121 /* JennaSue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5618DAC3510040DC7A /* JennaSue.ttf */; };
+		6E973C3D19EB08E000926121 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDCC45F191763010060AB28 /* RegisterViewController.xib */; };
+		6E973C3E19EB08E000926121 /* instagram~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EA73A68191CA923000FB97C /* instagram~ipad.png */; };
+		6E973C3F19EB08E000926121 /* Lobster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5718DAC3510040DC7A /* Lobster.ttf */; };
+		6E973C4019EB08E000926121 /* LucidaGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A9D90F319052CC200F5DACC /* LucidaGrande.ttf */; };
+		6E973C4119EB08E000926121 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A63E38E18CF02B10087189A /* MainViewController.xib */; };
+		6E973C4219EB08E000926121 /* stamptemplates.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E07A2651921E96100D536E3 /* stamptemplates.json */; };
+		6E973C4319EB08E000926121 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A13547A19064CC800D8A2E1 /* CheckoutViewController.xib */; };
+		6E973C4419EB08E000926121 /* Avenir Next.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5218DAC3510040DC7A /* Avenir Next.ttc */; };
+		6E973C4519EB08E000926121 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EA73A66191CA923000FB97C /* instagram.png */; };
+		6E973C4619EB08E000926121 /* Intro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5518DAC3510040DC7A /* Intro.otf */; };
+		6E973C4719EB08E000926121 /* Oranienbaum-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5918DAC3510040DC7A /* Oranienbaum-Regular.ttf */; };
+		6E973C4819EB08E000926121 /* Metropolis 1920.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5818DAC3510040DC7A /* Metropolis 1920.otf */; };
+		6E973C4919EB08E000926121 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5ECA18A0F682008034C6 /* InfoPlist.strings */; };
+		6E973C4A19EB08E000926121 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5ED318A0F682008034C6 /* Images.xcassets */; };
+		6E973C4B19EB08E000926121 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511919D495DD0000FF6D /* Podfile */; };
+		6E973C4C19EB08E000926121 /* NewStampViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B4E18DAB6B40040DC7A /* NewStampViewController.xib */; };
 		8CDDF70913E541BEB6BC716E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6311E4969CAE4CFA9E6DC220 /* libPods.a */; };
 		8F1EFC9418D976EE00D1FE43 /* StampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9318D976EE00D1FE43 /* StampCell.m */; };
 		8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9518D9771100D1FE43 /* StampCell.xib */; };
@@ -233,6 +324,8 @@
 		6311E4969CAE4CFA9E6DC220 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E64511919D495DD0000FF6D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
+		6E973C5119EB08E000926121 /* TravelWorldPassport copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TravelWorldPassport copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E973C5219EB08E100926121 /* TravelWorldPassport copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TravelWorldPassport copy-Info.plist"; path = "/Users/mzygar/Documents/Projekty/Australia/TWPapp/TravelWorldPassport/TravelWorldPassport copy-Info.plist"; sourceTree = "<absolute>"; };
 		8F1EFC9218D976EE00D1FE43 /* StampCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StampCell.h; path = "Controllers/Main View/StampCell.h"; sourceTree = "<group>"; };
 		8F1EFC9318D976EE00D1FE43 /* StampCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StampCell.m; path = "Controllers/Main View/StampCell.m"; sourceTree = "<group>"; };
 		8F1EFC9518D9771100D1FE43 /* StampCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StampCell.xib; path = "Controllers/Main View/StampCell.xib"; sourceTree = "<group>"; };
@@ -297,6 +390,29 @@
 				3A9A5EDB18A0F682008034C6 /* XCTest.framework in Frameworks */,
 				3A9A5EDD18A0F682008034C6 /* UIKit.framework in Frameworks */,
 				3A9A5EDC18A0F682008034C6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E973C1E19EB08E000926121 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E973C1F19EB08E000926121 /* ImageIO.framework in Frameworks */,
+				6E973C2019EB08E000926121 /* VenmoTouch.framework in Frameworks */,
+				6E973C2119EB08E000926121 /* CoreTelephony.framework in Frameworks */,
+				6E973C2219EB08E000926121 /* CoreText.framework in Frameworks */,
+				6E973C2319EB08E000926121 /* AdSupport.framework in Frameworks */,
+				6E973C2419EB08E000926121 /* SDWebImage.framework in Frameworks */,
+				6E973C2519EB08E000926121 /* Security.framework in Frameworks */,
+				6E973C2619EB08E000926121 /* Social.framework in Frameworks */,
+				6E973C2719EB08E000926121 /* Accounts.framework in Frameworks */,
+				6E973C2819EB08E000926121 /* CoreLocation.framework in Frameworks */,
+				6E973C2919EB08E000926121 /* FacebookSDK.framework in Frameworks */,
+				6E973C2A19EB08E000926121 /* QuartzCore.framework in Frameworks */,
+				6E973C2B19EB08E000926121 /* CoreGraphics.framework in Frameworks */,
+				6E973C2C19EB08E000926121 /* UIKit.framework in Frameworks */,
+				6E973C2D19EB08E000926121 /* Foundation.framework in Frameworks */,
+				6E973C2E19EB08E000926121 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +563,7 @@
 				3A9A5EC018A0F682008034C6 /* Frameworks */,
 				3A9A5EBF18A0F682008034C6 /* Products */,
 				24668B821043423D86DCC6CB /* Pods.xcconfig */,
+				6E973C5219EB08E100926121 /* TravelWorldPassport copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -455,6 +572,7 @@
 			children = (
 				3A9A5EBE18A0F682008034C6 /* TravelWorldPassport.app */,
 				3A9A5ED918A0F682008034C6 /* TravelWorldPassportTests.xctest */,
+				6E973C5119EB08E000926121 /* TravelWorldPassport copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -709,6 +827,25 @@
 			productReference = 3A9A5ED918A0F682008034C6 /* TravelWorldPassportTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6E973BED19EB08E000926121 /* TravelWorldPassport copy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E973C4E19EB08E000926121 /* Build configuration list for PBXNativeTarget "TravelWorldPassport copy" */;
+			buildPhases = (
+				6E973BEE19EB08E000926121 /* Check Pods Manifest.lock */,
+				6E973BEF19EB08E000926121 /* Sources */,
+				6E973C1E19EB08E000926121 /* Frameworks */,
+				6E973C2F19EB08E000926121 /* Resources */,
+				6E973C4D19EB08E000926121 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TravelWorldPassport copy";
+			productName = TravelWorldPassport;
+			productReference = 6E973C5119EB08E000926121 /* TravelWorldPassport copy.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -742,6 +879,7 @@
 			targets = (
 				3A9A5EBD18A0F682008034C6 /* TravelWorldPassport */,
 				3A9A5ED818A0F682008034C6 /* TravelWorldPassportTests */,
+				6E973BED19EB08E000926121 /* TravelWorldPassport copy */,
 			);
 		};
 /* End PBXProject section */
@@ -791,10 +929,76 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6E973C2F19EB08E000926121 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E973C3019EB08E000926121 /* DMResizerViewController.xib in Resources */,
+				6E973C3119EB08E000926121 /* Intro Inline.otf in Resources */,
+				6E973C3219EB08E000926121 /* instagram~ipad@2x.png in Resources */,
+				6E973C3319EB08E000926121 /* SideMenuViewController.xib in Resources */,
+				6E973C3419EB08E000926121 /* StampCell.xib in Resources */,
+				6E973C3519EB08E000926121 /* BebasNeue.otf in Resources */,
+				6E973C3619EB08E000926121 /* instagram@2x.png in Resources */,
+				6E973C3719EB08E000926121 /* EditProfileViewController.xib in Resources */,
+				6E973C3819EB08E000926121 /* SingleStampViewController.xib in Resources */,
+				6E973C3919EB08E000926121 /* TWPLoginViewController.xib in Resources */,
+				6E973C3A19EB08E000926121 /* TemplateIcon2x.png in Resources */,
+				6E973C3B19EB08E000926121 /* PaymentViewController.xib in Resources */,
+				6E973C3C19EB08E000926121 /* JennaSue.ttf in Resources */,
+				6E973C3D19EB08E000926121 /* RegisterViewController.xib in Resources */,
+				6E973C3E19EB08E000926121 /* instagram~ipad.png in Resources */,
+				6E973C3F19EB08E000926121 /* Lobster.ttf in Resources */,
+				6E973C4019EB08E000926121 /* LucidaGrande.ttf in Resources */,
+				6E973C4119EB08E000926121 /* MainViewController.xib in Resources */,
+				6E973C4219EB08E000926121 /* stamptemplates.json in Resources */,
+				6E973C4319EB08E000926121 /* CheckoutViewController.xib in Resources */,
+				6E973C4419EB08E000926121 /* Avenir Next.ttc in Resources */,
+				6E973C4519EB08E000926121 /* instagram.png in Resources */,
+				6E973C4619EB08E000926121 /* Intro.otf in Resources */,
+				6E973C4719EB08E000926121 /* Oranienbaum-Regular.ttf in Resources */,
+				6E973C4819EB08E000926121 /* Metropolis 1920.otf in Resources */,
+				6E973C4919EB08E000926121 /* InfoPlist.strings in Resources */,
+				6E973C4A19EB08E000926121 /* Images.xcassets in Resources */,
+				6E973C4B19EB08E000926121 /* Podfile in Resources */,
+				6E973C4C19EB08E000926121 /* NewStampViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		143B2DD10640435B8E21E674 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E973BEE19EB08E000926121 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6E973C4D19EB08E000926121 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -885,6 +1089,59 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A9A5EE718A0F682008034C6 /* TravelWorldPassportTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E973BEF19EB08E000926121 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E973BF019EB08E000926121 /* UIImage+UIImage_fixOrientation.m in Sources */,
+				6E973BF119EB08E000926121 /* EditProfileViewController.m in Sources */,
+				6E973BF219EB08E000926121 /* RegisterViewController.m in Sources */,
+				6E973BF319EB08E000926121 /* CheckoutViewController.m in Sources */,
+				6E973BF419EB08E000926121 /* UIImage+Alpha.m in Sources */,
+				6E973BF519EB08E000926121 /* MKNetworkOperation.m in Sources */,
+				6E973BF619EB08E000926121 /* ImageDownloadEngine.m in Sources */,
+				6E973BF719EB08E000926121 /* Location.m in Sources */,
+				6E973BF819EB08E000926121 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
+				6E973BF919EB08E000926121 /* TWPLoginViewController.m in Sources */,
+				6E973BFA19EB08E000926121 /* MFSideMenuContainerViewController.m in Sources */,
+				6E973BFB19EB08E000926121 /* StampCell.m in Sources */,
+				6E973BFC19EB08E000926121 /* MFSideMenuShadow.m in Sources */,
+				6E973BFD19EB08E000926121 /* MainViewController.m in Sources */,
+				6E973BFE19EB08E000926121 /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				6E973BFF19EB08E000926121 /* NSDate+RFC1123.m in Sources */,
+				6E973C0019EB08E000926121 /* NSDictionary+RequestEncoding.m in Sources */,
+				6E973C0119EB08E000926121 /* AppDelegate.m in Sources */,
+				6E973C0219EB08E000926121 /* Reachability.m in Sources */,
+				6E973C0319EB08E000926121 /* TWPUser.m in Sources */,
+				6E973C0419EB08E000926121 /* AVCamUtilities.m in Sources */,
+				6E973C0519EB08E000926121 /* AVCamCaptureManager.m in Sources */,
+				6E973C0619EB08E000926121 /* TWPShipping.m in Sources */,
+				6E973C0719EB08E000926121 /* NewStampViewController.m in Sources */,
+				6E973C0819EB08E000926121 /* NSData+MKBase64.m in Sources */,
+				6E973C0919EB08E000926121 /* DMResizerViewController.m in Sources */,
+				6E973C0A19EB08E000926121 /* MKNetworkEngine.m in Sources */,
+				6E973C0B19EB08E000926121 /* SideMenuViewController.m in Sources */,
+				6E973C0C19EB08E000926121 /* UIImage+Resize.m in Sources */,
+				6E973C0D19EB08E000926121 /* ADDeviceUtil.m in Sources */,
+				6E973C0E19EB08E000926121 /* UIImage+RoundedCorner.m in Sources */,
+				6E973C0F19EB08E000926121 /* AVCamRecorder.m in Sources */,
+				6E973C1019EB08E000926121 /* Stamps.m in Sources */,
+				6E973C1119EB08E000926121 /* DMActivityInstagram.m in Sources */,
+				6E973C1219EB08E000926121 /* PaymentViewController.m in Sources */,
+				6E973C1319EB08E000926121 /* Initializer.m in Sources */,
+				6E973C1419EB08E000926121 /* DMColorPickerView.m in Sources */,
+				6E973C1519EB08E000926121 /* SingleStampViewController.m in Sources */,
+				6E973C1619EB08E000926121 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
+				6E973C1719EB08E000926121 /* TWPEngine.m in Sources */,
+				6E973C1819EB08E000926121 /* KxMenu.m in Sources */,
+				6E973C1919EB08E000926121 /* main.m in Sources */,
+				6E973C1A19EB08E000926121 /* NSString+MKNetworkKitAdditions.m in Sources */,
+				6E973C1B19EB08E000926121 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				6E973C1C19EB08E000926121 /* Cloner.m in Sources */,
+				6E973C1D19EB08E000926121 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,7 +1258,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNIVERSAL WORLD PASSPORT PTY LTD (H7L45B2MKJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Labedzki (N29UV432E3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../braintree_ios/venmo-touch",
@@ -1026,7 +1283,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4b165fc-79e4-4668-9928-909ed14a0781";
+				PROVISIONING_PROFILE = "17987BF1-2A9A-4E22-AADB-C4F640E1A34D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1038,7 +1295,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNIVERSAL WORLD PASSPORT PTY LTD (H7L45B2MKJ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Labedzki (N29UV432E3)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../braintree_ios/venmo-touch",
@@ -1063,7 +1320,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4b165fc-79e4-4668-9928-909ed14a0781";
+				PROVISIONING_PROFILE = "17987BF1-2A9A-4E22-AADB-C4F640E1A34D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1110,6 +1367,80 @@
 			};
 			name = Release;
 		};
+		6E973C4F19EB08E000926121 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24668B821043423D86DCC6CB /* Pods.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Labedzki (N29UV432E3)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../braintree_ios/venmo-touch",
+					/Users/chiragpatel/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(src_root)/../braintree_ios/**",
+				);
+				INFOPLIST_FILE = "TravelWorldPassport copy-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/mzygar/Documents/Projekty/Australia/TWPapp/braintree_ios/Braintree/Data/Braintree-Data",
+					"/Users/mzygar/Documents/Projekty/Australia/TWPapp/braintree_ios/Braintree/PayPal/Braintree-PayPal/PayPalMobileSDK",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "TravelWorldPassport copy";
+				PROVISIONING_PROFILE = "17987BF1-2A9A-4E22-AADB-C4F640E1A34D";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6E973C5019EB08E000926121 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24668B821043423D86DCC6CB /* Pods.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Labedzki (N29UV432E3)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../braintree_ios/venmo-touch",
+					/Users/chiragpatel/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(src_root)/../braintree_ios/**",
+				);
+				INFOPLIST_FILE = "TravelWorldPassport copy-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/mzygar/Documents/Projekty/Australia/TWPapp/braintree_ios/Braintree/Data/Braintree-Data",
+					"/Users/mzygar/Documents/Projekty/Australia/TWPapp/braintree_ios/Braintree/PayPal/Braintree-PayPal/PayPalMobileSDK",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "TravelWorldPassport copy";
+				PROVISIONING_PROFILE = "17987BF1-2A9A-4E22-AADB-C4F640E1A34D";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1136,6 +1467,15 @@
 			buildConfigurations = (
 				3A9A5EEE18A0F683008034C6 /* Debug */,
 				3A9A5EEF18A0F683008034C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E973C4E19EB08E000926121 /* Build configuration list for PBXNativeTarget "TravelWorldPassport copy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E973C4F19EB08E000926121 /* Debug */,
+				6E973C5019EB08E000926121 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
