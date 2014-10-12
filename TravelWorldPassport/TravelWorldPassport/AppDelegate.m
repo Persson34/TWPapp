@@ -111,6 +111,9 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
 }
 
 - (void)logOut {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserProfileKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self showLogin];
 }
 
