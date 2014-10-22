@@ -16,7 +16,7 @@
 #import "TWPEngine.h"
 #import "DataModels.h"
 #import "MainViewController.h"
-
+#import <Crashlytics/Crashlytics.h>
 
 static NSString* const kUserProfileKey=@"kUserProfileKey";
 
@@ -79,7 +79,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
                                       }];
     }
     
-    
+    [Crashlytics startWithAPIKey:@"c5af9152500a53488ccbf8f3dadd2ed418c66d28"];
     
     return YES;
 }

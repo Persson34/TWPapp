@@ -173,6 +173,9 @@
 		6E973C4A19EB08E000926121 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5ED318A0F682008034C6 /* Images.xcassets */; };
 		6E973C4B19EB08E000926121 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511919D495DD0000FF6D /* Podfile */; };
 		6E973C4C19EB08E000926121 /* NewStampViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B4E18DAB6B40040DC7A /* NewStampViewController.xib */; };
+		6ED8B1AA19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */; };
+		6ED8B1AB19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */; };
+		6ED8B1AC19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */; };
 		8CDDF70913E541BEB6BC716E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6311E4969CAE4CFA9E6DC220 /* libPods.a */; };
 		8F1EFC9418D976EE00D1FE43 /* StampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9318D976EE00D1FE43 /* StampCell.m */; };
 		8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9518D9771100D1FE43 /* StampCell.xib */; };
@@ -326,6 +329,7 @@
 		6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		6E973C5119EB08E000926121 /* TravelWorldPassport copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TravelWorldPassport copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E973C5219EB08E100926121 /* TravelWorldPassport copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TravelWorldPassport copy-Info.plist"; path = "/Users/mzygar/Documents/Projekty/Australia/TWPapp/TravelWorldPassport/TravelWorldPassport copy-Info.plist"; sourceTree = "<absolute>"; };
+		6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		8F1EFC9218D976EE00D1FE43 /* StampCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StampCell.h; path = "Controllers/Main View/StampCell.h"; sourceTree = "<group>"; };
 		8F1EFC9318D976EE00D1FE43 /* StampCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StampCell.m; path = "Controllers/Main View/StampCell.m"; sourceTree = "<group>"; };
 		8F1EFC9518D9771100D1FE43 /* StampCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StampCell.xib; path = "Controllers/Main View/StampCell.xib"; sourceTree = "<group>"; };
@@ -372,6 +376,7 @@
 				0E30551D1920DBDF00DA2832 /* SDWebImage.framework in Frameworks */,
 				3A6E358018F26F0600A88133 /* Security.framework in Frameworks */,
 				3A160BDF18EEB6060077B8C3 /* Social.framework in Frameworks */,
+				6ED8B1AA19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */,
 				3A160BDD18EEB6000077B8C3 /* Accounts.framework in Frameworks */,
 				3A6E663818E54ED00085447D /* CoreLocation.framework in Frameworks */,
 				0E0F3B7919175249006D6ED1 /* FacebookSDK.framework in Frameworks */,
@@ -389,6 +394,7 @@
 			files = (
 				3A9A5EDB18A0F682008034C6 /* XCTest.framework in Frameworks */,
 				3A9A5EDD18A0F682008034C6 /* UIKit.framework in Frameworks */,
+				6ED8B1AB19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */,
 				3A9A5EDC18A0F682008034C6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +411,7 @@
 				6E973C2419EB08E000926121 /* SDWebImage.framework in Frameworks */,
 				6E973C2519EB08E000926121 /* Security.framework in Frameworks */,
 				6E973C2619EB08E000926121 /* Social.framework in Frameworks */,
+				6ED8B1AC19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */,
 				6E973C2719EB08E000926121 /* Accounts.framework in Frameworks */,
 				6E973C2819EB08E000926121 /* CoreLocation.framework in Frameworks */,
 				6E973C2919EB08E000926121 /* FacebookSDK.framework in Frameworks */,
@@ -604,6 +611,7 @@
 		3A9A5EC718A0F682008034C6 /* TravelWorldPassport */ = {
 			isa = PBXGroup;
 			children = (
+				6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */,
 				0EA73A59191CA91A000FB97C /* shareGroup */,
 				8F844B6218DAD3B10040DC7A /* Camera */,
 				8FE6C64018D870F80027DEB7 /* Models */,
@@ -799,6 +807,7 @@
 				3A9A5EBB18A0F682008034C6 /* Frameworks */,
 				3A9A5EBC18A0F682008034C6 /* Resources */,
 				143B2DD10640435B8E21E674 /* Copy Pods Resources */,
+				6ED8B1A819F7AE540059DC59 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1012,6 +1021,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6ED8B1A819F7AE540059DC59 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run c5af9152500a53488ccbf8f3dadd2ed418c66d28 d9ddbfbf86d988d4d63e3b1579b986990b5350ab76e064f5710730cf2b8bfc0a";
 		};
 		B1522521D4FC4A8C874B3D96 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1264,6 +1287,7 @@
 					"$(SRCROOT)/../braintree_ios/venmo-touch",
 					/Users/chiragpatel/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TravelWorldPassport",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
@@ -1302,6 +1326,7 @@
 					"$(SRCROOT)/../braintree_ios/venmo-touch",
 					/Users/chiragpatel/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TravelWorldPassport",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
@@ -1335,6 +1360,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/TravelWorldPassport",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
@@ -1358,6 +1384,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/TravelWorldPassport",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
@@ -1381,6 +1408,7 @@
 					"$(SRCROOT)/../braintree_ios/venmo-touch",
 					/Users/chiragpatel/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TravelWorldPassport",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
@@ -1418,6 +1446,7 @@
 					"$(SRCROOT)/../braintree_ios/venmo-touch",
 					/Users/chiragpatel/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TravelWorldPassport",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
