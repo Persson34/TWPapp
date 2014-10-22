@@ -1295,7 +1295,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Labedzki (N29UV432E3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UNIVERSAL WORLD PASSPORT PTY LTD (H7L45B2MKJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNIVERSAL WORLD PASSPORT PTY LTD (H7L45B2MKJ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../braintree_ios/venmo-touch",
@@ -1320,7 +1321,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "17987BF1-2A9A-4E22-AADB-C4F640E1A34D";
+				PROVISIONING_PROFILE = "dc8d4d13-09d7-4648-b850-86a196b8ed11";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -125,7 +125,7 @@ NSString *const kTWPUserName = @"name";
 
 
 -(NSString*)getFullName{
-    return [NSString stringWithFormat:@"%@ %@",self.surname,self.name];
+    return [NSString stringWithFormat:@"%@ %@",self.name,self.surname];
 }
 #pragma mark - NSCoding Methods
 
