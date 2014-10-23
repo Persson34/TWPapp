@@ -13,6 +13,7 @@
 #import "TWPUser.h"
 #import "Stamps.h"
 #import "AppDelegate.h"
+#import "UIImage+UIImage_fixOrientation.h"
 @import AddressBook;
 
 @interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,
@@ -338,7 +339,8 @@
 # pragma mark - AVCamCaptureDelegate
 -(void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager1{
     takenPicture = [captureManager1 takenImage];
-    imgView.image = [self imageByCropping:takenPicture toRect:CGRectMake(14, 57, 572, 670)];
+
+    imgView.image = [self imageByCropping:[takenPicture fixOrientation] toRect:CGRectMake(14, 57, 572, 670)];
     //[self.view bringSubviewToFront:imgView];
     cameraBtn.hidden = YES;
     galleryBtn.hidden = YES;
@@ -360,7 +362,12 @@
     CGFloat imgWidth=CGImageGetWidth(imageToCrop.CGImage);
     CGFloat imgHeight=CGImageGetHeight(imageToCrop.CGImage);
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 1.0);
-    [imageToCrop drawInRect:CGRectMake((rect.size.width-imgWidth)/2,0,imgWidth,rect.size.height)];
+    if (rect.size.height>imgHeight) {
+        imgWidth=imgWidth*rect.size.height/imgHeight;
+        imgHeight=rect.size.height;
+
+    }
+    [imageToCrop drawInRect:CGRectMake((rect.size.width-imgWidth)/2,(rect.size.height-imgHeight)/2,imgWidth,imgHeight)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
