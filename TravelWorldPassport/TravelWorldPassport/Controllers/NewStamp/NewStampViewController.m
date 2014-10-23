@@ -338,7 +338,7 @@
 # pragma mark - AVCamCaptureDelegate
 -(void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager1{
     takenPicture = [captureManager1 takenImage];
-    imgView.image = [self imageByCropping:[self imageByScaling:takenPicture] toRect:CGRectMake(14, 57, 286, 335)];
+    imgView.image = [self imageByCropping:takenPicture toRect:CGRectMake(14, 57, 572, 670)];
     //[self.view bringSubviewToFront:imgView];
     cameraBtn.hidden = YES;
     galleryBtn.hidden = YES;
@@ -356,6 +356,19 @@
 }
 
 -(UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect
+{
+    CGFloat imgWidth=CGImageGetWidth(imageToCrop.CGImage);
+    CGFloat imgHeight=CGImageGetHeight(imageToCrop.CGImage);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 1.0);
+    [imageToCrop drawInRect:CGRectMake((rect.size.width-imgWidth)/2,0,imgWidth,rect.size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+    
+    
+}
+
+-(UIImage *)imageByCropping2:(UIImage *)imageToCrop toRect:(CGRect)rect
 {
     CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
     
@@ -459,7 +472,7 @@
               
                 UIGraphicsEndImageContext();
 //                UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(14, 14, 284, 332)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
-                 UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(28, 28, 568, 664)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
+                 UIImage *img = [self drawImage:[self imageByCropping2:viewImage toRect:CGRectMake(28, 28, 568, 664)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
                 NSLog(@"Image size %@ and scale is %f",NSStringFromCGSize(img.size),img.scale);
              
                 UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
@@ -475,9 +488,9 @@
               atPoint:(CGPoint)  point
 {
    // UIGraphicsBeginImageContextWithOptions(bgImage.size, FALSE, 0.0);
-    CGRect newRect = CGRectMake(0, 0, 2.0*bgImage.size.width, bgImage.size.height*2.0);
+    CGRect newRect = CGRectMake(0, 0, CGImageGetWidth(bgImage.CGImage), CGImageGetHeight(bgImage.CGImage));
     UIGraphicsBeginImageContext(newRect.size );
-    [bgImage drawInRect:CGRectMake( 0, 0, bgImage.size.width*2.0f, bgImage.size.height*2.0f)];
+    [bgImage drawInRect:CGRectMake( 0, 0,  CGImageGetWidth(bgImage.CGImage), CGImageGetHeight(bgImage.CGImage))];
     [fgImage drawInRect:CGRectMake( point.x, point.y, fgImage.size.width, fgImage.size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -521,8 +534,10 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
     // Put the image here.
-    takenPicture = [info objectForKey:UIImagePickerControllerOriginalImage ];//[captureManager1 takenImage];
-    imgView.image = [self imageByCropping:[self imageByScaling:takenPicture] toRect:CGRectMake(14, 57, 286, 335)];
+    takenPicture = [info objectForKey:UIImagePickerControllerEditedImage ];//[captureManager1 takenImage];
+//    UIImage*scaled=[self imageByScaling:takenPicture];
+    UIImage*cropped=[self imageByCropping:takenPicture toRect:CGRectMake(14, 57, 572, 670)];
+    imgView.image = cropped;
     //[self.view bringSubviewToFront:imgView];
     cameraBtn.hidden = YES;
     galleryBtn.hidden = YES;

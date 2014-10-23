@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewStampViewController">
@@ -142,7 +142,7 @@
                         <constraint firstAttribute="height" constant="336" id="wWS-vE-hHW"/>
                     </constraints>
                 </imageView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="atG-Sm-IA7">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="atG-Sm-IA7">
                     <rect key="frame" x="0.0" y="69" width="320" height="387"/>
                     <color key="backgroundColor" red="0.96862745100000003" green="0.92941176469999998" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -191,10 +191,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQK-vs-YxD" userLabel="stampView1">
-                    <rect key="frame" x="4" y="20" width="316" height="365"/>
+                    <rect key="frame" x="0.0" y="21" width="318" height="365"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Stamp1" translatesAutoresizingMaskIntoConstraints="NO" id="aK5-Gq-OAt">
-                            <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
+                            <rect key="frame" x="0.0" y="0.0" width="318" height="365"/>
                             <color key="backgroundColor" red="0.96862745100000003" green="0.92941176469999998" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyo-EZ-e3B">
@@ -207,7 +207,7 @@
                     <color key="backgroundColor" red="0.96862745100000003" green="0.92941176469999998" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IZV-ez-1KP" userLabel="stampView2">
-                    <rect key="frame" x="322" y="20" width="316" height="365"/>
+                    <rect key="frame" x="322" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Stamp2" translatesAutoresizingMaskIntoConstraints="NO" id="Kkb-VS-9ze">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -229,7 +229,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="3" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fl-Mp-V4H" userLabel="stampView3">
-                    <rect key="frame" x="642" y="20" width="316" height="365"/>
+                    <rect key="frame" x="642" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Stamp3" translatesAutoresizingMaskIntoConstraints="NO" id="fF9-mT-zIG">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -245,7 +245,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="4" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f8g-ok-mrj" userLabel="stampView4">
-                    <rect key="frame" x="962" y="20" width="316" height="365"/>
+                    <rect key="frame" x="962" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Stamp4" translatesAutoresizingMaskIntoConstraints="NO" id="nhg-BN-Zhu">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -261,7 +261,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74i-BG-7DV" userLabel="stampView5">
-                    <rect key="frame" x="1282" y="20" width="316" height="365"/>
+                    <rect key="frame" x="1282" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Stamp5" translatesAutoresizingMaskIntoConstraints="NO" id="rc1-AW-Z61">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -277,7 +277,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="6" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4p-Uj-FCp" userLabel="stampView6">
-                    <rect key="frame" x="1602" y="20" width="316" height="365"/>
+                    <rect key="frame" x="1602" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editableStamp" translatesAutoresizingMaskIntoConstraints="NO" id="Vyc-TH-JzD">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -311,7 +311,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="7" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mFd-mh-GyB" userLabel="stampView7">
-                    <rect key="frame" x="1922" y="20" width="316" height="365"/>
+                    <rect key="frame" x="1922" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editableStamp" translatesAutoresizingMaskIntoConstraints="NO" id="ysS-Ac-EZu">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -343,7 +343,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="8" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ypA-5G-ZNQ" userLabel="stampView8">
-                    <rect key="frame" x="2242" y="20" width="316" height="365"/>
+                    <rect key="frame" x="2242" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editableStamp" translatesAutoresizingMaskIntoConstraints="NO" id="Fso-8F-6Bs">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -377,7 +377,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="9" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lo2-02-RyY" userLabel="stampView9">
-                    <rect key="frame" x="2562" y="20" width="316" height="365"/>
+                    <rect key="frame" x="2562" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editableStamp" translatesAutoresizingMaskIntoConstraints="NO" id="RMh-gW-4lQ">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -405,7 +405,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="10" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fOy-Ab-gzg" userLabel="stampView10">
-                    <rect key="frame" x="2882" y="20" width="316" height="365"/>
+                    <rect key="frame" x="2882" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editableStamp" translatesAutoresizingMaskIntoConstraints="NO" id="dUx-jF-n7C">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -433,7 +433,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="11" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PU9-Bn-ji2" userLabel="stampView11">
-                    <rect key="frame" x="3202" y="20" width="316" height="365"/>
+                    <rect key="frame" x="3202" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editableStamp" translatesAutoresizingMaskIntoConstraints="NO" id="vfS-XT-Hy6">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
@@ -467,7 +467,7 @@
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view tag="2" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gA7-TN-Qln" userLabel="stampView12">
-                    <rect key="frame" x="3522" y="20" width="316" height="365"/>
+                    <rect key="frame" x="3522" y="21" width="316" height="365"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editableStamp" translatesAutoresizingMaskIntoConstraints="NO" id="FOO-6r-1L4">
                             <rect key="frame" x="0.0" y="0.0" width="316" height="365"/>
