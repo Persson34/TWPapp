@@ -220,8 +220,6 @@
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         recognizer.numberOfTapsRequired = 1;
         [label addGestureRecognizer:recognizer];
-        label.layer.borderWidth=1.0f;
-        label.layer.borderColor=[UIColor colorWithRed:17/255.0 green:168/255.0 blue:171/255.0 alpha:1.0].CGColor;
         label.text=@"Type here";
     }
 
@@ -571,10 +569,11 @@
 
 - (void)handleTap:(UITapGestureRecognizer*)recognizer {
     NSLog(@"%d",[[recognizer view] tag]);
+    [hiddenTextField resignFirstResponder];
     selectedLblTag = [[recognizer view] tag];
     hiddenTextField.text = nil;
     hiddenTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    [hiddenTextField resignFirstResponder];
+
     [hiddenTextField becomeFirstResponder];
 }
 
@@ -586,6 +585,10 @@
 //}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    UILabel*label=[self labelForTag:selectedLblTag];
+    label.layer.borderWidth=1.0f;
+    label.layer.borderColor=[UIColor colorWithRed:17/255.0 green:168/255.0 blue:171/255.0 alpha:1.0].CGColor;
+
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -593,61 +596,70 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    
+    UILabel*label=[self labelForTag:selectedLblTag];
+    label.layer.borderWidth=0.0f;
+    label.layer.borderColor=[UIColor colorWithRed:17/255.0 green:168/255.0 blue:171/255.0 alpha:1.0].CGColor;
+
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString * searchStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    switch (selectedLblTag) {
+    [[self labelForTag:selectedLblTag] setText:searchStr];
+    return YES;
+}
+
+-(UILabel*)labelForTag:(NSUInteger)tag
+{
+    switch (tag) {
         case 1:
-            stamp6Lbl1.text = searchStr;
+            return stamp6Lbl1;
             break;
         case 2:
-            stamp6Lbl2.text = searchStr;
+            return stamp6Lbl2;
             break;
         case 3:
-            stamp7Lbl1.text = searchStr;
+            return stamp7Lbl1;
             break;
         case 4:
-            stamp7Lbl2.text = searchStr;
+            return stamp7Lbl2;
             break;
         case 5:
-            stamp8Lbl1.text = searchStr;
+            return stamp8Lbl1;
             break;
         case 6:
-            stamp8Lbl2.text = searchStr;
+            return stamp8Lbl2;
             break;
         case 7:
-            stamp8Lbl3.text = searchStr;
+            return stamp8Lbl3;
             break;
         case 8:
-            stamp9Lbl1.text = searchStr;
+            return stamp9Lbl1;
             break;
         case 9:
-            stamp9Lbl2.text = searchStr;
+            return stamp9Lbl2;
             break;
         case 10:
-            stamp10Lbl1.text = searchStr;
+            return stamp10Lbl1;
             break;
         case 11:
-            stamp10Lbl2.text = searchStr;
+            return stamp10Lbl2;
             break;
         case 12:
-            stamp11Lbl1.text = searchStr;
+            return stamp11Lbl1;
             break;
         case 13:
-            stamp11Lbl2.text = searchStr;
+            return stamp11Lbl2;
             break;
         case 14:
-            stamp11Lbl3.text = searchStr;
+            return stamp11Lbl3;
             break;
         case 15:
-            stamp12Lbl1.text = searchStr;
-
+            return stamp12Lbl1;
+            
         default:
             break;
     }
-    return YES;
+    return nil;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
