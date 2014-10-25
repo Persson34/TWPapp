@@ -58,10 +58,9 @@
     pwdField.font = [UIFont fontWithName:@"LucidaGrande" size:14.0f];
     registerBtn.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:14.0f];
     forgotPwdBtn.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:14.0f];
-    MFSideMenuContainerViewController* menuContainerViewController=[UIApplication sharedApplication].keyWindow.rootViewController;
+    MFSideMenuContainerViewController* menuContainerViewController=(MFSideMenuContainerViewController*)[UIApplication sharedApplication].keyWindow.rootViewController;
     menuContainerViewController.panMode=MFSideMenuPanModeNone;
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-//    [self.navigationController.navigationBar setBackgroundColor:[UIColor blackColor]];
     
 }
 
@@ -94,10 +93,7 @@
             // Success! Include your code to handle the results here
             // Get the facebook id
             NSDictionary *resultDict = (NSDictionary*)result;
-//            NSLog(@"user info: %@", resultDict[@"id"]);
             [[TWPEngine sharedEngine]loginWithFBID:resultDict[@"id"] onCompletion:^(NSData *responseString, NSError *theError) {
-//                NSString *loginResponse = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
-//                NSLog(@"Login Response is %@",loginResponse);
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
                 if ([responseDictionary[@"code"]isEqualToString:@"400"]) {
                     NSLog(@"Login failed");
@@ -136,63 +132,6 @@
             NSLog(@"Something went wrong");
         }
     }];
-    // Open session with basic_info (required) and user_birthday read permissions
-//    [FBSession openActiveSessionWithReadPermissions:@[@"basic_info"]
-//                                       allowLoginUI:YES
-//                                  completionHandler:
-//     ^(FBSession *session, FBSessionState state, NSError *error) {
-//         __block NSString *alertText;
-//         __block NSString *alertTitle;
-//         if (!error){
-//             // If the session was opened successfully
-//             if (state == FBSessionStateOpen){
-//                 // Your code here
-//                 
-//             } else {
-//                 // There was an error, handle it
-//                 if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
-//                     // Error requires people using an app to make an action outside of the app to recover
-//                     // The SDK will provide an error message that we have to show the user
-////                     alertTitle = @"Something went wrong";
-////                     alertText = [FBErrorUtility userMessageForError:error];
-////                     [[[UIAlertView alloc] initWithTitle:title
-////                                                 message:text
-////                                                delegate:self
-////                                       cancelButtonTitle:@"OK!"
-////                                       otherButtonTitles:nil] show];
-//                     
-//                 } else {
-//                     // If the user cancelled login
-//                     if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-////                         alertTitle = @"Login cancelled";
-////                         alertText = @"Your birthday will not be entered in our calendar because you didn't grant the permission.";
-////                         [[[UIAlertView alloc] initWithTitle:title
-////                                                     message:text
-////                                                    delegate:self
-////                                           cancelButtonTitle:@"OK!"
-////                                           otherButtonTitles:nil] show];
-//                     
-//                     } else {
-//                         // For simplicity, in this sample, for all other errors we show a generic message
-//                         // You can read more about how to handle other errors in our Handling errors guide
-//                         // https://developers.facebook.com/docs/ios/errors/
-////                         NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"]
-////                                                            objectForKey:@"body"]
-////                                                           objectForKey:@"error"];
-////                         alertTitle = @"Something went wrong";
-////                         alertText = [NSString stringWithFormat:@"Please retry. \n
-////                                      If the problem persists contact us and mention this error code: %@", 
-////                                      [errorInformation objectForKey:@"message"]];
-////                         [[[UIAlertView alloc] initWithTitle:title
-////                                                     message:text
-////                                                    delegate:self
-////                                           cancelButtonTitle:@"OK!"
-////                                           otherButtonTitles:nil] show];
-//                     }
-//                 }
-//             }
-//             
-//         }];
 }
 
 - (IBAction)loginBtnTapped:(id)sender {
@@ -221,15 +160,18 @@
         if (theError || responseData == nil) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Please try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
+
+            return ;
+        }
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+        if([responseDictionary[@"code"] isEqual:@"403"])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect username or password" message:@"Please try again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
             return;
         }
-//        NSString *responseString = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
-//        NSLog(@"%@",responseString);
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"Response dictionary %@",responseDictionary);
         TWPUser *theUser = [TWPUser modelObjectWithDictionary:responseDictionary];
-//        [TWPShipping getStoredShippingDict];
-      //  NSLog(@"Shipping %@",[TWPShipping getStoredShippingDict]);
         if([TWPShipping getStoredShippingDict]==nil){
             // Call , get and store the shipping address
             [[TWPEngine sharedEngine]getUserAddress:[NSString stringWithFormat:@"%d",(int)theUser.userId] onCompletion:^(NSData *responseString, NSError *theError) {
