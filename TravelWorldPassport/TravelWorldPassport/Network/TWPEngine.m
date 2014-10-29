@@ -63,8 +63,9 @@ static NSString const* API_ROOT= @"http://beta-test-travelworldpassport-com-8bl1
     NSDictionary *paramDict = @{@"userid":userId,@"name":fName,@"surname":sName,@"country":countryStr,@"city":cityStr,@"lat":[NSString stringWithFormat:@"%f",lat],@"long":[NSString stringWithFormat:@"%f",lng]};
          MKNetworkOperation *op = [self operationWithURLString:@"edituser" params:paramDict httpMethod:@"POST"];
      
+    if(data)
      [op addData:data forKey:@"picture" mimeType:@"image/png" fileName:@"upload.png"];
-      
+     
      [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
          theResponse([completedOperation responseData],nil);
      } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
@@ -131,9 +132,14 @@ static NSString const* API_ROOT= @"http://beta-test-travelworldpassport-com-8bl1
     
     [self enqueueOperation:op];
 }
--(void)registerUser:(NSDictionary *)userDictionary onCompletion:(TWPResponse)theResponse{
+-(void)registerUser:(NSDictionary *)userDictionary picture:(UIImage*)profileImage onCompletion:(TWPResponse)theResponse{
     //
+     NSData *data = UIImagePNGRepresentation(profileImage);
     MKNetworkOperation *op = [self operationWithURLString:@"register" params:userDictionary httpMethod:@"POST"];
+
+        if(data)
+            [op addData:data forKey:@"picture" mimeType:@"image/png" fileName:@"upload.png"];
+    
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {

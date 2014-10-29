@@ -183,7 +183,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *userDictionary = @{@"email":mailField.text,@"pwd":passwordField.text,@"name":nameField.text,@"lastname":surnameField.text};
     __weak TWPEngine * wEngine=[TWPEngine sharedEngine];
-    [[TWPEngine sharedEngine]registerUser:userDictionary onCompletion:^(NSData *responseString, NSError *theError) {
+    [[TWPEngine sharedEngine]registerUser:userDictionary picture:originalUserImage onCompletion:^(NSData *responseString, NSError *theError) {
         NSString *response = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
         NSLog(@"Response from server %@",response);
          dispatch_async(dispatch_get_main_queue(), ^{
