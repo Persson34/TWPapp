@@ -236,7 +236,7 @@
 		0EDCC45D191763010060AB28 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		0EDCC45E191763010060AB28 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		0EDCC45F191763010060AB28 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
-		24668B821043423D86DCC6CB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		23CF2285699EC31C37E71E44 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3A13547819064CC800D8A2E1 /* CheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckoutViewController.h; path = Controllers/Checkout/CheckoutViewController.h; sourceTree = "<group>"; };
 		3A13547919064CC800D8A2E1 /* CheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckoutViewController.m; path = Controllers/Checkout/CheckoutViewController.m; sourceTree = "<group>"; };
 		3A13547A19064CC800D8A2E1 /* CheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CheckoutViewController.xib; path = Controllers/Checkout/CheckoutViewController.xib; sourceTree = "<group>"; };
@@ -361,6 +361,7 @@
 		8FE6C64718D875060027DEB7 /* TWPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPUser.m; sourceTree = "<group>"; };
 		8FE6C64B18D876140027DEB7 /* ImageDownloadEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloadEngine.h; sourceTree = "<group>"; };
 		8FE6C64C18D876140027DEB7 /* ImageDownloadEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloadEngine.m; sourceTree = "<group>"; };
+		BAAB50F6822149CB173B3400 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -569,8 +570,8 @@
 				3A9A5EE018A0F682008034C6 /* TravelWorldPassportTests */,
 				3A9A5EC018A0F682008034C6 /* Frameworks */,
 				3A9A5EBF18A0F682008034C6 /* Products */,
-				24668B821043423D86DCC6CB /* Pods.xcconfig */,
 				6E973C5219EB08E100926121 /* TravelWorldPassport copy-Info.plist */,
+				53FC26F2AD32B3CA43D41DE0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -735,6 +736,15 @@
 			path = Network/Reachability;
 			sourceTree = "<group>";
 		};
+		53FC26F2AD32B3CA43D41DE0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BAAB50F6822149CB173B3400 /* Pods.debug.xcconfig */,
+				23CF2285699EC31C37E71E44 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8F844B4B18DAB66B0040DC7A /* NewStamp */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +894,8 @@
 			mainGroup = 3A9A5EB518A0F682008034C6;
 			productRefGroup = 3A9A5EBF18A0F682008034C6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+			);
 			projectRoot = "";
 			targets = (
 				3A9A5EBD18A0F682008034C6 /* TravelWorldPassport */,
@@ -989,7 +1001,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6E973BEE19EB08E000926121 /* Check Pods Manifest.lock */ = {
@@ -1276,7 +1288,7 @@
 		};
 		3A9A5EEB18A0F683008034C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24668B821043423D86DCC6CB /* Pods.xcconfig */;
+			baseConfigurationReference = BAAB50F6822149CB173B3400 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1308,13 +1320,14 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "17987BF1-2A9A-4E22-AADB-C4F640E1A34D";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		3A9A5EEC18A0F683008034C6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24668B821043423D86DCC6CB /* Pods.xcconfig */;
+			baseConfigurationReference = 23CF2285699EC31C37E71E44 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1347,6 +1360,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "dc8d4d13-09d7-4648-b850-86a196b8ed11";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1397,7 +1411,6 @@
 		};
 		6E973C4F19EB08E000926121 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24668B821043423D86DCC6CB /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1435,7 +1448,6 @@
 		};
 		6E973C5019EB08E000926121 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24668B821043423D86DCC6CB /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

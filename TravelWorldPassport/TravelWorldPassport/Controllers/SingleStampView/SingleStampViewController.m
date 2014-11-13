@@ -13,6 +13,7 @@
 #import "ImageDownloadEngine.h"
 #import "KxMenu.h"
 #import "MBProgressHUD.h"
+#import "ARAnalytics.h"
 
 @interface SingleStampViewController () <UIDocumentInteractionControllerDelegate>
 {
@@ -86,6 +87,7 @@
 }
 
 - (IBAction)buyBtnTapped:(id)sender {
+
     CheckoutViewController *aController = [[CheckoutViewController alloc] initWithNibName:@"CheckoutViewController" bundle:nil];
     [aController setCurrentUser:currentUser];
     [aController setSelectedStampNo:selectedStampNo];

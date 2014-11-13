@@ -14,6 +14,8 @@
 #import "Stamps.h"
 #import "AppDelegate.h"
 #import "UIImage+UIImage_fixOrientation.h"
+#import "ARAnalytics.h"
+
 @import AddressBook;
 
 @interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,
@@ -23,6 +25,7 @@
     BOOL pageControlBeingUsed;
     __weak IBOutlet UIImageView *imgView;
     __weak IBOutlet UILabel *swipeLabel;
+            __weak IBOutlet UILabel *loc0Lbl;
     __weak IBOutlet UILabel *stamp1Lbl;
     __weak IBOutlet UILabel *stamp2Lbl;
     __weak IBOutlet UILabel *loc2Lbl;
@@ -90,15 +93,7 @@
 
 - (void)viewDidLoad
 {
-//    for (NSString* family in [UIFont familyNames])
-//    {
-//         NSLog(@"%@", family);
-//
-//        for (NSString* name in [UIFont fontNamesForFamilyName: family])
-//         {
-//                NSLog(@"  %@", name);
-//           }
-//     }
+
     [super viewDidLoad];
     shareBtn.hidden = YES;
     crossBtn.hidden = YES;
@@ -112,7 +107,7 @@
 //    stampsScroll.contentSize=_contentView.bounds.size;
     [self startUpdatingLocation];
     [self setupLabelFonts];
-    NSInteger numOfSlides=12;
+    NSInteger numOfSlides=13;
     pageControl.numberOfPages=numOfSlides;
     [stampsScroll setContentSize:CGSizeMake(2+numOfSlides*320, 387)]; // Need to change this.
     // Do any additional setup after loading the view from its nib.
@@ -182,6 +177,7 @@
 //    //set font
     stamp1Lbl.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
     stamp2Lbl.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
+    loc0Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc2Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc3Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc4Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
@@ -275,9 +271,11 @@
             UILabel*lbl=[self valueForKey:@"loc2Lbl"];
             lbl.text=state;
 
-            for (int i =2; i<=12; i++) {
+            for (int i =0; i<=12; i++) {
+                if (i==1)continue;
                 NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
                 UILabel*locLabel=[self valueForKey:str];
+
                 if(city)
                 {
                     locLabel.text = [NSString stringWithFormat:@"%@, %@",city,country];
@@ -344,6 +342,7 @@
     galleryBtn.hidden = YES;
     shareBtn.hidden = NO;
     crossBtn.hidden = NO;
+    [ARAnalytics event:@"New Stamp Photo" withProperties:@{@"source":@"camera"}];
 }
 
 - (UIImage *)imageByScaling:(UIImage*)imageToScale {
@@ -412,7 +411,7 @@
 //    [self uploadStamp:viewImage];
 //    UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    [ARAnalytics event:@"New Stamp Share" withProperties:@{@"template_id":@(pageControl.currentPage)}];
     for (int i = 0; i < [[_contentView subviews] count]; i++) {
         if ([[[_contentView subviews] objectAtIndex:i] isKindOfClass:[UIView class]]) {
             UIView *currentView = (UIView*)[[_contentView subviews] objectAtIndex:pageControl.currentPage];
@@ -538,6 +537,7 @@
 #pragma mark - UIImagePicker delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [ARAnalytics event:@"New Stamp Photo" withProperties:@{@"source":@"gallery"}];
     // Put the image here.
     takenPicture = [info objectForKey:UIImagePickerControllerEditedImage ];//[captureManager1 takenImage];
 //    UIImage*scaled=[self imageByScaling:takenPicture];

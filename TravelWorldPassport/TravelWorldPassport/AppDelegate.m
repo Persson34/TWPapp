@@ -16,6 +16,7 @@
 #import "TWPEngine.h"
 #import "DataModels.h"
 #import "MainViewController.h"
+#import "ARAnalytics.h"
 #import <Crashlytics/Crashlytics.h>
 
 static NSString* const kUserProfileKey=@"kUserProfileKey";
@@ -78,7 +79,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
 //                                          [self sessionStateChanged:session state:state error:error];
                                       }];
     }
-    
+    [ARAnalytics setupGoogleAnalyticsWithID:@""];
     [Crashlytics startWithAPIKey:@"c5af9152500a53488ccbf8f3dadd2ed418c66d28"];
     
     return YES;
