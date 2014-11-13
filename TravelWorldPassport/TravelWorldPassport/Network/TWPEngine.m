@@ -8,9 +8,9 @@
  //
 
 #import "TWPEngine.h"
-
+static NSString const* API_ROOT= @"http://www.travelworldpassport.com/webapp/nl/app/";
 //static NSString const* API_ROOT= @"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/";
-static NSString const* API_ROOT= @"http://beta-test-travelworldpassport-com-8bl19t7rur4b.runscope.net/app_dev.php/nl/app/";
+//static NSString const* API_ROOT= @"http://beta-test-travelworldpassport-com-8bl19t7rur4b.runscope.net/app_dev.php/nl/app/";
 
 
 @implementation TWPEngine
