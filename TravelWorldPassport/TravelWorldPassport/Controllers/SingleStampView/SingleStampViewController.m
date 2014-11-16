@@ -47,7 +47,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [ARAnalytics pageView:@"Single Stamp View"];
+
     [selectedImgView setImageWithURL:[NSURL URLWithString:selectedImageURL]];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[ImageDownloadEngine sharedEngine]imageAtURL:[NSURL URLWithString:selectedImageURL] completionHandler:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
@@ -66,7 +67,8 @@
 }
 
 - (IBAction)sendBtnTapped:(id)sender {
-    
+
+    [ARAnalytics event:@"Stamp share attempt"];
     DMActivityInstagram *instagramActivity = [[DMActivityInstagram alloc] init];
     
     //NSString *shareText = @"CatPaint #catpaint";
@@ -80,6 +82,10 @@
     NSString *textToShare = @"Created with the new Travel World Passport app";
     anActivityController = [[UIActivityViewController alloc]initWithActivityItems:@[imageToShare,textToShare] applicationActivities:@[instagramActivity]];
     anActivityController.completionHandler = ^(NSString *activityType, BOOL completed){
+        if(completed)
+        {
+            [ARAnalytics event:@"Stamp shared" withProperties:@{@"Service:":activityType}];
+        }
     };
     [self presentViewController:anActivityController animated:YES completion:nil];
     // Changed

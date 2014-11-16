@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Chirag Patel. All rights reserved.
 //
 
+#import <ARAnalytics/ARAnalytics.h>
 #import "TWPLoginViewController.h"
 #import "MainViewController.h"
 #import "MBProgressHUD.h"
@@ -47,6 +48,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [ARAnalytics pageView:@"Login View"];
+
     self.navigationItem.title = @"";
 
     loginView.translatesAutoresizingMaskIntoConstraints=NO;

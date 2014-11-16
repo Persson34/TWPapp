@@ -16,6 +16,7 @@
  response - response from breintree
  */
 
+#import <ARAnalytics/ARAnalytics.h>
 #import "PaymentViewController.h"
 #import "TWPEngine.h"
 #import "DataModels.h"
@@ -57,8 +58,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-  //  aPaymentForm.frame = CGRectMake(0, 0, 320, 40);
+    [ARAnalytics pageView:@"Payment View"];
+
+    //  aPaymentForm.frame = CGRectMake(0, 0, 320, 40);
     self.navigationItem.title = @"Purchase";
     payLabel.font = [UIFont fontWithName:@"LucidaGrande" size:19.0f];
     payBtn.enabled = NO;

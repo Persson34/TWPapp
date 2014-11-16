@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Chirag Patel. All rights reserved.
 //
 
+#import <ARAnalytics/ARAnalytics.h>
 #import "CheckoutViewController.h"
 #import "StampCell.h"
 #import "PaymentViewController.h"
@@ -37,6 +38,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [ARAnalytics pageView:@"Checkout View"];
+
     selectedImgCount = 1;
     staticLbl.font = [UIFont fontWithName:@"Avenir-Roman" size:14.0f];
     [stampsCollectionView registerNib:[UINib nibWithNibName:@"StampCell" bundle:nil] forCellWithReuseIdentifier:@"StampCell"];

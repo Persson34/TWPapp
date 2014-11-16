@@ -894,8 +894,6 @@
 			mainGroup = 3A9A5EB518A0F682008034C6;
 			productRefGroup = 3A9A5EBF18A0F682008034C6 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
 				3A9A5EBD18A0F682008034C6 /* TravelWorldPassport */,

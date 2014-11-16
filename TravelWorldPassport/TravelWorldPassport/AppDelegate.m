@@ -79,7 +79,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
 //                                          [self sessionStateChanged:session state:state error:error];
                                       }];
     }
-    [ARAnalytics setupGoogleAnalyticsWithID:@""];
+    [ARAnalytics setupGoogleAnalyticsWithID:@"UA-34990766-3"];
     [Crashlytics startWithAPIKey:@"c5af9152500a53488ccbf8f3dadd2ed418c66d28"];
     
     return YES;

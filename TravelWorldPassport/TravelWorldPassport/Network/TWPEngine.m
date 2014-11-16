@@ -7,9 +7,10 @@
 //
  //
 
+#import <ARAnalytics/ARAnalytics.h>
 #import "TWPEngine.h"
-//static NSString const* API_ROOT= @"http://www.travelworldpassport.com/webapp/nl/app/";
-static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur4b.runscope.net/webapp/nl/app/";
+static NSString const* API_ROOT= @"http://www.travelworldpassport.com/webapp/nl/app/";
+//static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur4b.runscope.net/webapp/nl/app/";
 
 //static NSString const* API_ROOT= @"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/";
 //static NSString const* API_ROOT= @"http://beta-test-travelworldpassport-com-8bl19t7rur4b.runscope.net/app_dev.php/nl/app/";
@@ -39,6 +40,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
 //        NSLog(@"Response String %@",[completedOperation responseString]);
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Login error"];
         theResponse(nil,error);
     }];
     
@@ -53,6 +55,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Upload error"];
         theResponse(nil,error);
     }];
     
@@ -71,6 +74,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
      [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
          theResponse([completedOperation responseData],nil);
      } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+         [ARAnalytics error:error withMessage:@"Edit profile error"];
          theResponse(nil,error);
      }];
      
@@ -83,6 +87,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Get user addr error"];
         theResponse(nil,error);
     }];
     
@@ -95,6 +100,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"FB Login error"];
         theResponse(nil,error);
     }];
     
@@ -106,6 +112,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Upadte addr error"];
         theResponse(nil,error);
     }];
     
@@ -117,6 +124,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Save payment info error"];
         theResponse(nil,error);
     }];
     
@@ -129,6 +137,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Place order error"];
         theResponse(nil,error);
     }];
     
@@ -145,6 +154,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Register user error"];
         theResponse(nil,error);
     }];
     
@@ -159,6 +169,7 @@ static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"delete stamp error"];
         theResponse(nil,error);
     }];
     [self enqueueOperation:op];

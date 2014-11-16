@@ -93,7 +93,6 @@
 
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
     shareBtn.hidden = YES;
     crossBtn.hidden = YES;
@@ -116,8 +115,9 @@
   //  stampsScroll.userInteractionEnabled = YES;
    // [stampsScroll setBackgroundColor:[UIColor redColor]];
     self.videoPreviewView.userInteractionEnabled = YES;
-    
-    
+    [ARAnalytics pageView:@"New Stamp View"];
+
+
     // Start of camera code
 		captureManager = [[AVCamCaptureManager alloc] init];
 		
