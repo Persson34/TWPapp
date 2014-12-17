@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C68k" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewStampViewController">
@@ -47,7 +47,7 @@
                 <outlet property="stamp9Lbl2" destination="8gO-97-A0u" id="QNP-NM-i7y"/>
                 <outlet property="stampsScroll" destination="atG-Sm-IA7" id="mNp-lv-8Yl"/>
                 <outlet property="swipeLabel" destination="oAB-NI-VZj" id="i54-N2-5J6"/>
-                <outlet property="videoPreviewView" destination="VkR-PG-wsR" id="KvW-11-FXn"/>
+                <outlet property="videoPreviewView" destination="Bvu-B4-87d" id="kjT-Pr-2CC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -56,8 +56,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VkR-PG-wsR" userLabel="VideoPreview">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvu-B4-87d">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StampsDefault" translatesAutoresizingMaskIntoConstraints="NO" id="lSw-J2-acp">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -135,8 +136,8 @@
                         <action selector="shareBtnTapped:" destination="-1" eventType="touchUpInside" id="y3S-LF-q5U"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g1U-vu-Ukz">
-                    <rect key="frame" x="14" y="101" width="289" height="336"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g1U-vu-Ukz">
+                    <rect key="frame" x="14" y="102" width="289" height="336"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="289" id="M8M-pT-3CM"/>
@@ -169,19 +170,23 @@
                 <constraint firstAttribute="bottom" secondItem="5ny-Av-l0X" secondAttribute="bottom" constant="-3" id="6Fl-lE-ByA"/>
                 <constraint firstAttribute="centerX" secondItem="lSw-J2-acp" secondAttribute="centerX" id="6PI-OL-RmX"/>
                 <constraint firstItem="5ny-Av-l0X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7he-no-wpP"/>
+                <constraint firstAttribute="trailing" secondItem="Bvu-B4-87d" secondAttribute="trailing" id="JpL-jd-oGI"/>
                 <constraint firstItem="g1U-vu-Ukz" firstAttribute="centerX" secondItem="atG-Sm-IA7" secondAttribute="centerX" constant="-1.5" id="KAi-dp-CKk"/>
                 <constraint firstAttribute="trailing" secondItem="atG-Sm-IA7" secondAttribute="trailing" id="Kqf-9k-ABe"/>
+                <constraint firstItem="Bvu-B4-87d" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mq1-xt-Sqk"/>
                 <constraint firstItem="atG-Sm-IA7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OGM-Yu-CH8"/>
                 <constraint firstAttribute="centerX" secondItem="gz8-KJ-tgt" secondAttribute="centerX" id="Oco-6S-Wf9"/>
+                <constraint firstItem="Bvu-B4-87d" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Vn1-IZ-SRw"/>
                 <constraint firstItem="gz8-KJ-tgt" firstAttribute="top" secondItem="atG-Sm-IA7" secondAttribute="bottom" constant="-4" id="WAE-wq-ZCp"/>
                 <constraint firstAttribute="centerY" secondItem="lSw-J2-acp" secondAttribute="centerY" id="YcT-RU-n7k"/>
                 <constraint firstItem="o8M-FX-zei" firstAttribute="leading" secondItem="cYJ-kF-vf0" secondAttribute="trailing" constant="33" id="YqN-qQ-xui"/>
                 <constraint firstItem="5ny-Av-l0X" firstAttribute="centerY" secondItem="o8M-FX-zei" secondAttribute="centerY" priority="999" id="Z7w-yo-tjp"/>
                 <constraint firstItem="o8M-FX-zei" firstAttribute="centerY" secondItem="cdW-Yb-cdZ" secondAttribute="centerY" id="cDo-cd-gBI"/>
                 <constraint firstAttribute="trailing" secondItem="5ny-Av-l0X" secondAttribute="trailing" id="cey-Js-bUi"/>
+                <constraint firstAttribute="bottom" secondItem="Bvu-B4-87d" secondAttribute="bottom" id="jaT-NH-YBR"/>
                 <constraint firstAttribute="centerX" secondItem="atG-Sm-IA7" secondAttribute="centerX" id="qGi-80-ftm"/>
                 <constraint firstItem="cYJ-kF-vf0" firstAttribute="centerY" secondItem="5ny-Av-l0X" secondAttribute="centerY" constant="0.5" id="tTu-g2-DBR"/>
-                <constraint firstItem="g1U-vu-Ukz" firstAttribute="centerY" secondItem="atG-Sm-IA7" secondAttribute="centerY" constant="6.5" id="ukj-nJ-b4y"/>
+                <constraint firstItem="g1U-vu-Ukz" firstAttribute="centerY" secondItem="atG-Sm-IA7" secondAttribute="centerY" constant="7" id="ukj-nJ-b4y"/>
                 <constraint firstAttribute="centerX" secondItem="o8M-FX-zei" secondAttribute="centerX" constant="0.5" id="wnH-wM-PKZ"/>
                 <constraint firstAttribute="centerY" secondItem="atG-Sm-IA7" secondAttribute="centerY" constant="21.5" id="yEg-bw-Ecp"/>
             </constraints>

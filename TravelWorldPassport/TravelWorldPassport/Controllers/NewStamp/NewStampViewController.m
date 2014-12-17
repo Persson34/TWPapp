@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "UIImage+UIImage_fixOrientation.h"
 #import "ARAnalytics.h"
+#import "UIImage+Resize.h"
 
 @import AddressBook;
 
@@ -319,6 +320,7 @@
 }
 
 - (IBAction)captureImage:(id)sender {
+    [self.videoPreviewView drawViewHierarchyInRect:self.videoPreviewView.bounds afterScreenUpdates:YES];
     [captureManager captureStillImage];
 }
 
@@ -334,9 +336,13 @@
 
 # pragma mark - AVCamCaptureDelegate
 -(void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager1{
-    takenPicture = [captureManager1 takenImage];
+    takenPicture = [[captureManager1 takenImage] fixOrientation];
+    CGFloat imgWidth=CGImageGetWidth(takenPicture.CGImage);
+    CGFloat imgHeight=CGImageGetHeight(takenPicture.CGImage);
+    CGFloat ratio=imgHeight/imgWidth;
 
-    imgView.image = [self imageByCropping:[takenPicture fixOrientation] toRect:CGRectMake(14, 57, 572, 670)];
+    takenPicture= [takenPicture resizedImage:CGSizeMake(640, 640*ratio) interpolationQuality:kCGInterpolationHigh];
+    imgView.image = [self imageByCropping2:takenPicture toRect:CGRectApplyAffineTransform(imgView.frame, CGAffineTransformMakeScale(2.0, 2.0))];
     //[self.view bringSubviewToFront:imgView];
     cameraBtn.hidden = YES;
     galleryBtn.hidden = YES;
@@ -541,7 +547,7 @@
     // Put the image here.
     takenPicture = [info objectForKey:UIImagePickerControllerEditedImage ];//[captureManager1 takenImage];
 //    UIImage*scaled=[self imageByScaling:takenPicture];
-    UIImage*cropped=[self imageByCropping:takenPicture toRect:CGRectMake(14, 57, 572, 670)];
+    UIImage*cropped=[self imageByCropping:takenPicture toRect:CGRectMake(0, 0, 572, 670)];
     imgView.image = cropped;
     //[self.view bringSubviewToFront:imgView];
     cameraBtn.hidden = YES;

@@ -67,7 +67,7 @@
     [bgScrollView setContentSize:CGSizeMake(320, 700)];
     self.aPaymentForm = [BTPaymentFormView paymentFormView];
     self.aPaymentForm.delegate = self;
-    self.aPaymentForm.requestsZip =YES;//self.requestsZipInManualCardEntry;
+    self.aPaymentForm.requestsZip =NO;//self.requestsZipInManualCardEntry;
     self.aPaymentForm.backgroundColor = [UIColor clearColor];
     self.aPaymentForm.UKSupportEnabled = YES;//self.UKSupportEnabled;
     [bgScrollView addSubview:self.aPaymentForm];
