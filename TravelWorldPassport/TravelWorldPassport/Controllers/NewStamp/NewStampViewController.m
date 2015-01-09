@@ -12,15 +12,21 @@
 #import "TWPEngine.h"
 #import "TWPUser.h"
 #import "Stamps.h"
+#import "AppDelegate.h"
+#import "UIImage+UIImage_fixOrientation.h"
+#import "ARAnalytics.h"
+#import "UIImage+Resize.h"
 
 @import AddressBook;
 
-@interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
+@interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,
+        UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate> {
     
     __weak IBOutlet UIPageControl *pageControl;
     BOOL pageControlBeingUsed;
     __weak IBOutlet UIImageView *imgView;
     __weak IBOutlet UILabel *swipeLabel;
+            __weak IBOutlet UILabel *loc0Lbl;
     __weak IBOutlet UILabel *stamp1Lbl;
     __weak IBOutlet UILabel *stamp2Lbl;
     __weak IBOutlet UILabel *loc2Lbl;
@@ -33,6 +39,7 @@
     __weak IBOutlet UILabel *loc9Lbl;
     __weak IBOutlet UILabel *loc10Lbl;
     __weak IBOutlet UILabel *loc11Lbl;
+    __weak IBOutlet UILabel *loc12Lbl;
     __weak IBOutlet UIButton *galleryBtn;
     __weak IBOutlet UIButton *cameraBtn;
     __weak IBOutlet UIButton *crossBtn;
@@ -53,6 +60,8 @@
     __weak IBOutlet UILabel *stamp11Lbl1;
     __weak IBOutlet UILabel *stamp11Lbl2;
     __weak IBOutlet UILabel *stamp11Lbl3;
+    __weak IBOutlet UILabel *stamp12Lbl1;
+            IBOutlet UIView *_contentView;
     int selectedLblTag;
     UIImage *takenPicture;
     AVCamCaptureManager *captureManager;
@@ -85,15 +94,6 @@
 
 - (void)viewDidLoad
 {
-//    for (NSString* family in [UIFont familyNames])
-//    {
-//         NSLog(@"%@", family);
-//
-//        for (NSString* name in [UIFont fontNamesForFamilyName: family])
-//         {
-//                NSLog(@"  %@", name);
-//           }
-//     }
     [super viewDidLoad];
     shareBtn.hidden = YES;
     crossBtn.hidden = YES;
@@ -103,17 +103,22 @@
     hiddenTextField.delegate = self;
     [self.view addSubview:hiddenTextField];
     [self.view sendSubviewToBack:hiddenTextField];
+    [stampsScroll addSubview:_contentView];
+//    stampsScroll.contentSize=_contentView.bounds.size;
     [self startUpdatingLocation];
     [self setupLabelFonts];
-    [stampsScroll setContentSize:CGSizeMake(3522, 387)]; // Need to change this.
+    NSInteger numOfSlides=13;
+    pageControl.numberOfPages=numOfSlides;
+    [stampsScroll setContentSize:CGSizeMake(2+numOfSlides*320, 387)]; // Need to change this.
     // Do any additional setup after loading the view from its nib.
 //    swipeLabel.font = [UIFont fontWithName:@"Intro" size:16.0f];
    // [swipeLabel sizeToFit];
   //  stampsScroll.userInteractionEnabled = YES;
    // [stampsScroll setBackgroundColor:[UIColor redColor]];
     self.videoPreviewView.userInteractionEnabled = YES;
-    
-    
+    [ARAnalytics pageView:@"New Stamp View"];
+
+
     // Start of camera code
 		captureManager = [[AVCamCaptureManager alloc] init];
 		
@@ -170,9 +175,10 @@
 }
 
 - (void)setupLabelFonts {
-    //set font
+//    //set font
     stamp1Lbl.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
     stamp2Lbl.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
+    loc0Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc2Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc3Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc4Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
@@ -183,6 +189,7 @@
     loc9Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc10Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     loc11Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
+    loc12Lbl.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0f];
     stamp6Lbl1.font = [UIFont fontWithName:@"Intro-Inline" size:20.0f];
     stamp6Lbl2.font = [UIFont fontWithName:@"Intro-Inline" size:20.0f];
     stamp7Lbl1.font = [UIFont fontWithName:@"BebasNeue" size:30.0f];
@@ -197,52 +204,22 @@
     stamp11Lbl1.font = [UIFont fontWithName:@"Intro" size:25.0f];
     stamp11Lbl2.font = [UIFont fontWithName:@"Lobster" size:20.0f];
     stamp11Lbl3.font = [UIFont fontWithName:@"Intro" size:25.0f];
+    stamp12Lbl1.font = [UIFont fontWithName:@"Metropolis1920" size:40.0f];
     
     stamp6EditView.layer.borderWidth = 2.0f;
     stamp6EditView.layer.borderColor = [UIColor whiteColor].CGColor;
-    // Naresh taken out
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp6Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp6Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp7Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp7Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp8Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp8Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp8Lbl3 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp9Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp9Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp10Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp10Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp11Lbl1 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp11Lbl2 addGestureRecognizer:recognizer];
-    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    recognizer.numberOfTapsRequired = 1;
-    [stamp11Lbl3 addGestureRecognizer:recognizer];
+    // Naresh taken out - Chirag taken out as weel
+    NSArray* interactiveLabels=@[stamp6Lbl1,stamp6Lbl2,stamp7Lbl1,stamp7Lbl2,stamp8Lbl1,stamp8Lbl2,stamp8Lbl3,
+            stamp9Lbl1,stamp9Lbl2,stamp10Lbl1,stamp10Lbl2,stamp11Lbl1,stamp11Lbl2,stamp11Lbl3,stamp12Lbl1];
+
+    for(UILabel *label in interactiveLabels)
+    {
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        recognizer.numberOfTapsRequired = 1;
+        [label addGestureRecognizer:recognizer];
+        label.text=@"Type here";
+    }
+
 }
 
 - (void)startUpdatingLocation {
@@ -251,10 +228,13 @@
     if (!locationManager) {
         locationManager = [[CLLocationManager alloc] init];
     }
+    if([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+    {
+        [locationManager requestWhenInUseAuthorization];
+    }
     locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.pausesLocationUpdatesAutomatically = NO;
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    locationManager.distanceFilter = 100;
     [locationManager startUpdatingLocation];
 }
 
@@ -289,33 +269,30 @@
                                objectForKey:(NSString *)kABPersonAddressStateKey];
             
             NSLog(@"%@ %@ %@", country,city, state);
+            UILabel*lbl=[self valueForKey:@"loc2Lbl"];
+            lbl.text=state;
+
+            for (int i =0; i<=12; i++) {
+                if (i==1)continue;
+                NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
+                UILabel*locLabel=[self valueForKey:str];
+
+                if(city)
+                {
+                    locLabel.text = [NSString stringWithFormat:@"%@, %@",city,country];
+                }else{
+                    locLabel.text = [NSString stringWithFormat:@"%@, %@",state,country];
+                }
+                
+            }
+            
             if (city == nil) {
                 stamp1Lbl.text = state;
                 stamp2Lbl.text = state;
-                loc2Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc3Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc4Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc5Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc6Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc7Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc8Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc9Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc10Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
-                loc11Lbl.text = [NSString stringWithFormat:@"%@, %@",state,country];
             }
             else {
                 stamp1Lbl.text = city;
                 stamp2Lbl.text = state;
-                loc2Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc3Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc4Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc5Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc6Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc7Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc8Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc9Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc10Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                loc11Lbl.text = [NSString stringWithFormat:@"%@, %@",city,country];
             }
         }
     }];
@@ -323,10 +300,17 @@
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to find user's location" message:@"Please try again" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Try Again", nil];
+    alert.delegate=self;
     [alert show];
-    [locationManager stopUpdatingLocation];
-    //    locationManager.delegate = nil;
+}
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex==1)
+    {
+        [self startUpdatingLocation];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -336,6 +320,7 @@
 }
 
 - (IBAction)captureImage:(id)sender {
+    [self.videoPreviewView drawViewHierarchyInRect:self.videoPreviewView.bounds afterScreenUpdates:YES];
     [captureManager captureStillImage];
 }
 
@@ -351,13 +336,19 @@
 
 # pragma mark - AVCamCaptureDelegate
 -(void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager1{
-    takenPicture = [captureManager1 takenImage];
-    imgView.image = [self imageByCropping:[self imageByScaling:takenPicture] toRect:CGRectMake(14, 57, 286, 335)];
+    takenPicture = [[captureManager1 takenImage] fixOrientation];
+    CGFloat imgWidth=CGImageGetWidth(takenPicture.CGImage);
+    CGFloat imgHeight=CGImageGetHeight(takenPicture.CGImage);
+    CGFloat ratio=imgHeight/imgWidth;
+
+    takenPicture= [takenPicture resizedImage:CGSizeMake(640, 640*ratio) interpolationQuality:kCGInterpolationHigh];
+    imgView.image = [self imageByCropping2:takenPicture toRect:CGRectApplyAffineTransform(imgView.frame, CGAffineTransformMakeScale(2.0, 2.0))];
     //[self.view bringSubviewToFront:imgView];
     cameraBtn.hidden = YES;
     galleryBtn.hidden = YES;
     shareBtn.hidden = NO;
     crossBtn.hidden = NO;
+    [ARAnalytics event:@"New Stamp Photo" withProperties:@{@"source":@"camera"}];
 }
 
 - (UIImage *)imageByScaling:(UIImage*)imageToScale {
@@ -370,6 +361,24 @@
 }
 
 -(UIImage *)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect
+{
+    CGFloat imgWidth=CGImageGetWidth(imageToCrop.CGImage);
+    CGFloat imgHeight=CGImageGetHeight(imageToCrop.CGImage);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 1.0);
+    if (rect.size.height>imgHeight) {
+        imgWidth=imgWidth*rect.size.height/imgHeight;
+        imgHeight=rect.size.height;
+
+    }
+    [imageToCrop drawInRect:CGRectMake((rect.size.width-imgWidth)/2,(rect.size.height-imgHeight)/2,imgWidth,imgHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+    
+    
+}
+
+-(UIImage *)imageByCropping2:(UIImage *)imageToCrop toRect:(CGRect)rect
 {
     CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
     
@@ -408,11 +417,11 @@
 //    [self uploadStamp:viewImage];
 //    UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-    for (int i = 0; i < [[stampsScroll subviews] count]; i++) {
-        if ([[[stampsScroll subviews] objectAtIndex:i] isKindOfClass:[UIView class]]) {
-            UIView *currentView = (UIView*)[[stampsScroll subviews] objectAtIndex:pageControl.currentPage];
-            UIView *view = (UIView*)[[stampsScroll subviews] objectAtIndex:i];
+    [ARAnalytics event:@"New Stamp Share" withProperties:@{@"template_id":@(pageControl.currentPage)}];
+    for (int i = 0; i < [[_contentView subviews] count]; i++) {
+        if ([[[_contentView subviews] objectAtIndex:i] isKindOfClass:[UIView class]]) {
+            UIView *currentView = (UIView*)[[_contentView subviews] objectAtIndex:pageControl.currentPage];
+            UIView *view = (UIView*)[[_contentView subviews] objectAtIndex:i];
             if ([view isEqual:currentView]) {
 //                 UIGraphicsBeginImageContext(view.frame.size);//CGSizeMake(284, 332)
                 UIGraphicsBeginImageContextWithOptions(view.frame.size, FALSE, 0.0);
@@ -473,7 +482,7 @@
               
                 UIGraphicsEndImageContext();
 //                UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(14, 14, 284, 332)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
-                 UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(28, 28, 568, 664)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
+                 UIImage *img = [self drawImage:[self imageByCropping2:viewImage toRect:CGRectMake(28, 28, 568, 664)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
                 NSLog(@"Image size %@ and scale is %f",NSStringFromCGSize(img.size),img.scale);
              
                 UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
@@ -489,9 +498,9 @@
               atPoint:(CGPoint)  point
 {
    // UIGraphicsBeginImageContextWithOptions(bgImage.size, FALSE, 0.0);
-    CGRect newRect = CGRectMake(0, 0, 2.0*bgImage.size.width, bgImage.size.height*2.0);
+    CGRect newRect = CGRectMake(0, 0, CGImageGetWidth(bgImage.CGImage), CGImageGetHeight(bgImage.CGImage));
     UIGraphicsBeginImageContext(newRect.size );
-    [bgImage drawInRect:CGRectMake( 0, 0, bgImage.size.width*2.0f, bgImage.size.height*2.0f)];
+    [bgImage drawInRect:CGRectMake( 0, 0,  CGImageGetWidth(bgImage.CGImage), CGImageGetHeight(bgImage.CGImage))];
     [fgImage drawInRect:CGRectMake( point.x, point.y, fgImage.size.width, fgImage.size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -511,7 +520,10 @@
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"%@",responseDictionary);
         Stamps *newStamp = [[Stamps alloc] initWithDictionary:responseDictionary];
+        theUser.stampCount+=1;
         [theUser.stamps addObject:newStamp];
+        AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [appDelegate serializeLoggedUser];
         [self dismissViewControllerAnimated:YES completion:nil];
 //        [self dismissViewControllerAnimated:YES completion:^{
 //        }];
@@ -531,9 +543,12 @@
 #pragma mark - UIImagePicker delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [ARAnalytics event:@"New Stamp Photo" withProperties:@{@"source":@"gallery"}];
     // Put the image here.
-    takenPicture = [info objectForKey:UIImagePickerControllerOriginalImage ];//[captureManager1 takenImage];
-    imgView.image = [self imageByCropping:[self imageByScaling:takenPicture] toRect:CGRectMake(14, 57, 286, 335)];
+    takenPicture = [info objectForKey:UIImagePickerControllerEditedImage ];//[captureManager1 takenImage];
+//    UIImage*scaled=[self imageByScaling:takenPicture];
+    UIImage*cropped=[self imageByCropping:takenPicture toRect:CGRectMake(0, 0, 572, 670)];
+    imgView.image = cropped;
     //[self.view bringSubviewToFront:imgView];
     cameraBtn.hidden = YES;
     galleryBtn.hidden = YES;
@@ -560,10 +575,11 @@
 
 - (void)handleTap:(UITapGestureRecognizer*)recognizer {
     NSLog(@"%d",[[recognizer view] tag]);
+    [hiddenTextField resignFirstResponder];
     selectedLblTag = [[recognizer view] tag];
     hiddenTextField.text = nil;
     hiddenTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    [hiddenTextField resignFirstResponder];
+
     [hiddenTextField becomeFirstResponder];
 }
 
@@ -575,6 +591,10 @@
 //}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    UILabel*label=[self labelForTag:selectedLblTag];
+    label.layer.borderWidth=1.0f;
+    label.layer.borderColor=[UIColor colorWithRed:17/255.0 green:168/255.0 blue:171/255.0 alpha:1.0].CGColor;
+
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -582,58 +602,70 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    
+    UILabel*label=[self labelForTag:selectedLblTag];
+    label.layer.borderWidth=0.0f;
+    label.layer.borderColor=[UIColor colorWithRed:17/255.0 green:168/255.0 blue:171/255.0 alpha:1.0].CGColor;
+
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString * searchStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    switch (selectedLblTag) {
+    [[self labelForTag:selectedLblTag] setText:searchStr];
+    return YES;
+}
+
+-(UILabel*)labelForTag:(NSUInteger)tag
+{
+    switch (tag) {
         case 1:
-            stamp6Lbl1.text = searchStr;
+            return stamp6Lbl1;
             break;
         case 2:
-            stamp6Lbl2.text = searchStr;
+            return stamp6Lbl2;
             break;
         case 3:
-            stamp7Lbl1.text = searchStr;
+            return stamp7Lbl1;
             break;
         case 4:
-            stamp7Lbl2.text = searchStr;
+            return stamp7Lbl2;
             break;
         case 5:
-            stamp8Lbl1.text = searchStr;
+            return stamp8Lbl1;
             break;
         case 6:
-            stamp8Lbl2.text = searchStr;
+            return stamp8Lbl2;
             break;
         case 7:
-            stamp8Lbl3.text = searchStr;
+            return stamp8Lbl3;
             break;
         case 8:
-            stamp9Lbl1.text = searchStr;
+            return stamp9Lbl1;
             break;
         case 9:
-            stamp9Lbl2.text = searchStr;
+            return stamp9Lbl2;
             break;
         case 10:
-            stamp10Lbl1.text = searchStr;
+            return stamp10Lbl1;
             break;
         case 11:
-            stamp10Lbl2.text = searchStr;
+            return stamp10Lbl2;
             break;
         case 12:
-            stamp11Lbl1.text = searchStr;
+            return stamp11Lbl1;
             break;
         case 13:
-            stamp11Lbl2.text = searchStr;
+            return stamp11Lbl2;
             break;
         case 14:
-            stamp11Lbl3.text = searchStr;
+            return stamp11Lbl3;
             break;
+        case 15:
+            return stamp12Lbl1;
+            
         default:
             break;
     }
-    return YES;
+    return nil;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

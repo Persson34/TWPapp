@@ -15,9 +15,21 @@
 #import <VenmoTouch/VenmoTouch.h>
 #import "TWPEngine.h"
 #import "DataModels.h"
+#import "MainViewController.h"
+#import "ARAnalytics.h"
+#import <Crashlytics/Crashlytics.h>
 
+static NSString* const kUserProfileKey=@"kUserProfileKey";
+
+@interface AppDelegate()
+{
+
+}
+@property (strong, nonatomic) SideMenuViewController *leftSideMenuController;
+@property (strong, nonatomic) MFSideMenuContainerViewController* rootController;
+@end
 @implementation AppDelegate
-@synthesize leftSideMenuController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -26,14 +38,29 @@
     TWPLoginViewController *loginController = [[TWPLoginViewController alloc] initWithNibName:@"TWPLoginViewController" bundle:nil];
      navController= [[UINavigationController alloc] initWithRootViewController:loginController];
     navController.navigationBarHidden = YES;
-    leftSideMenuController = [[SideMenuViewController alloc] initWithNibName:@"SideMenuViewController" bundle:nil];
-    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+    _leftSideMenuController = [[SideMenuViewController alloc] initWithNibName:@"SideMenuViewController" bundle:nil];
+    self.rootController= [MFSideMenuContainerViewController
                                                     containerWithCenterViewController:navController
-                                                    leftMenuViewController:leftSideMenuController
+                                                    leftMenuViewController:_leftSideMenuController
                                                     rightMenuViewController:nil];
-    self.window.rootViewController = container;
+
+    self.rootController.panMode=MFSideMenuPanModeNone;
+    self.window.rootViewController = self.rootController;
     self.window.backgroundColor = [UIColor whiteColor];
+
+
     [self.window makeKeyAndVisible];
+
+    NSData* userData=[[NSUserDefaults standardUserDefaults] objectForKey:kUserProfileKey];
+    if(userData)
+    {
+        TWPUser *user=[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+        if(user)
+        {
+            self.loggedUser=user;
+            [self showHome];
+        }
+    }
     [UIImageView setDefaultEngine:[ImageDownloadEngine sharedEngine]];
     //[self addDummyAddress];
     [self initVTClient];
@@ -52,11 +79,45 @@
 //                                          [self sessionStateChanged:session state:state error:error];
                                       }];
     }
-    
-    
+    [ARAnalytics setupGoogleAnalyticsWithID:@"UA-34990766-3"];
+    [Crashlytics startWithAPIKey:@"c5af9152500a53488ccbf8f3dadd2ed418c66d28"];
     
     return YES;
 }
+
+- (void)setLoggedUser:(TWPUser *)loggedUser {
+    _loggedUser = loggedUser;
+    [self serializeLoggedUser];
+}
+
+-(void)showHome
+{
+    MainViewController *mainController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    mainController.currentUser = self.loggedUser;
+    navController=[[UINavigationController alloc] initWithRootViewController:mainController];
+    self.rootController.centerViewController=navController;
+    navController.navigationBarHidden = YES;
+    self.rootController.panMode=MFSideMenuPanModeDefault;
+    self.leftSideMenuController.delegate=mainController;
+}
+
+-(void)showLogin
+{
+    TWPLoginViewController *loginController = [[TWPLoginViewController alloc] initWithNibName:@"TWPLoginViewController" bundle:nil];
+    navController= [[UINavigationController alloc] initWithRootViewController:loginController];
+    navController.navigationBarHidden = YES;
+    self.rootController.menuState=MFSideMenuStateClosed;
+    self.rootController.centerViewController=navController;
+    self.rootController.panMode=MFSideMenuPanModeNone;
+}
+
+- (void)logOut {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserProfileKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self showLogin];
+}
+
 
 - (void)initVTClient {
     if ([BT_ENVIRONMENT isEqualToString:@"sandbox"]) {
@@ -197,8 +258,15 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    [self serializeLoggedUser];
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)serializeLoggedUser {
+    NSData* userData= [NSKeyedArchiver archivedDataWithRootObject:self.loggedUser];
+    [[NSUserDefaults standardUserDefaults] setObject:userData forKey:kUserProfileKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -206,8 +274,9 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
+-(void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [application setStatusBarHidden:YES];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

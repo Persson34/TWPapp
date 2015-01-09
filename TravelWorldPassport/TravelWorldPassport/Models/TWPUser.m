@@ -55,28 +55,28 @@ NSString *const kTWPUserName = @"name";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.stampCount = [[self objectOrNilForKey:kTWPUserStampCount fromDictionary:dict] doubleValue];
-    NSObject *receivedStamps = [dict objectForKey:kTWPUserStamps];
-    NSMutableArray *parsedStamps = [NSMutableArray array];
-    if ([receivedStamps isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *item in (NSArray *)receivedStamps) {
-            if ([item isKindOfClass:[NSDictionary class]]) {
-                [parsedStamps addObject:[Stamps modelObjectWithDictionary:item]];
-            }
-       }
-    } else if ([receivedStamps isKindOfClass:[NSDictionary class]]) {
-       [parsedStamps addObject:[Stamps modelObjectWithDictionary:(NSDictionary *)receivedStamps]];
-    }
+        self.stampCount = [[self objectOrNilForKey:kTWPUserStampCount fromDictionary:dict] doubleValue];
+        NSObject *receivedStamps = [dict objectForKey:kTWPUserStamps];
+        NSMutableArray *parsedStamps = [NSMutableArray array];
+        if ([receivedStamps isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *item in (NSArray *)receivedStamps) {
+                if ([item isKindOfClass:[NSDictionary class]]) {
+                    [parsedStamps addObject:[Stamps modelObjectWithDictionary:item]];
+                }
+           }
+        } else if ([receivedStamps isKindOfClass:[NSDictionary class]]) {
+           [parsedStamps addObject:[Stamps modelObjectWithDictionary:(NSDictionary *)receivedStamps]];
+        }
 
-    self.stamps = [[NSArray arrayWithArray:parsedStamps]mutableCopy];
-            self.userId = [[self objectOrNilForKey:kTWPUserUserId fromDictionary:dict] doubleValue];
-            self.userProfile = [self objectOrNilForKey:kTWPUserUserProfile fromDictionary:dict];
-            self.code = [self objectOrNilForKey:kTWPUserCode fromDictionary:dict];
-            self.surname = [self objectOrNilForKey:kTWPUserSurname fromDictionary:dict];
-            self.location = [Location modelObjectWithDictionary:[dict objectForKey:kTWPUserLocation]];
-            self.meta = [self objectOrNilForKey:kTWPUserMeta fromDictionary:dict];
-            self.followersCount = [[self objectOrNilForKey:kTWPUserFollowersCount fromDictionary:dict] doubleValue];
-            self.name = [self objectOrNilForKey:kTWPUserName fromDictionary:dict];
+        self.stamps = [[NSArray arrayWithArray:parsedStamps]mutableCopy];
+        self.userId = [[self objectOrNilForKey:kTWPUserUserId fromDictionary:dict] doubleValue];
+        self.userProfile = [self objectOrNilForKey:kTWPUserUserProfile fromDictionary:dict];
+        self.code = [self objectOrNilForKey:kTWPUserCode fromDictionary:dict];
+        self.surname = [self objectOrNilForKey:kTWPUserSurname fromDictionary:dict];
+        self.location = [Location modelObjectWithDictionary:[dict objectForKey:kTWPUserLocation]];
+        self.meta = [self objectOrNilForKey:kTWPUserMeta fromDictionary:dict];
+        self.followersCount = [[self objectOrNilForKey:kTWPUserFollowersCount fromDictionary:dict] doubleValue];
+        self.name = [self objectOrNilForKey:kTWPUserName fromDictionary:dict];
 
     }
     
@@ -88,7 +88,7 @@ NSString *const kTWPUserName = @"name";
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     [mutableDict setValue:[NSNumber numberWithDouble:self.stampCount] forKey:kTWPUserStampCount];
-NSMutableArray *tempArrayForStamps = [NSMutableArray array];
+    NSMutableArray *tempArrayForStamps = [NSMutableArray array];
     for (NSObject *subArrayObject in self.stamps) {
         if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
             // This class is a model object
@@ -125,7 +125,7 @@ NSMutableArray *tempArrayForStamps = [NSMutableArray array];
 
 
 -(NSString*)getFullName{
-    return [NSString stringWithFormat:@"%@ %@",self.surname,self.name];
+    return [NSString stringWithFormat:@"%@ %@",self.name,self.surname];
 }
 #pragma mark - NSCoding Methods
 

@@ -14,3 +14,20 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#ifndef braintree_ios_VenmoTouchSettings_h
+#define braintree_ios_VenmoTouchSettings_h
+
+#ifdef DEBUG
+    #define BT_ENVIRONMENT @"sandbox"
+#else
+    #define BT_ENVIRONMENT @"production"
+#endif
+
+#define BT_SANDBOX_MERCHANT_ID @"f7crdy6k3hbfvbgw"
+#define BT_SANDBOX_CLIENT_SIDE_ENCRYPTION_KEY @"MIIBCgKCAQEAt/CwBQmEf5XwbuTsGG/Z11+XMntnvbusD+iD2yAkFMsowCdBqxjlHmqTx5iX48fPE60UvN9vCtfE0ggkhQREsJsdHK+juTtFahllXYiF4UD4ZHyOhIVxyH1g82NfUcXwdiw1YtHspvB4buNVjMowAuHl51QCqlVvG9Y+YYWcmLd/gdxhFvU7MEB3gzwgLAtNZMiQU3qjZY/6HJS5vJ3nMRLof0nepGT958UqmTZkHjLp12Xde8x58ZhtA4ytsgJIfHTOiIahdtV4x1CKNRV939Ut5TeEruPdln8p7fOMDUOaXK4ttzH03vQp69tOjBo3/BJpnM0FU5rsdgFEqsTpiQIDAQAB"
+
+#define BT_PRODUCTION_MERCHANT_ID @"xmzyvp4p9n99js7v"
+#define BT_PRODUCTION_CLIENT_SIDE_ENCRYPTION_KEY @"MIIBCgKCAQEAx4n3Ne14DqCSaktge2ii6OnKePLBFKiVAmSOdDWLGkvar95qcisSyFBvAgrhS9n2ggBK5bO6xvi+7WSQcSzFYIZbTq680aI1FGgBQQdSwRx1u2WuET+o+X/6P2hqCF1CmJeK0Ji+epdS/HiW5X37HortaSJ4osraxfKZAes7IJ1PSBNDoNWMINNy/AzXcj9zq4CRyYmokC1u4s1YuWAeOE8XT72tU21etXe/7lfjtnBpbeZHSwkoPL6L+B4XEauwP1IkQnmxDqG2wMKsF3dMKPL5+A/Mitn6Wc7hEcp9O3veUgbFsaBT9lgA8m7N8kaQwTfi51UVnBxfvk8RwiQq5wIDAQAB"
+
+#endif

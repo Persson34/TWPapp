@@ -64,7 +64,6 @@
     self.currentUser = appDelegate.loggedUser;
     SideMenuViewController *sideController = (SideMenuViewController*)[self.menuContainerViewController leftMenuViewController];
     [sideController configureForUser:self.currentUser];
-    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] leftSideMenuController] updateMenuView];
     for (UILabel *aLabel in allLabels) {
         aLabel.font = [UIFont fontWithName:@"LucidaGrande" size:10.0f];
     }
@@ -170,9 +169,6 @@
 }
 
 - (void)editProfile {
-    if ([[[self.navigationController viewControllers] lastObject] isKindOfClass:[EditProfileViewController class]]) {
-        return;
-    }
     EditProfileViewController *aController = [[EditProfileViewController alloc] initWithNibName:@"EditProfileViewController" bundle:nil];
     aController.onUserUpdate = ^(TWPUser *updatedUser){
         self.currentUser = updatedUser;
@@ -182,6 +178,14 @@
     };
     [aController setTheUser:self.currentUser];
     [self.navigationController pushViewController:aController animated:YES];
+}
+
+- (void)requestProfileEdit {
+    if ([[[self.navigationController viewControllers] lastObject] isKindOfClass:[EditProfileViewController class]]) {
+        return;
+    }
+
+    [self editProfile];
 }
 
 @end

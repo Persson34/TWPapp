@@ -17,7 +17,11 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) SideMenuViewController *leftSideMenuController;
+
 @property (strong, nonatomic) TWPUser *loggedUser; // This is requred for all round access
 
+- (void)showHome;
+
+- (void)logOut;
+- (void)serializeLoggedUser;
 @end

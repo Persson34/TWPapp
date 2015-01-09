@@ -15,11 +15,12 @@
 #import "MainViewController.h"
 #import "MFSideMenu.h"
 #import "TWPUser.h"
+#import "AppDelegate.h"
 
 @interface SideMenuViewController ()
 {
     IBOutletCollection(UIButton) NSArray *allButtons;
-    MainViewController *controller;
+
     __weak IBOutlet UIImageView *userProfilePic;
     __weak IBOutlet UILabel *usernameLabel;
     TWPUser *currentUser;
@@ -52,10 +53,15 @@
         aBtn.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:15.0f];
     }
     usernameLabel.font =  [UIFont fontWithName:@"LucidaGrande" size:14.0f];
+    if(currentUser)
+    {
+        [self configureForUser:currentUser];
+    }
 }
 
 -(void)configureForUser:(TWPUser *)theUser{
     currentUser = theUser;
+
     //[userProfilePic setImageFromURL:[NSURL URLWithString:theUser.userProfile]];
     [[ImageDownloadEngine sharedEngine]imageAtURL:[NSURL URLWithString:theUser.userProfile] completionHandler:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
         UIImage *roundedImage  = [fetchedImage resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(112, 112) interpolationQuality:kCGInterpolationHigh];
@@ -74,18 +80,18 @@
     usernameLabel.text = [theUser getFullName];
 }
 
-- (void)updateMenuView {
-    UINavigationController *navController = self.menuContainerViewController.centerViewController;
-    controller = (MainViewController*)[[navController viewControllers] objectAtIndex:1];
-}
 
 #pragma mark UI button actions
 
 - (IBAction)editBtnTapped:(id)sender {
-    if ([controller respondsToSelector:@selector(editProfile)]) {
-        [(MainViewController*)controller editProfile];
+    if ([_delegate respondsToSelector:@selector(requestProfileEdit)]) {
+        [_delegate requestProfileEdit];
     }
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+}
+- (IBAction)signoutBtnTapped:(id)sender {
+    AppDelegate* appDelegate=[[UIApplication sharedApplication] delegate];
+    [appDelegate logOut];
 }
 
 - (IBAction)billingBtnTapped:(id)sender {

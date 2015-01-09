@@ -16,6 +16,7 @@
  response - response from breintree
  */
 
+#import <ARAnalytics/ARAnalytics.h>
 #import "PaymentViewController.h"
 #import "TWPEngine.h"
 #import "DataModels.h"
@@ -57,15 +58,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-  //  aPaymentForm.frame = CGRectMake(0, 0, 320, 40);
+    [ARAnalytics pageView:@"Payment View"];
+
+    //  aPaymentForm.frame = CGRectMake(0, 0, 320, 40);
     self.navigationItem.title = @"Purchase";
     payLabel.font = [UIFont fontWithName:@"LucidaGrande" size:19.0f];
     payBtn.enabled = NO;
     [bgScrollView setContentSize:CGSizeMake(320, 700)];
     self.aPaymentForm = [BTPaymentFormView paymentFormView];
     self.aPaymentForm.delegate = self;
-    self.aPaymentForm.requestsZip =YES;//self.requestsZipInManualCardEntry;
+    self.aPaymentForm.requestsZip =NO;//self.requestsZipInManualCardEntry;
     self.aPaymentForm.backgroundColor = [UIColor clearColor];
     self.aPaymentForm.UKSupportEnabled = YES;//self.UKSupportEnabled;
     [bgScrollView addSubview:self.aPaymentForm];

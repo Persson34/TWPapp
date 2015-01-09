@@ -7,7 +7,14 @@
 //
  //
 
+#import <ARAnalytics/ARAnalytics.h>
 #import "TWPEngine.h"
+static NSString const* API_ROOT= @"http://www.travelworldpassport.com/webapp/nl/app/";
+//static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur4b.runscope.net/webapp/nl/app/";
+
+//static NSString const* API_ROOT= @"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/";
+//static NSString const* API_ROOT= @"http://beta-test-travelworldpassport-com-8bl19t7rur4b.runscope.net/app_dev.php/nl/app/";
+
 
 @implementation TWPEngine
 
@@ -28,11 +35,12 @@
 -(void)loginWithUserName:(NSString*)userName andPassword:(NSString*)password onCompletion:(TWPResponse)theResponse
 {
     NSDictionary *paramDict = @{@"email":userName,@"pwd":password};
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/nl/app/login" params:paramDict httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"login" params:paramDict httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
 //        NSLog(@"Response String %@",[completedOperation responseString]);
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Login error"];
         theResponse(nil,error);
     }];
     
@@ -42,11 +50,12 @@
 - (void)uploadStamp:(NSString *)userId andImage:(UIImage*)uploadImg onCompletion:(TWPResponse)theResponse{
     NSData *data = UIImagePNGRepresentation(uploadImg);
     NSDictionary *paramDict = @{@"userId": userId};
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/nl/app/savestamp" params:paramDict httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"savestamp" params:paramDict httpMethod:@"POST"];
     [op addData:data forKey:@"imageData" mimeType:@"image/png" fileName:@"upload.png"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Upload error"];
         theResponse(nil,error);
     }];
     
@@ -57,13 +66,15 @@
  {
      NSData *data = UIImagePNGRepresentation(profileImg);
     NSDictionary *paramDict = @{@"userid":userId,@"name":fName,@"surname":sName,@"country":countryStr,@"city":cityStr,@"lat":[NSString stringWithFormat:@"%f",lat],@"long":[NSString stringWithFormat:@"%f",lng]};
-         MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/edituser" params:paramDict httpMethod:@"POST"];
+         MKNetworkOperation *op = [self operationWithURLString:@"edituser" params:paramDict httpMethod:@"POST"];
      
+    if(data)
      [op addData:data forKey:@"picture" mimeType:@"image/png" fileName:@"upload.png"];
-      
+     
      [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
          theResponse([completedOperation responseData],nil);
      } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+         [ARAnalytics error:error withMessage:@"Edit profile error"];
          theResponse(nil,error);
      }];
      
@@ -72,10 +83,11 @@
 
 -(void)getUserAddress:(NSString*)userId onCompletion:(TWPResponse)theResponse{
     NSDictionary *paramDict = @{@"userid": userId};
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/getshipping" params:paramDict httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"getshipping" params:paramDict httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Get user addr error"];
         theResponse(nil,error);
     }];
     
@@ -84,10 +96,11 @@
 
 -(void)loginWithFBID:(NSString*)fbId onCompletion:(TWPResponse)theResponse{
     NSDictionary *paramDict = @{@"fbid": fbId};
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/loginfb" params:paramDict httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"loginfb" params:paramDict httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"FB Login error"];
         theResponse(nil,error);
     }];
     
@@ -95,10 +108,11 @@
 }
 
 -(void)updateShippingAddress:(NSDictionary*)shippingDetails onCompletion:(TWPResponse)theResponse{
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/setshipping" params:shippingDetails httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"setshipping" params:shippingDetails httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Upadte addr error"];
         theResponse(nil,error);
     }];
     
@@ -106,10 +120,11 @@
     
 }
 -(void)savePaymentInformation:(NSDictionary*)paramDict onCompletion:(TWPResponse)theResponse{
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/savecc" params:paramDict httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"savecc" params:paramDict httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Save payment info error"];
         theResponse(nil,error);
     }];
     
@@ -118,21 +133,28 @@
 
 -(void)placeAndSaveOrder:(NSDictionary*)orderParams onCompletion:(TWPResponse)theResponse{
 
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beat.test.travelworldpassport.com/app_dev.php/nl/app/placeorder" params:orderParams httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"placeorder" params:orderParams httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Place order error"];
         theResponse(nil,error);
     }];
     
     [self enqueueOperation:op];
 }
--(void)registerUser:(NSDictionary *)userDictionary onCompletion:(TWPResponse)theResponse{
+-(void)registerUser:(NSDictionary *)userDictionary picture:(UIImage*)profileImage onCompletion:(TWPResponse)theResponse{
     //
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/register" params:userDictionary httpMethod:@"POST"];
+     NSData *data = UIImagePNGRepresentation(profileImage);
+    MKNetworkOperation *op = [self operationWithURLString:@"register" params:userDictionary httpMethod:@"POST"];
+
+        if(data)
+            [op addData:data forKey:@"picture" mimeType:@"image/png" fileName:@"upload.png"];
+    
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Register user error"];
         theResponse(nil,error);
     }];
     
@@ -143,13 +165,20 @@
 
 -(void)deleteStampWithId:(NSString *)stampId onCompletion:(TWPResponse)theResponse{
     NSDictionary *paramDict = @{@"stamp_id":stampId};
-    MKNetworkOperation *op = [self operationWithURLString:@"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/deletestamp" params:paramDict httpMethod:@"POST"];
+    MKNetworkOperation *op = [self operationWithURLString:@"deletestamp" params:paramDict httpMethod:@"POST"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         theResponse([completedOperation responseData],nil);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"delete stamp error"];
         theResponse(nil,error);
     }];
     [self enqueueOperation:op];
+}
+
+
+- (MKNetworkOperation *)operationWithURLString:(NSString *)urlString params:(NSDictionary *)body httpMethod:(NSString *)method {
+    urlString=[NSString stringWithFormat:@"%@%@",API_ROOT,urlString];
+    return [super operationWithURLString:urlString params:body httpMethod:method];
 }
 
 @end

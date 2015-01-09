@@ -12,6 +12,8 @@
 #import "DMActivityInstagram.h"
 #import "ImageDownloadEngine.h"
 #import "KxMenu.h"
+#import "MBProgressHUD.h"
+#import "ARAnalytics.h"
 
 @interface SingleStampViewController () <UIDocumentInteractionControllerDelegate>
 {
@@ -45,12 +47,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [ARAnalytics pageView:@"Single Stamp View"];
+
     [selectedImgView setImageWithURL:[NSURL URLWithString:selectedImageURL]];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[ImageDownloadEngine sharedEngine]imageAtURL:[NSURL URLWithString:selectedImageURL] completionHandler:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
         imageToShare = fetchedImage;
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
     // Do any additional setup after loading the view from its nib.
     // Initiate UIImage download for this.
@@ -62,7 +67,8 @@
 }
 
 - (IBAction)sendBtnTapped:(id)sender {
-    
+
+    [ARAnalytics event:@"Stamp share attempt"];
     DMActivityInstagram *instagramActivity = [[DMActivityInstagram alloc] init];
     
     //NSString *shareText = @"CatPaint #catpaint";
@@ -76,6 +82,10 @@
     NSString *textToShare = @"Created with the new Travel World Passport app";
     anActivityController = [[UIActivityViewController alloc]initWithActivityItems:@[imageToShare,textToShare] applicationActivities:@[instagramActivity]];
     anActivityController.completionHandler = ^(NSString *activityType, BOOL completed){
+        if(completed)
+        {
+            [ARAnalytics event:@"Stamp shared" withProperties:@{@"Service:":activityType}];
+        }
     };
     [self presentViewController:anActivityController animated:YES completion:nil];
     // Changed
@@ -83,6 +93,7 @@
 }
 
 - (IBAction)buyBtnTapped:(id)sender {
+
     CheckoutViewController *aController = [[CheckoutViewController alloc] initWithNibName:@"CheckoutViewController" bundle:nil];
     [aController setCurrentUser:currentUser];
     [aController setSelectedStampNo:selectedStampNo];
