@@ -1,0 +1,18 @@
+PODS:
+  - ARAnalytics/CoreIOS (3.9.1)
+  - ARAnalytics/GoogleAnalytics (3.9.1):
+    - ARAnalytics/CoreIOS
+    - GoogleAnalytics
+  - Braintree (2.2.8)
+  - GoogleAnalytics (3.14.0)
+
+DEPENDENCIES:
+  - ARAnalytics/GoogleAnalytics
+  - Braintree (~> 2.2.8)
+
+SPEC CHECKSUMS:
+  ARAnalytics: c23edc9467fd1830d5d54d763e11655b3b7041da
+  Braintree: 2df656aee6b55443f214c43870363df9c6649737
+  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
+
+COCOAPODS: 0.38.2

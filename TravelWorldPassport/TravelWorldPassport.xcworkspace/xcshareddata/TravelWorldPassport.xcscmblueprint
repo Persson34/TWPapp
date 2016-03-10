@@ -1,0 +1,28 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8102BC39568282FC91F27AFC0F51F97BA6CF08DC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8102BC39568282FC91F27AFC0F51F97BA6CF08DC" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "10C95092-49FA-4989-9261-419A58CBB36F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8102BC39568282FC91F27AFC0F51F97BA6CF08DC" : "Australia\/TWPapp\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TravelWorldPassport",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TravelWorldPassport\/TravelWorldPassport.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/itsmax\/TWPapp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8102BC39568282FC91F27AFC0F51F97BA6CF08DC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/itsmax\/TWPapp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8102BC39568282FC91F27AFC0F51F97BA6CF08DC"
+    }
+  ]
+}

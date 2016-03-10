@@ -44,8 +44,6 @@
 		3A6E358518F26F1B00A88133 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358318F26F1B00A88133 /* CoreTelephony.framework */; };
 		3A6E358618F26F1B00A88133 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E358418F26F1B00A88133 /* CoreText.framework */; };
 		3A6E363718F2867100A88133 /* VenmoTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E363618F2867100A88133 /* VenmoTouch.framework */; };
-		3A6E363F18F2AB4000A88133 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E363D18F2AB4000A88133 /* EditProfileViewController.m */; };
-		3A6E364018F2AB4000A88133 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E363E18F2AB4000A88133 /* EditProfileViewController.xib */; };
 		3A6E663818E54ED00085447D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E663718E54ED00085447D /* CoreLocation.framework */; };
 		3A96A4C3190943AA008CEEBD /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A96A4C1190943AA008CEEBD /* PaymentViewController.m */; };
 		3A96A4C4190943AA008CEEBD /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A96A4C2190943AA008CEEBD /* PaymentViewController.xib */; };
@@ -83,7 +81,6 @@
 		6E64511B19D495DD0000FF6D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511919D495DD0000FF6D /* Podfile */; };
 		6E64511C19D495DD0000FF6D /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */; };
 		6E973BF019EB08E000926121 /* UIImage+UIImage_fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E283DEB19232FD5002CA62F /* UIImage+UIImage_fixOrientation.m */; };
-		6E973BF119EB08E000926121 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6E363D18F2AB4000A88133 /* EditProfileViewController.m */; };
 		6E973BF219EB08E000926121 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC45E191763010060AB28 /* RegisterViewController.m */; };
 		6E973BF319EB08E000926121 /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A13547919064CC800D8A2E1 /* CheckoutViewController.m */; };
 		6E973BF419EB08E000926121 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F3B69191751D4006D6ED1 /* UIImage+Alpha.m */; };
@@ -151,7 +148,6 @@
 		6E973C3419EB08E000926121 /* StampCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1EFC9518D9771100D1FE43 /* StampCell.xib */; };
 		6E973C3519EB08E000926121 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B5318DAC3510040DC7A /* BebasNeue.otf */; };
 		6E973C3619EB08E000926121 /* instagram@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EA73A67191CA923000FB97C /* instagram@2x.png */; };
-		6E973C3719EB08E000926121 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E363E18F2AB4000A88133 /* EditProfileViewController.xib */; };
 		6E973C3819EB08E000926121 /* SingleStampViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A160BD418EEA9E00077B8C3 /* SingleStampViewController.xib */; };
 		6E973C3919EB08E000926121 /* TWPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5EF418A0F6DA008034C6 /* TWPLoginViewController.xib */; };
 		6E973C3A19EB08E000926121 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */; };
@@ -173,6 +169,10 @@
 		6E973C4A19EB08E000926121 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A5ED318A0F682008034C6 /* Images.xcassets */; };
 		6E973C4B19EB08E000926121 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6E64511919D495DD0000FF6D /* Podfile */; };
 		6E973C4C19EB08E000926121 /* NewStampViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F844B4E18DAB6B40040DC7A /* NewStampViewController.xib */; };
+		6EB0FAD61C915A8F001E451C /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FAD41C915A8F001E451C /* EditProfileViewController.m */; };
+		6EB0FAD71C915A8F001E451C /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FAD41C915A8F001E451C /* EditProfileViewController.m */; };
+		6EB0FAD81C915A8F001E451C /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB0FAD51C915A8F001E451C /* EditProfileViewController.xib */; };
+		6EB0FAD91C915A8F001E451C /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB0FAD51C915A8F001E451C /* EditProfileViewController.xib */; };
 		6ED8B1AA19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */; };
 		6ED8B1AB19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */; };
 		6ED8B1AC19F7AE7E0059DC59 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */; };
@@ -265,9 +265,6 @@
 		3A6E358318F26F1B00A88133 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3A6E358418F26F1B00A88133 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		3A6E363618F2867100A88133 /* VenmoTouch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VenmoTouch.framework; path = "../braintree_ios/venmo-touch/VenmoTouch.framework"; sourceTree = "<group>"; };
-		3A6E363C18F2AB4000A88133 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditProfileViewController.h; path = Controllers/Profile/EditProfileViewController.h; sourceTree = "<group>"; };
-		3A6E363D18F2AB4000A88133 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileViewController.m; path = Controllers/Profile/EditProfileViewController.m; sourceTree = "<group>"; };
-		3A6E363E18F2AB4000A88133 /* EditProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditProfileViewController.xib; path = Controllers/Profile/EditProfileViewController.xib; sourceTree = "<group>"; };
 		3A6E663718E54ED00085447D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3A96A4C0190943AA008CEEBD /* PaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewController.h; sourceTree = "<group>"; };
 		3A96A4C1190943AA008CEEBD /* PaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
@@ -329,6 +326,9 @@
 		6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		6E973C5119EB08E000926121 /* TravelWorldPassport copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TravelWorldPassport copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E973C5219EB08E100926121 /* TravelWorldPassport copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TravelWorldPassport copy-Info.plist"; path = "/Users/mzygar/Documents/Projekty/Australia/TWPapp/TravelWorldPassport/TravelWorldPassport copy-Info.plist"; sourceTree = "<absolute>"; };
+		6EB0FAD31C915A8F001E451C /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		6EB0FAD41C915A8F001E451C /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		6EB0FAD51C915A8F001E451C /* EditProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
 		6ED8B1A919F7AE7E0059DC59 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		8F1EFC9218D976EE00D1FE43 /* StampCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StampCell.h; path = "Controllers/Main View/StampCell.h"; sourceTree = "<group>"; };
 		8F1EFC9318D976EE00D1FE43 /* StampCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StampCell.m; path = "Controllers/Main View/StampCell.m"; sourceTree = "<group>"; };
@@ -541,16 +541,6 @@
 			name = "Main View";
 			sourceTree = "<group>";
 		};
-		3A6E363B18F2AB2100A88133 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				3A6E363C18F2AB4000A88133 /* EditProfileViewController.h */,
-				3A6E363D18F2AB4000A88133 /* EditProfileViewController.m */,
-				3A6E363E18F2AB4000A88133 /* EditProfileViewController.xib */,
-			);
-			name = Profile;
-			sourceTree = "<group>";
-		};
 		3A96A4BF19094398008CEEBD /* Payment */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,10 +651,10 @@
 		3A9A5EF018A0F691008034C6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6EB0FAD21C915A8F001E451C /* ProfileEdit */,
 				0EDCC455191762E70060AB28 /* Register */,
 				3A96A4BF19094398008CEEBD /* Payment */,
 				3A13547019064CA300D8A2E1 /* Checkout */,
-				3A6E363B18F2AB2100A88133 /* Profile */,
 				3A160BD118EEA99A0077B8C3 /* SingleStampView */,
 				8F844B4B18DAB66B0040DC7A /* NewStamp */,
 				3A63E38B18CF02930087189A /* Main View */,
@@ -743,6 +733,17 @@
 				23CF2285699EC31C37E71E44 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6EB0FAD21C915A8F001E451C /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				6EB0FAD31C915A8F001E451C /* EditProfileViewController.h */,
+				6EB0FAD41C915A8F001E451C /* EditProfileViewController.m */,
+				6EB0FAD51C915A8F001E451C /* EditProfileViewController.xib */,
+			);
+			name = ProfileEdit;
+			path = Controllers/ProfileEdit;
 			sourceTree = "<group>";
 		};
 		8F844B4B18DAB66B0040DC7A /* NewStamp */ = {
@@ -909,6 +910,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB0FAD81C915A8F001E451C /* EditProfileViewController.xib in Resources */,
 				0EA73A6C191CA923000FB97C /* DMResizerViewController.xib in Resources */,
 				8F844B5C18DAC3510040DC7A /* Intro Inline.otf in Resources */,
 				0EA73A70191CA923000FB97C /* instagram~ipad@2x.png in Resources */,
@@ -916,7 +918,6 @@
 				8F1EFC9618D9771100D1FE43 /* StampCell.xib in Resources */,
 				8F844B5B18DAC3510040DC7A /* BebasNeue.otf in Resources */,
 				0EA73A6E191CA923000FB97C /* instagram@2x.png in Resources */,
-				3A6E364018F2AB4000A88133 /* EditProfileViewController.xib in Resources */,
 				3A160BD618EEA9E00077B8C3 /* SingleStampViewController.xib in Resources */,
 				3A9A5EF618A0F6DA008034C6 /* TWPLoginViewController.xib in Resources */,
 				6E64511C19D495DD0000FF6D /* TemplateIcon2x.png in Resources */,
@@ -953,6 +954,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB0FAD91C915A8F001E451C /* EditProfileViewController.xib in Resources */,
 				6E973C3019EB08E000926121 /* DMResizerViewController.xib in Resources */,
 				6E973C3119EB08E000926121 /* Intro Inline.otf in Resources */,
 				6E973C3219EB08E000926121 /* instagram~ipad@2x.png in Resources */,
@@ -960,7 +962,6 @@
 				6E973C3419EB08E000926121 /* StampCell.xib in Resources */,
 				6E973C3519EB08E000926121 /* BebasNeue.otf in Resources */,
 				6E973C3619EB08E000926121 /* instagram@2x.png in Resources */,
-				6E973C3719EB08E000926121 /* EditProfileViewController.xib in Resources */,
 				6E973C3819EB08E000926121 /* SingleStampViewController.xib in Resources */,
 				6E973C3919EB08E000926121 /* TWPLoginViewController.xib in Resources */,
 				6E973C3A19EB08E000926121 /* TemplateIcon2x.png in Resources */,
@@ -1070,7 +1071,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E283DEC19232FD5002CA62F /* UIImage+UIImage_fixOrientation.m in Sources */,
-				3A6E363F18F2AB4000A88133 /* EditProfileViewController.m in Sources */,
 				0EDCC460191763010060AB28 /* RegisterViewController.m in Sources */,
 				3A13547B19064CC800D8A2E1 /* CheckoutViewController.m in Sources */,
 				0E0F3B6E191751D4006D6ED1 /* UIImage+Alpha.m in Sources */,
@@ -1092,6 +1092,7 @@
 				8F844B6B18DAD3B10040DC7A /* AVCamUtilities.m in Sources */,
 				8F844B6918DAD3B10040DC7A /* AVCamCaptureManager.m in Sources */,
 				3AE799AF190E10A5002C989C /* TWPShipping.m in Sources */,
+				6EB0FAD61C915A8F001E451C /* EditProfileViewController.m in Sources */,
 				8F844B4F18DAB6B40040DC7A /* NewStampViewController.m in Sources */,
 				3AB37A7418D0885300EFCDA2 /* NSData+MKBase64.m in Sources */,
 				0EA73A6B191CA923000FB97C /* DMResizerViewController.m in Sources */,
@@ -1131,7 +1132,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E973BF019EB08E000926121 /* UIImage+UIImage_fixOrientation.m in Sources */,
-				6E973BF119EB08E000926121 /* EditProfileViewController.m in Sources */,
 				6E973BF219EB08E000926121 /* RegisterViewController.m in Sources */,
 				6E973BF319EB08E000926121 /* CheckoutViewController.m in Sources */,
 				6E973BF419EB08E000926121 /* UIImage+Alpha.m in Sources */,
@@ -1153,6 +1153,7 @@
 				6E973C0419EB08E000926121 /* AVCamUtilities.m in Sources */,
 				6E973C0519EB08E000926121 /* AVCamCaptureManager.m in Sources */,
 				6E973C0619EB08E000926121 /* TWPShipping.m in Sources */,
+				6EB0FAD71C915A8F001E451C /* EditProfileViewController.m in Sources */,
 				6E973C0719EB08E000926121 /* NewStampViewController.m in Sources */,
 				6E973C0819EB08E000926121 /* NSData+MKBase64.m in Sources */,
 				6E973C0919EB08E000926121 /* DMResizerViewController.m in Sources */,
