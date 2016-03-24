@@ -4,15 +4,22 @@ PODS:
     - ARAnalytics/CoreIOS
     - GoogleAnalytics
   - Braintree (2.2.8)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
   - GoogleAnalytics (3.14.0)
 
 DEPENDENCIES:
   - ARAnalytics/GoogleAnalytics
   - Braintree (~> 2.2.8)
+  - Crashlytics
+  - Fabric
 
 SPEC CHECKSUMS:
   ARAnalytics: c23edc9467fd1830d5d54d763e11655b3b7041da
   Braintree: 2df656aee6b55443f214c43870363df9c6649737
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

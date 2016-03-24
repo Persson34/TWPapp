@@ -1,3 +1,5 @@
 platform :ios, '7.0'
 pod 'Braintree', '~>2.2.8'
 pod 'ARAnalytics/GoogleAnalytics'
+pod 'Fabric'
+pod 'Crashlytics'
