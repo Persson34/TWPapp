@@ -21,10 +21,11 @@
 #import "TWPEngine.h"
 #import "DataModels.h"
 #import "MBProgressHUD.h"
+#import <Stripe/Stripe.h>
 
 #define STAMP_COST 0.5 // 50 cents per stamp
 
-@interface PaymentViewController ()<BTPaymentFormViewDelegate,UITextFieldDelegate,VTClientDelegate,UIAlertViewDelegate>{
+@interface PaymentViewController () <BTPaymentFormViewDelegate, UITextFieldDelegate, VTClientDelegate, UIAlertViewDelegate, STPPaymentCardTextFieldDelegate> {
     
     
     __weak IBOutlet UITextField *postalCodeLabel;
@@ -38,12 +39,17 @@
     
     TWPShipping *currentShipping;
 }
+
+@property(nonatomic) STPPaymentCardTextField *paymentTextField;
+
 - (IBAction)goBackTapped:(id)sender;
 - (IBAction)payTapped:(id)sender;
 
 @end
 
 @implementation PaymentViewController
+
+#pragma mark - UIViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,21 +65,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [ARAnalytics pageView:@"Payment View"];
-
-    //  aPaymentForm.frame = CGRectMake(0, 0, 320, 40);
-    self.navigationItem.title = @"Purchase";
-    payLabel.font = [UIFont fontWithName:@"LucidaGrande" size:19.0f];
-    payBtn.enabled = NO;
-    [bgScrollView setContentSize:CGSizeMake(320, 700)];
-    self.aPaymentForm = [BTPaymentFormView paymentFormView];
-    self.aPaymentForm.delegate = self;
-    self.aPaymentForm.requestsZip =NO;//self.requestsZipInManualCardEntry;
-    self.aPaymentForm.backgroundColor = [UIColor clearColor];
-    self.aPaymentForm.UKSupportEnabled = YES;//self.UKSupportEnabled;
-    [bgScrollView addSubview:self.aPaymentForm];
-    [self.aPaymentForm setOrigin:CGPointMake(10, 105)];
     
-    [self.aPaymentForm.cardNumberTextField becomeFirstResponder];
+    self.paymentTextField = [[STPPaymentCardTextField alloc] initWithFrame:CGRectMake(15, 107, CGRectGetWidth(self.view.frame) - 30, 44)];
+    self.paymentTextField.delegate = self;
+    [bgScrollView addSubview:self.paymentTextField];
    
     // Configure a tool bar for postalcode since its number input
     UIToolbar *aToolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
@@ -85,15 +80,12 @@
     postalCodeLabel.inputAccessoryView = aToolBar;
     payLabel.text = [NSString stringWithFormat:@"PAY $%0.2f",[self.stampsToOrder count]*0.5f];
     [VTClient sharedVTClient].delegate = self;
-    
-    self.aPaymentForm.cardNumberTextField.inputAccessoryView = aToolBar;
-    self.aPaymentForm.monthYearTextField.inputAccessoryView = aToolBar;
-//    self.aPaymentForm.zipTextField.inputAccessoryView  = aToolBar;
+
     // Get user shipping address
     // Get the user address from the site.
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    if([TWPShipping getStoredShippingDict]==nil){
+    if ([TWPShipping getStoredShippingDict]==nil){
         // Call , get and store the shipping address
         [[TWPEngine sharedEngine]getUserAddress:[NSString stringWithFormat:@"%d",(int)self.currentUser.userId] onCompletion:^(NSData *responseString, NSError *theError) {
             
@@ -105,84 +97,12 @@
             });
         }];
     }
-    else{
+    else
+    {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         currentShipping = [TWPShipping getStoredShippingDict];
         [self configureAddressElements];
     }
-    
-//    
-//    
-//    [[TWPEngine sharedEngine]getUserAddress:[NSString stringWithFormat:@"%d",(int)self.currentUser.userId]  onCompletion:^(NSData *responseString, NSError *theError) {
-//        if (theError) {
-//            NSLog(@"Error getting the data");
-//        }
-//        else{
-//            
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//                NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
-//                currentShipping = [TWPShipping modelObjectWithDictionary:respDict];
-//                [self configureAddressElements];
-//            });
-//            
-//        }
-//    }];
-    
-}
-
--(void)viewDidAppear:(BOOL)animated{
-   // Log all stamp ids
- 
-    
-}
--(void)configureAddressElements{
-    address1Label.text = currentShipping.addressOne;
-    address2Label.text = currentShipping.addressTwo;
-    cityLabel.text = currentShipping.city;
-    stateLabel.text = currentShipping.state;
-    postalCodeLabel.text = currentShipping.postalCode;
-}
-#pragma mark - Payment Form delegate methods
-- (void)paymentFormView:(BTPaymentFormView *)paymentFormView didModifyCardInformationWithValidity:(BOOL)isValid{
-    if (isValid) {
-        NSLog(@"Entered valid credit card info");
-        [paymentFormView.zipTextField resignFirstResponder];
-        postalCodeLabel.text = paymentFormView.zipTextField.text;
-        [address1Label becomeFirstResponder];
-        
-    }
-    payBtn.enabled = isValid;
-}
-
-#pragma mark -UITextField Delegate methods
-
--(void)doneTapped{
-    [postalCodeLabel resignFirstResponder];
-    [self.aPaymentForm.cardNumberTextField resignFirstResponder];
-    [self.aPaymentForm.monthYearTextField resignFirstResponder];
-    [self.aPaymentForm.zipTextField resignFirstResponder];
-}
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == cityLabel || textField == stateLabel|| textField== address2Label) {
-         // Shift the scroll view a little up
-        [bgScrollView setContentOffset:CGPointMake(0, 95)];
-    }
-    if (textField == postalCodeLabel) {
-        // Shift another level up
-         [bgScrollView setContentOffset:CGPointMake(0, 200)];// Keyboard and tool bar also
-    }
-}
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField == cityLabel || textField == stateLabel || textField == postalCodeLabel) {
-        [bgScrollView setContentOffset:CGPointMake(0, 0)];
-    }
-    [textField resignFirstResponder];
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -191,40 +111,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UIButton Methods
+#pragma mark - Helpers
+
+-(void)configureAddressElements{
+    address1Label.text = currentShipping.addressOne;
+    address2Label.text = currentShipping.addressTwo;
+    cityLabel.text = currentShipping.city;
+    stateLabel.text = currentShipping.state;
+    postalCodeLabel.text = currentShipping.postalCode;
+}
+
+-(void)doneTapped{
+    [postalCodeLabel resignFirstResponder];
+}
 
 - (IBAction)goBackTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)payTapped:(id)sender {
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    // This is where the action goes.
-    NSDictionary *cardInfo = [self.aPaymentForm cardEntry];
-    NSDictionary *cardInfoEncrypted;
-   cardInfoEncrypted =  [[VTClient sharedVTClient]encryptedCardDataAndVenmoSDKSessionWithCardDictionary:cardInfo];
-    // amount
-    // payment_method_code
-    NSString *amount = [NSString stringWithFormat:@"%0.1f",[self.stampsToOrder count]*STAMP_COST];
-    NSDictionary *params = @{@"amount":amount,@"payment_method_code":cardInfoEncrypted};
-    [cardInfoEncrypted setValue:amount forKey:@"amount"];
-    [[TWPEngine sharedEngine]savePaymentInformation:cardInfoEncrypted onCompletion:^(NSData *responseString, NSError *theError) {
-        NSString *resp = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
-        NSLog(@"Response is %@",resp);
-        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
-        if ([[[responseDict objectForKey:@"response"]objectForKey:@"success"]isEqualToNumber:@1]) {
-            NSLog(@"Transaction was successful");
-          
-            [self sendAndPlaceOrder];
-        }
-    }];
-    
-}
-
 -(void)sendAndPlaceOrder{
-
-//     beat.test.travelworldpassport.com/app_dev.php/nl/app/placeorder
+    
+    //     beat.test.travelworldpassport.com/app_dev.php/nl/app/placeorder
     // userid
     // stamps (ids array)
     NSArray *stamIdArray=  [self.stampsToOrder valueForKeyPath:@"stampId"];
@@ -244,19 +151,134 @@
             UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"Something went wrong with your order." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [anAlert show];
         }
-//        NSString *resp = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
-       
+        //        NSString *resp = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
+        
     }];
 }
 
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    NSArray *vcArray = [self.navigationController viewControllers];
+#pragma mark - Payment Form delegate methods
+
+- (void)paymentFormView:(BTPaymentFormView *)paymentFormView didModifyCardInformationWithValidity:(BOOL)isValid{
+    if (isValid) {
+        NSLog(@"Entered valid credit card info");
+        [paymentFormView.zipTextField resignFirstResponder];
+        postalCodeLabel.text = paymentFormView.zipTextField.text;
+        [address1Label becomeFirstResponder];
+        
+    }
+    payBtn.enabled = isValid;
+}
+
+#pragma mark - UITextFieldDelegate
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField == cityLabel || textField == stateLabel|| textField== address2Label) {
+         // Shift the scroll view a little up
+        [bgScrollView setContentOffset:CGPointMake(0, 95)];
+    }
+    if (textField == postalCodeLabel) {
+        // Shift another level up
+         [bgScrollView setContentOffset:CGPointMake(0, 200)];// Keyboard and tool bar also
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField == cityLabel || textField == stateLabel || textField == postalCodeLabel) {
+        [bgScrollView setContentOffset:CGPointMake(0, 0)];
+    }
+    [textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+/******************************************************** STRIPE ********************************************************/
+
+#pragma mark - Stripe
+
+- (IBAction)payTapped:(id)sender {
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [[STPAPIClient sharedClient] createTokenWithCard:self.paymentTextField.cardParams completion:^(STPToken *token, NSError *error) {
+        if (error)
+        {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+        else
+        {
+            [self createBackendChargeWithToken:token completion:^(BOOL success) {
+                if (success)
+                {
+                    [self sendAndPlaceOrder];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    NSLog(@"SUCCESS");
+                }
+                else
+                {
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
+                }
+            }];
+         }
+     }];
+}
+
+
+- (void)createBackendChargeWithToken:(STPToken *)token completion:(void (^)(BOOL success))completion {
+    // This passes the token off to our payment backend, which will then actually complete charging the card using your Stripe account's secret key
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    
+    NSString *urlString = [@"http://testtravelworldpassport.herokuapp.com" stringByAppendingPathComponent:@"charge"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.HTTPMethod = @"POST";
+    NSString *postBody = [NSString stringWithFormat:@"stripeToken=%@&amount=%@", token.tokenId, @1000];
+    NSData *data = [postBody dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request
+                                                               fromData:data
+                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                          NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                          
+                                                          if (!error && httpResponse.statusCode != 200)
+                                                          {
+                                                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
+                                                              error = [NSError errorWithDomain:StripeDomain
+                                                                                          code:STPInvalidRequestError
+                                                                                      userInfo:@{NSLocalizedDescriptionKey: @"There was an error connecting to your payment backend."}];
+                                                          }
+                                                          
+                                                          if (!error)
+                                                          {
+                                                              completion(YES);
+                                                          }
+                                                          else
+                                                          {
+                                                              completion(NO);
+                                                          }
+                                                      }];
+    
+    [uploadTask resume];
+}
+
+#pragma mark STPPaymentCardTextFieldDelegate
+
+- (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField {
+    // Toggle navigation, for example
+}
+
+/***********************************************************************************************************************/
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    NSArray *vcArray = [self.navigationController viewControllers];
     [self.navigationController popToViewController:[vcArray objectAtIndex:1] animated:YES];
 }
 
-
-- (void)client:(VTClient *)client approvedPaymentMethodWithCode:(NSString *)paymentMethodCode {
-    NSLog(@"Payment code %@",paymentMethodCode);
-}
 @end
