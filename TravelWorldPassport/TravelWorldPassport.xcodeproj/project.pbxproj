@@ -319,7 +319,7 @@
 		3AE799A6190E10A0002C989C /* TWPShipping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWPShipping.h; sourceTree = "<group>"; };
 		3AE799AE190E10A5002C989C /* TWPShipping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPShipping.m; sourceTree = "<group>"; };
 		6311E4969CAE4CFA9E6DC220 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E64511919D495DD0000FF6D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		6E64511919D495DD0000FF6D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6E64511A19D495DD0000FF6D /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		6E973C5119EB08E000926121 /* TravelWorldPassport copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TravelWorldPassport copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E973C5219EB08E100926121 /* TravelWorldPassport copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TravelWorldPassport copy-Info.plist"; path = "/Users/mzygar/Documents/Projekty/Australia/TWPapp/TravelWorldPassport/TravelWorldPassport copy-Info.plist"; sourceTree = "<absolute>"; };
