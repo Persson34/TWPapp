@@ -66,6 +66,11 @@
     // Do any additional setup after loading the view from its nib.
     [ARAnalytics pageView:@"Payment View"];
     
+    self.navigationItem.title = @"Purchase";
+    payLabel.font = [UIFont fontWithName:@"LucidaGrande" size:19.0f];
+    payBtn.enabled = NO;
+    [bgScrollView setContentSize:CGSizeMake(320, 700)];
+    
     self.paymentTextField = [[STPPaymentCardTextField alloc] initWithFrame:CGRectMake(15, 107, CGRectGetWidth(self.view.frame) - 30, 44)];
     _paymentTextField.delegate = self;
     [bgScrollView addSubview:_paymentTextField];
@@ -81,6 +86,8 @@
     payLabel.text = [NSString stringWithFormat:@"PAY $%0.2f",[self.stampsToOrder count]*0.5f];
 //    [VTClient sharedVTClient].delegate = self;
 
+    _paymentTextField.inputAccessoryView = aToolBar;
+    
     // Get user shipping address
     // Get the user address from the site.
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -105,6 +112,8 @@
     }
     
     [_paymentTextField becomeFirstResponder];
+    
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +123,10 @@
 }
 
 #pragma mark - Helpers
+
+- (void)hideKeyboard {
+    [self.view endEditing:YES];
+}
 
 -(void)configureAddressElements{
     address1Label.text = currentShipping.addressOne;
@@ -125,6 +138,7 @@
 
 -(void)doneTapped{
     [postalCodeLabel resignFirstResponder];
+    [_paymentTextField resignFirstResponder];
 }
 
 - (IBAction)goBackTapped:(id)sender {
@@ -176,7 +190,7 @@
 #pragma mark - UITextFieldDelegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == cityLabel || textField == stateLabel|| textField== address2Label) {
+    if (textField == cityLabel || textField == stateLabel|| textField== address2Label || textField== address1Label) {
          // Shift the scroll view a little up
         [bgScrollView setContentOffset:CGPointMake(0, 95)];
     }
@@ -240,7 +254,9 @@
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
-    NSString *postBody = [NSString stringWithFormat:@"stripeToken=%@&amount=%@", token.tokenId, @1000];
+    
+    //multiplied by 100 to convert dollars into cents
+    NSString *postBody = [NSString stringWithFormat:@"stripeToken=%@&amount=%@", token.tokenId, @([self.stampsToOrder count]*STAMP_COST*100)];
     NSData *data = [postBody dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request
@@ -272,8 +288,42 @@
 
 #pragma mark STPPaymentCardTextFieldDelegate
 
+/**
+ *  Called when either the card number, expiration, or CVC changes. At this point, one can call -isValid on the text field to determine, for example, whether or not to enable a button to submit the form. Example:
+ 
+ - (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField {
+ self.paymentButton.enabled = textField.isValid;
+ }
+ 
+ *
+ *  @param textField the text field that has changed
+ */
 - (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField {
-    // Toggle navigation, for example
+    if (textField.isValid) {
+        [address1Label becomeFirstResponder];
+        payBtn.enabled = YES;
+    }
+}
+
+/**
+ *  Called when editing begins in the payment card field's number field.
+ */
+- (void)paymentCardTextFieldDidBeginEditingNumber:(nonnull STPPaymentCardTextField *)textField {
+    
+}
+
+/**
+ *  Called when editing begins in the payment card field's CVC field.
+ */
+- (void)paymentCardTextFieldDidBeginEditingCVC:(nonnull STPPaymentCardTextField *)textField {
+
+}
+
+/**
+ *  Called when editing begins in the payment card field's expiration field.
+ */
+- (void)paymentCardTextFieldDidBeginEditingExpiration:(nonnull STPPaymentCardTextField *)textField {
+    
 }
 
 /***********************************************************************************************************************/
