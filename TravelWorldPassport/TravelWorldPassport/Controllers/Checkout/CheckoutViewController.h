@@ -8,15 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DataModels.h"
-#import "BTPaymentViewController.h"
 
-@interface CheckoutViewController : UIViewController<BTPaymentViewControllerDelegate>
+@interface CheckoutViewController : UIViewController 
 {
     
 }
 
 @property (nonatomic, assign) int selectedStampNo;
 @property (nonatomic,strong)TWPUser *currentUser;
-@property (nonatomic, strong) BTPaymentViewController *paymentViewController;
 
 @end

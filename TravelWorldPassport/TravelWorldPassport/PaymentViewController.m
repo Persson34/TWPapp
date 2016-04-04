@@ -25,7 +25,7 @@
 
 #define STAMP_COST 0.5 // 50 cents per stamp
 
-@interface PaymentViewController () <BTPaymentFormViewDelegate, UITextFieldDelegate, VTClientDelegate, UIAlertViewDelegate, STPPaymentCardTextFieldDelegate> {
+@interface PaymentViewController () <UITextFieldDelegate, UIAlertViewDelegate, STPPaymentCardTextFieldDelegate> {
     
     
     __weak IBOutlet UITextField *postalCodeLabel;
@@ -67,8 +67,8 @@
     [ARAnalytics pageView:@"Payment View"];
     
     self.paymentTextField = [[STPPaymentCardTextField alloc] initWithFrame:CGRectMake(15, 107, CGRectGetWidth(self.view.frame) - 30, 44)];
-    self.paymentTextField.delegate = self;
-    [bgScrollView addSubview:self.paymentTextField];
+    _paymentTextField.delegate = self;
+    [bgScrollView addSubview:_paymentTextField];
    
     // Configure a tool bar for postalcode since its number input
     UIToolbar *aToolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
@@ -79,7 +79,7 @@
     [aToolBar setItems:@[flexSpace, toolBarItem]];
     postalCodeLabel.inputAccessoryView = aToolBar;
     payLabel.text = [NSString stringWithFormat:@"PAY $%0.2f",[self.stampsToOrder count]*0.5f];
-    [VTClient sharedVTClient].delegate = self;
+//    [VTClient sharedVTClient].delegate = self;
 
     // Get user shipping address
     // Get the user address from the site.
@@ -103,6 +103,8 @@
         currentShipping = [TWPShipping getStoredShippingDict];
         [self configureAddressElements];
     }
+    
+    [_paymentTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,6 +158,7 @@
     }];
 }
 
+/*
 #pragma mark - Payment Form delegate methods
 
 - (void)paymentFormView:(BTPaymentFormView *)paymentFormView didModifyCardInformationWithValidity:(BOOL)isValid{
@@ -168,6 +171,7 @@
     }
     payBtn.enabled = isValid;
 }
+ */
 
 #pragma mark - UITextFieldDelegate
 
@@ -202,7 +206,7 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [[STPAPIClient sharedClient] createTokenWithCard:self.paymentTextField.cardParams completion:^(STPToken *token, NSError *error) {
+    [[STPAPIClient sharedClient] createTokenWithCard:_paymentTextField.cardParams completion:^(STPToken *token, NSError *error) {
         if (error)
         {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

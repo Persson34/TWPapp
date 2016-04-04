@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BTPaymentFormView.h"
-#import <VenmoTouch/VenmoTouch.h>
 #import "DataModels.h"
 @interface PaymentViewController : UIViewController
-@property (nonatomic,strong)BTPaymentFormView *aPaymentForm;;
 @property (nonatomic,strong)TWPUser *currentUser;
 @property (nonatomic,strong)NSMutableArray *stampsToOrder;
 @end

@@ -12,7 +12,6 @@
 #import "MFSideMenuContainerViewController.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "ImageDownloadEngine.h"
-#import <VenmoTouch/VenmoTouch.h>
 #import "TWPEngine.h"
 #import "DataModels.h"
 #import "MainViewController.h"
@@ -64,7 +63,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
     }
     [UIImageView setDefaultEngine:[ImageDownloadEngine sharedEngine]];
     //[self addDummyAddress];
-    [self initVTClient];
+//    [self initVTClient];
 //    [self printAllFonts];
 //    [[UIApplication sharedApplication]setStatusBarHidden:YES];
     // Facebook thing
@@ -121,7 +120,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
     [self showLogin];
 }
 
-
+/*
 - (void)initVTClient {
     if ([BT_ENVIRONMENT isEqualToString:@"sandbox"]) {
         NSLog(@"sandbox environment, merchant_id %@", BT_SANDBOX_MERCHANT_ID);
@@ -139,6 +138,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
          environment:VTEnvironmentSandbox];
     }
 }
+ */
 
 #pragma mark - PrintFonts
 -(void)printAllFonts{
