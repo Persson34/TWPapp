@@ -255,14 +255,14 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     
-    NSURL *url = [NSURL URLWithString:kTestServerURL];
+    NSURL *url = [NSURL URLWithString:kLiveServerURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     
     //multiplied by 100 to convert dollars into cents
     //NSString *testPostBody = [NSString stringWithFormat:@"stripeToken=%@&amount=%@", token.tokenId, @([self.stampsToOrder count]*STAMP_COST*100)];
     
-    NSString *livePostBody = [NSString stringWithFormat:@"user_id=%@stripe_token=%@&amount=%@", @(self.currentUser.userId), token.tokenId, @([self.stampsToOrder count]*STAMP_COST)];
+    NSString *livePostBody = [NSString stringWithFormat:@"user_id=%@&stripe_token=%@&cost=%@", @(self.currentUser.userId), token.tokenId, @([self.stampsToOrder count]*STAMP_COST)];
 
     NSData *data = [livePostBody dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -279,6 +279,10 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
                                                               error = [NSError errorWithDomain:StripeDomain
                                                                                           code:STPInvalidRequestError
                                                                                       userInfo:@{NSLocalizedDescriptionKey: @"There was an error connecting to your payment backend."}];
+                                                              
+                                                              NSLog(@"%@\n%@", httpResponse, error);
+                                                              
+                                                              completion(NO);
                                                           }
                                                           
                                                           if (!error)
@@ -287,7 +291,12 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
                                                           }
                                                           else
                                                           {
-                                                              [[[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                                  [[[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                                                              });
+                                                              
+                                                              NSLog(@"%@\n%@", httpResponse, error);
+                                                              
                                                               completion(NO);
                                                           }
                                                       }];

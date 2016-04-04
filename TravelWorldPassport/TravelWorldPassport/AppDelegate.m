@@ -20,7 +20,8 @@
 #import <Stripe/Stripe.h>
 
 static NSString* const kUserProfileKey=@"kUserProfileKey";
-static NSString* const kStripeTestKey=@"pk_test_Winqv9mEOSROfFdbHxwPts1K";
+static NSString* const kStripeDeveloperTestKey=@"pk_test_Winqv9mEOSROfFdbHxwPts1K";
+static NSString* const kStripeTestKey=@"pk_test_YkQiDre7NJuGQFjIG6g9OkgX";
 static NSString* const kStripeLiveKey=@"pk_live_lAC0ZBRgQkahLq6qZloahz5w";
 
 @interface AppDelegate()
