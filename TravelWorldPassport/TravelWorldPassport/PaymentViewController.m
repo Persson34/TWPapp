@@ -25,6 +25,10 @@
 
 #define STAMP_COST 0.5 // 50 cents per stamp
 
+static NSString* const kTestServerURL=@"http://testtravelworldpassport.herokuapp.com/charge";
+static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webapp/nl/app/createStripePayment";
+
+
 @interface PaymentViewController () <UITextFieldDelegate, UIAlertViewDelegate, STPPaymentCardTextFieldDelegate> {
     
     
@@ -224,6 +228,7 @@
         if (error)
         {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [[[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
         else
         {
@@ -237,7 +242,7 @@
                 else
                 {
                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
+                
                 }
             }];
          }
@@ -250,18 +255,21 @@
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     
-    NSString *urlString = [@"http://testtravelworldpassport.herokuapp.com" stringByAppendingPathComponent:@"charge"];
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [NSURL URLWithString:kTestServerURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
     
     //multiplied by 100 to convert dollars into cents
-    NSString *postBody = [NSString stringWithFormat:@"stripeToken=%@&amount=%@", token.tokenId, @([self.stampsToOrder count]*STAMP_COST*100)];
-    NSData *data = [postBody dataUsingEncoding:NSUTF8StringEncoding];
+    //NSString *testPostBody = [NSString stringWithFormat:@"stripeToken=%@&amount=%@", token.tokenId, @([self.stampsToOrder count]*STAMP_COST*100)];
+    
+    NSString *livePostBody = [NSString stringWithFormat:@"user_id=%@stripe_token=%@&amount=%@", @(self.currentUser.userId), token.tokenId, @([self.stampsToOrder count]*STAMP_COST)];
+
+    NSData *data = [livePostBody dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request
                                                                fromData:data
                                                       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                          
                                                           NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                                                           
                                                           if (!error && httpResponse.statusCode != 200)
@@ -279,6 +287,7 @@
                                                           }
                                                           else
                                                           {
+                                                              [[[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                                                               completion(NO);
                                                           }
                                                       }];

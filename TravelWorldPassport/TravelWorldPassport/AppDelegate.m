@@ -20,6 +20,8 @@
 #import <Stripe/Stripe.h>
 
 static NSString* const kUserProfileKey=@"kUserProfileKey";
+static NSString* const kStripeTestKey=@"pk_test_Winqv9mEOSROfFdbHxwPts1K";
+static NSString* const kStripeLiveKey=@"pk_live_lAC0ZBRgQkahLq6qZloahz5w";
 
 @interface AppDelegate()
 {
@@ -80,9 +82,10 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
                                       }];
     }
     [ARAnalytics setupGoogleAnalyticsWithID:@"UA-34990766-3"];
+    
     [Crashlytics startWithAPIKey:@"c5af9152500a53488ccbf8f3dadd2ed418c66d28"];
     
-    [Stripe setDefaultPublishableKey:@"pk_test_Winqv9mEOSROfFdbHxwPts1K"];
+    [Stripe setDefaultPublishableKey:kStripeLiveKey];
     
     return YES;
 }
