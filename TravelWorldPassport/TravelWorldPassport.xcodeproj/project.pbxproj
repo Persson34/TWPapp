@@ -866,6 +866,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Chirag Patel";
 				TargetAttributes = {
+					3A9A5EBD18A0F682008034C6 = {
+						DevelopmentTeam = H7L45B2MKJ;
+					};
 					3A9A5ED818A0F682008034C6 = {
 						DevelopmentTeam = H7L45B2MKJ;
 						TestTargetID = 3A9A5EBD18A0F682008034C6;
@@ -1034,7 +1037,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}\"/Fabric/run c5af9152500a53488ccbf8f3dadd2ed418c66d28 d9ddbfbf86d988d4d63e3b1579b986990b5350ab76e064f5710730cf2b8bfc0a";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6026472b66f186312a16422f0dca610587e09b43 cc6feeffa95f39dfdd21a916f8aa9805fcf450372a49969f8423aad37c9fb461";
 		};
 		81A08902B82C2FC26BD96348 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1296,8 +1299,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Kid (K372L26N44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Kid (K372L26N44)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1322,7 +1325,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boydlee.twp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "01e127be-9987-4db3-99be-1509968be112";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1335,8 +1338,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Kid (K372L26N44)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Kid (K372L26N44)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1361,7 +1364,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boydlee.twp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "01e127be-9987-4db3-99be-1509968be112";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};

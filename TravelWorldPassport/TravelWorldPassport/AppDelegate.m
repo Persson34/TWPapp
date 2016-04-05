@@ -17,6 +17,7 @@
 #import "MainViewController.h"
 #import "ARAnalytics.h"
 #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
 #import <Stripe/Stripe.h>
 
 static NSString* const kUserProfileKey=@"kUserProfileKey";
@@ -87,6 +88,8 @@ static NSString* const kStripeLiveKey=@"pk_live_lAC0ZBRgQkahLq6qZloahz5w";
     [Crashlytics startWithAPIKey:@"c5af9152500a53488ccbf8f3dadd2ed418c66d28"];
     
     [Stripe setDefaultPublishableKey:kStripeLiveKey];
+    
+    [Fabric with:@[[STPAPIClient class]]];
     
     return YES;
 }
