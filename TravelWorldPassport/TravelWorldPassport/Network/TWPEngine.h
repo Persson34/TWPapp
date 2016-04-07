@@ -25,6 +25,7 @@ typedef void (^TWPResponse)(NSData* responseString,NSError *theError);
 -(void)updateShippingAddress:(NSDictionary*)shippingDetails onCompletion:(TWPResponse)theResponse;
 
 -(void)savePaymentInformation:(NSDictionary*)paramDict onCompletion:(TWPResponse)theResponse;
+-(void)createBackendChargeWithParameters:(NSDictionary*)orderParams onCompletion:(TWPResponse)theResponse;
 -(void)placeAndSaveOrder:(NSDictionary*)orderParams onCompletion:(TWPResponse)theResponse;
 -(void)registerUser:(NSDictionary *)userDictionary picture:(UIImage*)profileImage onCompletion:(TWPResponse)theResponse;
 -(void)deleteStampWithId:(NSString *)stampId onCompletion:(TWPResponse)theResponse;

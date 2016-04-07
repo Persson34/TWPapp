@@ -228,21 +228,19 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
         if (error)
         {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [[[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            [[[UIAlertView alloc]initWithTitle:@"Error while creating token!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
         else
         {
             [self createBackendChargeWithToken:token completion:^(BOOL success) {
+                
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
                 if (success)
                 {
                     [self sendAndPlaceOrder];
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    
                     NSLog(@"SUCCESS");
-                }
-                else
-                {
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                
                 }
             }];
          }
@@ -251,6 +249,33 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
 
 
 - (void)createBackendChargeWithToken:(STPToken *)token completion:(void (^)(BOOL success))completion {
+    NSDictionary *params = @{@"user_id":@(self.currentUser.userId),@"stripe_token":token.tokenId,@"cost":@([self.stampsToOrder count]*STAMP_COST)};
+    
+    [[TWPEngine sharedEngine] createBackendChargeWithParameters:params onCompletion:^(NSData *responseString, NSError *theError) {
+        NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
+        if ([[respDict objectForKey:@"meta"] isEqualToString:@"OK"])
+        {
+            completion(YES);
+        }
+        else
+        {
+            NSString *errorMessage = [NSString stringWithFormat:@"Backend code %@. ", respDict[@"code"]];
+            if (respDict[@"error_msg"])
+            {
+                errorMessage = [errorMessage stringByAppendingString:respDict[@"error_msg"]];
+            }
+            
+            [[[UIAlertView alloc]initWithTitle:@"Error while backend charging!"
+                                       message:errorMessage
+                                      delegate:nil
+                             cancelButtonTitle:@"OK"
+                             otherButtonTitles:nil] show];
+
+            completion(NO);
+        }
+    }];
+    
+    /*
     // This passes the token off to our payment backend, which will then actually complete charging the card using your Stripe account's secret key
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
@@ -270,38 +295,49 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
                                                                fromData:data
                                                       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                           
-                                                          NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                                          
-                                                          if (!error && httpResponse.statusCode != 200)
-                                                          {
-                                                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
-                                                              error = [NSError errorWithDomain:StripeDomain
-                                                                                          code:STPInvalidRequestError
-                                                                                      userInfo:@{NSLocalizedDescriptionKey: @"There was an error connecting to your payment backend."}];
-                                                              
-                                                              NSLog(@"%@\n%@", httpResponse, error);
-                                                              
-                                                              completion(NO);
-                                                          }
+                                                          NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                                                           
                                                           if (!error)
                                                           {
-                                                              completion(YES);
+                                                              if (httpResponse.statusCode == 200)
+                                                              {
+                                                                  completion(YES);
+                                                              }
+                                                              else
+                                                              {
+                                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                                      
+                                                                      [[[UIAlertView alloc]initWithTitle:@"Error while backend charging!"
+                                                                                                 message:[NSString stringWithFormat:@"Responce code %ld", (long)httpResponse.statusCode]
+                                                                                                delegate:nil
+                                                                                       cancelButtonTitle:@"OK"
+                                                                                       otherButtonTitles:nil] show];
+                                                                      
+                                                                  });
+                                                                  
+                                                                  completion(NO);
+                                                              }
                                                           }
                                                           else
                                                           {
                                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                                  [[[UIAlertView alloc]initWithTitle:@"Error!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                                                              });
+
+                                                                  [[[UIAlertView alloc]initWithTitle:@"Error while backend charging!"
+                                                                                             message:error.localizedDescription
+                                                                                            delegate:nil
+                                                                                   cancelButtonTitle:@"OK"
+                                                                                   otherButtonTitles:nil] show];
                                                               
-                                                              NSLog(@"%@\n%@", httpResponse, error);
+                                                              });
                                                               
                                                               completion(NO);
                                                           }
                                                       }];
     
     [uploadTask resume];
+    */
 }
 
 #pragma mark STPPaymentCardTextFieldDelegate

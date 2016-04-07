@@ -131,6 +131,19 @@ static NSString const* API_ROOT= @"http://www.travelworldpassport.com/webapp/nl/
     [self enqueueOperation:op];
 }
 
+-(void)createBackendChargeWithParameters:(NSDictionary*)orderParams onCompletion:(TWPResponse)theResponse{
+    
+    MKNetworkOperation *op = [self operationWithURLString:@"createStripePayment" params:orderParams httpMethod:@"POST"];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        theResponse([completedOperation responseData],nil);
+    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        [ARAnalytics error:error withMessage:@"Backend charge error"];
+        theResponse(nil,error);
+    }];
+    
+    [self enqueueOperation:op];
+}
+
 -(void)placeAndSaveOrder:(NSDictionary*)orderParams onCompletion:(TWPResponse)theResponse{
 
     MKNetworkOperation *op = [self operationWithURLString:@"placeorder" params:orderParams httpMethod:@"POST"];
