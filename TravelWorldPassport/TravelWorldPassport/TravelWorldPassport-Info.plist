@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.boydlee.twp</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -34,11 +34,39 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.5</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>6026472b66f186312a16422f0dca610587e09b43</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>publishable</key>
+					<string>Stripe API Publishable Key</string>
+				</dict>
+				<key>KitName</key>
+				<string>STPAPIClient</string>
+			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>140264042785042</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need to know your location to place your stamps!</string>
 	<key>UIAppFonts</key>

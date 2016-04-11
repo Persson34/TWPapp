@@ -12,14 +12,18 @@
 #import "MFSideMenuContainerViewController.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "ImageDownloadEngine.h"
-#import <VenmoTouch/VenmoTouch.h>
 #import "TWPEngine.h"
 #import "DataModels.h"
 #import "MainViewController.h"
 #import "ARAnalytics.h"
 #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Stripe/Stripe.h>
 
 static NSString* const kUserProfileKey=@"kUserProfileKey";
+static NSString* const kStripeDeveloperTestKey=@"pk_test_Winqv9mEOSROfFdbHxwPts1K";
+static NSString* const kStripeTestKey=@"pk_test_YkQiDre7NJuGQFjIG6g9OkgX";
+static NSString* const kStripeLiveKey=@"pk_live_lAC0ZBRgQkahLq6qZloahz5w";
 
 @interface AppDelegate()
 {
@@ -63,7 +67,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
     }
     [UIImageView setDefaultEngine:[ImageDownloadEngine sharedEngine]];
     //[self addDummyAddress];
-    [self initVTClient];
+//    [self initVTClient];
 //    [self printAllFonts];
 //    [[UIApplication sharedApplication]setStatusBarHidden:YES];
     // Facebook thing
@@ -80,7 +84,12 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
                                       }];
     }
     [ARAnalytics setupGoogleAnalyticsWithID:@"UA-34990766-3"];
+    
     [Crashlytics startWithAPIKey:@"c5af9152500a53488ccbf8f3dadd2ed418c66d28"];
+    
+    [Stripe setDefaultPublishableKey:kStripeLiveKey];
+    
+    [Fabric with:@[[STPAPIClient class]]];
     
     return YES;
 }
@@ -118,7 +127,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
     [self showLogin];
 }
 
-
+/*
 - (void)initVTClient {
     if ([BT_ENVIRONMENT isEqualToString:@"sandbox"]) {
         NSLog(@"sandbox environment, merchant_id %@", BT_SANDBOX_MERCHANT_ID);
@@ -136,6 +145,7 @@ static NSString* const kUserProfileKey=@"kUserProfileKey";
          environment:VTEnvironmentSandbox];
     }
 }
+ */
 
 #pragma mark - PrintFonts
 -(void)printAllFonts{

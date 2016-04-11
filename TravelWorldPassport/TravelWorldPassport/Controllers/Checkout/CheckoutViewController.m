@@ -162,11 +162,13 @@
 // NB: you receive raw, unencrypted info in the `cardInfo` dictionary, but
 // for easy PCI Compliance, you should use the `cardInfoEncrypted` dictionary
 // to securely pass data through your servers to the Braintree Gateway.
+/*
 - (void)paymentViewController:(BTPaymentViewController *)paymentViewController
         didSubmitCardWithInfo:(NSDictionary *)cardInfo
          andCardInfoEncrypted:(NSDictionary *)cardInfoEncrypted {
     NSLog(@"didSubmitCardWithInfo %@ andCardInfoEncrypted %@", cardInfo, cardInfoEncrypted);
     [self saveCardInfoToServer:cardInfoEncrypted];
+    
   //  [self savePaymentInfoToServer:cardInfoEncrypted]; // send card through your server to Braintree Gateway
     //       [[VTClient sharedVTClient] refresh];
     //    [self dismissViewControllerAnimated:YES completion:^(void) {
@@ -179,6 +181,7 @@
 // When a user adds a saved card from Venmo Touch to your app, the BTPaymentViewController sends you
 // a paymentMethodCode that you can pass through your servers to the Braintree Gateway to
 // add the full card details to your Vault.
+
 - (void)paymentViewController:(BTPaymentViewController *)paymentViewController
 didAuthorizeCardWithPaymentMethodCode:(NSString *)paymentMethodCode {
     NSLog(@"didAuthorizeCardWithPaymentMethodCode %@", paymentMethodCode);
@@ -188,6 +191,7 @@ didAuthorizeCardWithPaymentMethodCode:(NSString *)paymentMethodCode {
                                                                           forKey:@"payment_method_code"];
     [self savePaymentInfoToServer:paymentInfo]; // send card through your server to Braintree Gateway
 }
+ */
 
 #pragma mark - Networking
 
@@ -210,6 +214,8 @@ didAuthorizeCardWithPaymentMethodCode:(NSString *)paymentMethodCode {
 // * CVV verification does not pass
 // * AVS verification does not pass
 // * The card number was a valid Luhn number, but nonexistent or no longer valid
+
+/*
 - (void) savePaymentInfoToServer:(NSDictionary *)paymentInfo {
     
     NSURL *url;
@@ -310,6 +316,7 @@ didAuthorizeCardWithPaymentMethodCode:(NSString *)paymentMethodCode {
      }];
 
 }
+ */
 
 // Some boiler plate networking code below.
 
