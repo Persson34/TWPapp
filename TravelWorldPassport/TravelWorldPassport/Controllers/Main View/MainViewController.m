@@ -33,6 +33,8 @@
     __weak IBOutlet UILabel *followerCounLbl;
 }
 
+@property (nonatomic) NSArray *dataSource;
+
 - (IBAction)menuBtnTapped:(id)sender;
 - (IBAction)addBtnTapped:(id)sender;
 
@@ -51,7 +53,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [stampsCollectionView reloadData];
+    
+    [self updateDataSource];
 }
 
 - (void)viewDidLoad
@@ -71,6 +74,25 @@
     stampCountLabel.font = [UIFont fontWithName:@"LucidaGrande" size:26.0f];
     followerCounLbl.font =[UIFont fontWithName:@"LucidaGrande" size:26.0f];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDataSource) name:TWPEngineUpdateDataSourceNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)updateDataSource {
+    self.dataSource = [NSMutableArray arrayWithArray:self.currentUser.stamps];
+
+    if ([[TWPEngine sharedEngine].unsavedStamps count] > 0)
+    {
+        _dataSource = [_dataSource arrayByAddingObjectsFromArray:[TWPEngine sharedEngine].unsavedStamps];
+    }
+    
+    [stampsCollectionView reloadData];
 }
 
 - (IBAction)menuBtnTapped:(id)sender {
@@ -82,7 +104,6 @@
     NewStampViewController *aNewStampController = [[NewStampViewController alloc]initWithNibName:@"NewStampViewController" bundle:nil];
     [aNewStampController setTheUser:self.currentUser];
     [self presentViewController:aNewStampController animated:YES completion:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,13 +115,13 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
-    return [self.currentUser.stamps count];
+    return [_dataSource count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    StampCell *cell =(StampCell*) [collectionView dequeueReusableCellWithReuseIdentifier:@"StampCell" forIndexPath:indexPath];
+    StampCell *cell =(StampCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"StampCell" forIndexPath:indexPath];
     
     [self configureCell:cell forItemAtIndexPath:indexPath];
     
@@ -108,38 +129,49 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    Stamps *currentStamp = [self.currentUser.stamps objectAtIndex:indexPath.row];
-    SingleStampViewController *aController = [[SingleStampViewController alloc] initWithNibName:@"SingleStampViewController" bundle:nil];
-    [aController setSelectedStampNo:indexPath.row];
-    [aController setCurrentUser:self.currentUser];
-    [aController setSelectedImageURL:currentStamp.stampUrl];
-    [self.navigationController pushViewController:aController animated:YES];
+    if ([_dataSource[indexPath.row] isMemberOfClass:[UIImage class]])
+    {
+        [[[UIAlertView alloc] initWithTitle:nil message:@"Stamp will be synced automatically when internet connection appears" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+        return;
+    }
+    else
+    {
+        Stamps *currentStamp = [self.currentUser.stamps objectAtIndex:indexPath.row];
+        SingleStampViewController *aController = [[SingleStampViewController alloc] initWithNibName:@"SingleStampViewController" bundle:nil];
+        [aController setSelectedStampNo:indexPath.row];
+        [aController setCurrentUser:self.currentUser];
+        [aController setSelectedImageURL:currentStamp.stampUrl];
+        [self.navigationController pushViewController:aController animated:YES];
+    }
 }
 
-- (void)configureCell:(StampCell *)cell
-   forItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(StampCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Stamps *currentStamp = [self.currentUser.stamps objectAtIndex:indexPath.row];
-   // NSLog(@"Stamp details %@",currentStamp);
+    id currentStamp = _dataSource[indexPath.row];
     [cell configureForStamp:currentStamp];
-    cell.onDeleteTap = ^(StampCell *selectedCell){
+    
+    cell.onDeleteTap = ^(StampCell *selectedCell) {
+        
         // Delete the same from the stamps and reload the collection
         NSIndexPath *currentPath =[stampsCollectionView indexPathForCell:selectedCell];
 //        NSLog(@"Index path %d, and index path %d",indexPath.row,currentPath.row);
         Stamps *stampToDelete = [self.currentUser.stamps objectAtIndex:currentPath.row];
         NSString *stampIdString =[NSString stringWithFormat:@"%f",stampToDelete.stampId];
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        __weak typeof(self) weakSelf = self;
+        
         [[TWPEngine sharedEngine]deleteStampWithId:stampIdString onCompletion:^(NSData *responseString, NSError *theError) {
+            
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             NSString *resp = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
             NSLog(@"Response from server %@",resp);
             [self.currentUser.stamps removeObjectAtIndex:currentPath.row];
             [stampsCollectionView deleteItemsAtIndexPaths:@[currentPath]];
             
+            [weakSelf updateDataSource];
         }];
-       
-        
-        
     };
 }
 

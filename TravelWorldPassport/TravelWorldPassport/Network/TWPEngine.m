@@ -9,27 +9,131 @@
 
 #import <ARAnalytics/ARAnalytics.h>
 #import "TWPEngine.h"
-static NSString const* API_ROOT= @"http://www.travelworldpassport.com/webapp/nl/app/";
-//static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur4b.runscope.net/webapp/nl/app/";
+#import "AppDelegate.h"
+#import "TWPUser.h"
+#import "Stamps.h"
 
+static NSString const* API_ROOT= @"http://www.travelworldpassport.com/webapp/nl/app/";
+
+//static NSString const* API_ROOT= @"http://www-travelworldpassport-com-8bl19t7rur4b.runscope.net/webapp/nl/app/";
 //static NSString const* API_ROOT= @"http://beta.test.travelworldpassport.com/app_dev.php/nl/app/";
 //static NSString const* API_ROOT= @"http://beta-test-travelworldpassport-com-8bl19t7rur4b.runscope.net/app_dev.php/nl/app/";
 
+NSString *const kUnsavedStamps = @"kUnsavedStamps";
+NSString *const TWPEngineUpdateDataSourceNotification = @"TWPEngineUpdateDataSourceNotification";
+
+
+@interface TWPEngine ()
+
+@property (nonatomic) BOOL isLock;
+
+@end
 
 @implementation TWPEngine
 
-+ (TWPEngine *)sharedEngine
-{
-    static TWPEngine * instance = nil;
-    
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
-        // --- call to super avoids a deadlock with the above allocWithZone
-        instance = [[super allocWithZone:nil] init];
-        [instance useCache];
++ (TWPEngine *)sharedEngine {
+    static TWPEngine *_shared = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _shared = [[TWPEngine alloc] init];
+        [_shared useCache];
     });
     
-    return instance;
+    return _shared;
+}
+
+- (id)init
+{
+    self = [super initWithHostName:@"www.google.com"];
+    {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:kUnsavedStamps])
+        {
+            NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kUnsavedStamps];
+            self.unsavedStamps = [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy];
+        }
+        else
+        {
+            self.unsavedStamps = [[NSMutableArray alloc] init];
+        }
+        
+        NSLog(@"[UNSAVED STAMPS]: init with %lu stamps", (unsigned long)[_unsavedStamps count]);
+        
+        __weak typeof(self) weakSelf = self;
+        
+        self.reachabilityChangedHandler = ^(NetworkStatus status) {
+            if (status == ReachableViaWiFi || status == ReachableViaWWAN)
+            {
+                [weakSelf postUnsavedStamps];
+            }
+        };
+        
+        _isLock = NO;
+    }
+    
+    return self;
+    
+}
+
+- (BOOL)isInternetAvailable
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);
+}
+
+- (void)postUnsavedStamps
+{
+    if (!_isLock)
+    {
+        if ([self.unsavedStamps count] > 0)
+        {
+            _isLock = YES;
+            
+            NSLog(@"[UNSAVED STAMPS]: posting...");
+            
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            TWPUser *currentUser = appDelegate.loggedUser;
+            
+            for (UIImage *currentImage in _unsavedStamps)
+            {
+                [[TWPEngine sharedEngine] uploadStamp:[NSString stringWithFormat:@"%d", (int)currentUser.userId]
+                                             andImage:currentImage
+                                         onCompletion:^(NSData *responseData, NSError *theError) {
+                                             
+                                             if (theError || responseData == nil)
+                                             {
+                                                 _isLock = NO;
+                                                 return;
+                                             }
+                                             
+                                             NSLog(@"[UNSAVED STAMPS]: synced");
+                                             
+                                             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+                                             NSLog(@"%@",responseDictionary);
+                                             Stamps *newStamp = [[Stamps alloc] initWithDictionary:responseDictionary];
+                                             currentUser.stampCount += 1;
+                                             [currentUser.stamps addObject:newStamp];
+                                             AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                             [appDelegate serializeLoggedUser];
+                                             
+                                             [_unsavedStamps removeObject:currentImage];
+                                             
+                                             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_unsavedStamps];
+                                             
+                                             [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUnsavedStamps];
+                                             
+                                             NSLog(@"[UNSAVED STAMPS]: left: %lu", [_unsavedStamps count]);
+                                             
+                                             if ([_unsavedStamps count] == 0)
+                                             {
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:TWPEngineUpdateDataSourceNotification object:nil];
+                                                 _isLock = NO;
+                                             }
+                                             
+                                         }];
+            }
+        }
+    }
 }
 
 -(void)loginWithUserName:(NSString*)userName andPassword:(NSString*)password onCompletion:(TWPResponse)theResponse

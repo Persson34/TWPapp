@@ -40,25 +40,27 @@
     }
 }
 
--(void)configureForStamp:(Stamps *)theStamp{
+-(void)configureForStamp:(id)theStamp{
+    
     isDeleteMode = NO;
     deleteBtn.hidden = YES;
     UILongPressGestureRecognizer *aPressRecog = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(enterDeleteMode)];
     aPressRecog.minimumPressDuration = 1.0f;
     
     [self addGestureRecognizer:aPressRecog];
-//    stampImageView.contentMode = UIViewContentModeCenter;
-//    downloadOp = [[ImageDownloadEngine sharedEngine]imageAtURL:[NSURL URLWithString:theStamp.stampUrl] completionHandler:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            stampImageView.image = fetchedImage;
-//        });
-//       
-//    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-//        
-//    }];
-   // [stampImageView setImageFromURL:[NSURL URLWithString:theStamp.stampUrl]];
-    [stampImageView setImageWithURL:[NSURL URLWithString:theStamp.stampUrl]];
     
+    if ([theStamp isMemberOfClass:[Stamps class]])
+    {
+        Stamps *currentStamp = (Stamps *)theStamp;
+        stampImageView.alpha = 1.0;
+        [stampImageView setImageWithURL:[NSURL URLWithString:currentStamp.stampUrl]];
+    }
+    else if ([theStamp isMemberOfClass:[UIImage class]])
+    {
+        UIImage *currentStamp = (UIImage *)theStamp;
+        stampImageView.alpha = 0.3;
+        stampImageView.image = currentStamp;
+    }
 }
 
 -(void)prepareForReuse{

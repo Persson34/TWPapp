@@ -186,7 +186,7 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
         
     });
     
-    _option = Shooted;
+    _option = Current;
     
     for (int i =0; i<=12; i++) {
         if (i==1)continue;
@@ -430,10 +430,10 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
     _option = Custom;
     
     self.customLocationAlerView = [[UIAlertView alloc] initWithTitle:@"Enter new folder name"
-                                                     message:nil
-                                                    delegate:self
-                                           cancelButtonTitle:@"Cancel"
-                                           otherButtonTitles:@"ОК", nil];
+                                                             message:nil
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles:@"ОК", nil];
     [_customLocationAlerView setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [_customLocationAlerView textFieldAtIndex:0].autocapitalizationType = UITextAutocapitalizationTypeSentences;
     [_customLocationAlerView show];
@@ -443,8 +443,7 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 
 #pragma mark  location manager delegates
 
-- (void)locationManager:(CLLocationManager *)manager
-	 didUpdateLocations:(NSArray *)locations {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     CLLocation* location = [locations lastObject];
     self.userLocation = location;
@@ -517,8 +516,7 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
     }];
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error {
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to find user's location" message:@"Please try again" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Try Again", nil];
     alert.delegate=self;
@@ -758,7 +756,28 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
                 NSLog(@"Image size %@ and scale is %f",NSStringFromCGSize(img.size),img.scale);
              
                 UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
-                [self uploadStamp:img];
+                
+                if ([TWPEngine sharedEngine].isInternetAvailable)
+                {
+                    [self uploadStamp:img];
+                }
+                else
+                {
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    
+                    [[TWPEngine sharedEngine].unsavedStamps addObject:img];
+                    
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[TWPEngine sharedEngine].unsavedStamps];
+
+                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUnsavedStamps];
+                    
+                    NSLog(@"[UNSAVED STAMPS]: add image, total: %lu", (unsigned long)[[TWPEngine sharedEngine].unsavedStamps count]);
+
+                    [[[UIAlertView alloc] initWithTitle:@"Info" message:@"Your stamp saved locally and will be synced automatically when it will be possible" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+                
                 return;
             }
         }
