@@ -91,6 +91,8 @@ static NSString* const kStripeLiveKey=@"pk_live_lAC0ZBRgQkahLq6qZloahz5w";
     
     [Fabric with:@[[STPAPIClient class]]];
     
+    [TWPEngine sharedEngine];
+    
     return YES;
 }
 

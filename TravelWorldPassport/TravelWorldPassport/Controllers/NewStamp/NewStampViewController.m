@@ -16,8 +16,16 @@
 #import "UIImage+UIImage_fixOrientation.h"
 #import "ARAnalytics.h"
 #import "UIImage+Resize.h"
+#import "KxMenu.h"
 
 @import AddressBook;
+#import <AssetsLibrary/AssetsLibrary.h>
+
+typedef NS_ENUM(NSUInteger, LocationOption) {
+    Shooted,
+    Current,
+    Custom
+};
 
 @interface NewStampViewController ()<AVCamCaptureManagerDelegate, UITextFieldDelegate,
         UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate> {
@@ -70,8 +78,15 @@
     // Share options
 //    UIActivityViewController *anActivityController;
 }
-- (IBAction)goBackTapped:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIButton *locationButton;
+@property (strong, nonatomic) IBOutlet UIView *backgroundView;
+@property (assign, nonatomic) LocationOption option;
+@property (strong, nonatomic) CLLocation *shootedLocation;
+@property (strong, nonatomic) NSString *customLocation;
+@property (strong, nonatomic) UIAlertView *customLocationAlerView;
+
+- (IBAction)goBackTapped:(id)sender;
 - (IBAction)crossBtnTapped:(id)sender;
 - (IBAction)shareBtnTapped:(id)sender;
 - (IBAction)pageControlTapped:(id)sender;
@@ -171,7 +186,19 @@
         
     });
     
-     // End of capture code
+    _option = Current;
+    
+    for (int i =0; i<=12; i++) {
+        if (i==1)continue;
+        NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
+        UILabel*locLabel=[self valueForKey:str];
+        locLabel.text = nil;
+    }
+    
+    stamp1Lbl.text = nil;
+    stamp2Lbl.text = nil;
+    
+    // End of capture code
 }
 
 - (void)setupLabelFonts {
@@ -238,21 +265,207 @@
     [locationManager startUpdatingLocation];
 }
 
-#pragma mark  location manager delegates
+#pragma mark - Actions
 
-- (void)locationManager:(CLLocationManager *)manager
-	 didUpdateLocations:(NSArray *)locations {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    CLLocation* location = [locations lastObject];
-    self.userLocation = location;
-    [locationManager stopUpdatingLocation];
-    locationManager.delegate = nil;
+- (IBAction)locationButtonTapped:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    
+    NSArray *menuItems =
+    @[
+      
+      [KxMenuItem menuItem:@"Shooted location"
+                     image:nil
+                    target:self
+                    action:@selector(shootedLocationTapped)],
+      
+      [KxMenuItem menuItem:@"Current location"
+                     image:nil
+                    target:self
+                    action:@selector(currentLocationTapped)],
+      
+      [KxMenuItem menuItem:@"Custom location"
+                     image:nil
+                    target:self
+                    action:@selector(customLocationTapped)]
+      ];
+    
+    [KxMenu showMenuInView:[[UIApplication sharedApplication] keyWindow]
+                  fromRect:CGRectMake(23, self.view.frame.size.height - 50, 10, 10)
+                 menuItems:menuItems];
+}
+
+- (void)shootedLocationTapped {
+    _option = Shooted;
+    
+    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+    
+    if (_shootedLocation)
+    {
+        [geoCoder reverseGeocodeLocation:self.shootedLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+            if (error) {
+                NSLog(@"Geocode failed with error: %@", error);
+                return;
+            }
+            
+            if (placemarks && placemarks.count > 0)
+            {
+                CLPlacemark *placemark = placemarks[0];
+                
+                NSDictionary *addressDictionary =
+                placemark.addressDictionary;
+                
+                NSLog(@"%@ ", addressDictionary);
+                NSString *country = [addressDictionary
+                                     objectForKey:(NSString *)kABPersonAddressCountryKey];
+                NSString *city = [addressDictionary
+                                  objectForKey:(NSString *)kABPersonAddressCityKey];
+                NSString *state = [addressDictionary
+                                   objectForKey:(NSString *)kABPersonAddressStateKey];
+                
+                NSLog(@"%@ %@ %@", country,city, state);
+                UILabel*lbl=[self valueForKey:@"loc2Lbl"];
+                lbl.text=state;
+                
+                for (int i =0; i<=12; i++) {
+                    if (i==1)continue;
+                    NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
+                    UILabel*locLabel=[self valueForKey:str];
+                    
+                    if (city)
+                    {
+                        locLabel.text = [NSString stringWithFormat:@"%@, %@",city,country];
+                    }
+                    else
+                    {
+                        locLabel.text = [NSString stringWithFormat:@"%@, %@",state,country];
+                    }
+                    
+                    if (_option == Custom) {
+                        locLabel.text = _customLocation;
+                    }
+                }
+                
+                if (city == nil) {
+                    stamp1Lbl.text = state;
+                    stamp2Lbl.text = state;
+                }
+                else {
+                    stamp1Lbl.text = city;
+                    stamp2Lbl.text = state;
+                }
+            }
+        }];
+    }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Unable to get shooted location" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    }
+    
+    NSLog(@"shootedLocationTapped");
+}
+
+- (void)currentLocationTapped {
+    _option = Current;
+    
     CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
     [geoCoder reverseGeocodeLocation:self.userLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error) {
             NSLog(@"Geocode failed with error: %@", error);
             return;
         }
+        
+        if (placemarks && placemarks.count > 0)
+        {
+            CLPlacemark *placemark = placemarks[0];
+            
+            NSDictionary *addressDictionary =
+            placemark.addressDictionary;
+            
+            NSLog(@"%@ ", addressDictionary);
+            NSString *country = [addressDictionary
+                                 objectForKey:(NSString *)kABPersonAddressCountryKey];
+            NSString *city = [addressDictionary
+                              objectForKey:(NSString *)kABPersonAddressCityKey];
+            NSString *state = [addressDictionary
+                               objectForKey:(NSString *)kABPersonAddressStateKey];
+            
+            NSLog(@"%@ %@ %@", country,city, state);
+            UILabel*lbl=[self valueForKey:@"loc2Lbl"];
+            lbl.text=state;
+            
+            for (int i =0; i<=12; i++) {
+                if (i==1)continue;
+                NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
+                UILabel*locLabel=[self valueForKey:str];
+                
+                if (city)
+                {
+                    locLabel.text = [NSString stringWithFormat:@"%@, %@",city,country];
+                }
+                else
+                {
+                    locLabel.text = [NSString stringWithFormat:@"%@, %@",state,country];
+                }
+                
+                if (_option == Custom) {
+                    locLabel.text = _customLocation;
+                }
+            }
+            
+            if (city == nil) {
+                stamp1Lbl.text = state;
+                stamp2Lbl.text = state;
+            }
+            else {
+                stamp1Lbl.text = city;
+                stamp2Lbl.text = state;
+            }
+        }
+    }];
+    
+    NSLog(@"currentLocationTapped");
+}
+
+- (void)customLocationTapped {
+    _option = Custom;
+    
+    self.customLocationAlerView = [[UIAlertView alloc] initWithTitle:@"Enter new folder name"
+                                                             message:nil
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                                   otherButtonTitles:@"ОК", nil];
+    [_customLocationAlerView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    [_customLocationAlerView textFieldAtIndex:0].autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    [_customLocationAlerView show];
+    
+    NSLog(@"customLocationTapped");
+}
+
+#pragma mark  location manager delegates
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    CLLocation* location = [locations lastObject];
+    self.userLocation = location;
+    [locationManager stopUpdatingLocation];
+    locationManager.delegate = nil;
+    CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+    
+    CLLocation *selectedLocation;
+    if (_option == Current) {
+        selectedLocation = self.userLocation;
+    } else if (_option == Shooted) {
+        selectedLocation = _shootedLocation;
+    } else if (_option == Custom) {
+        
+    }
+    
+    [geoCoder reverseGeocodeLocation:selectedLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error) {
+            NSLog(@"Geocode failed with error: %@", error);
+            return;
+        }
+        
         if (placemarks && placemarks.count > 0)
         {
             CLPlacemark *placemark = placemarks[0];
@@ -277,13 +490,18 @@
                 NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
                 UILabel*locLabel=[self valueForKey:str];
 
-                if(city)
+                if (city)
                 {
                     locLabel.text = [NSString stringWithFormat:@"%@, %@",city,country];
-                }else{
+                }
+                else
+                {
                     locLabel.text = [NSString stringWithFormat:@"%@, %@",state,country];
                 }
                 
+                if (_option == Custom) {
+                    locLabel.text = _customLocation;
+                }
             }
             
             if (city == nil) {
@@ -298,20 +516,71 @@
     }];
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error {
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to find user's location" message:@"Please try again" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Try Again", nil];
     alert.delegate=self;
     [alert show];
 }
 
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex==1)
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView == _customLocationAlerView)
     {
-        [self startUpdatingLocation];
+        if (buttonIndex != [alertView cancelButtonIndex])
+        {
+            NSString *text = [alertView textFieldAtIndex:0].text;
+            self.customLocation = text;
+            
+            
+            for (int i =0; i<=12; i++)
+            {
+                if (i==1)continue;
+                NSString* str=[NSString stringWithFormat:@"loc%iLbl",i];
+                UILabel*locLabel=[self valueForKey:str];
+                if (_option == Custom)
+                {
+                    locLabel.text = _customLocation;
+                    stamp1Lbl.text = _customLocation;
+                    stamp2Lbl.text = _customLocation;
+                }
+            }
+        }
     }
 }
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    if (alertView.alertViewStyle == UIAlertViewStylePlainTextInput)
+    {
+        if ([[[alertView textFieldAtIndex:0] text] length] >= 1)
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (alertView != _customLocationAlerView)
+    {
+        if (buttonIndex==1)
+        {
+            [self startUpdatingLocation];
+        }
+    }
+}
+
+#pragma mark -
 
 - (void)didReceiveMemoryWarning
 {
@@ -399,6 +668,7 @@
     crossBtn.hidden = YES;
     imgView.image = nil;
 //    [self.view sendSubviewToBack:imgView];
+    _shootedLocation = nil;
 }
 
 - (IBAction)pageControlTapped:(id)sender {
@@ -486,7 +756,28 @@
                 NSLog(@"Image size %@ and scale is %f",NSStringFromCGSize(img.size),img.scale);
              
                 UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
-                [self uploadStamp:img];
+                
+                if ([TWPEngine sharedEngine].isInternetAvailable)
+                {
+                    [self uploadStamp:img];
+                }
+                else
+                {
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    
+                    [[TWPEngine sharedEngine].unsavedStamps addObject:img];
+                    
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[TWPEngine sharedEngine].unsavedStamps];
+
+                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUnsavedStamps];
+                    
+                    NSLog(@"[UNSAVED STAMPS]: add image, total: %lu", (unsigned long)[[TWPEngine sharedEngine].unsavedStamps count]);
+
+                    [[[UIAlertView alloc] initWithTitle:@"Info" message:@"Your stamp saved locally and will be synced automatically when it will be possible" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+                
                 return;
             }
         }
@@ -554,6 +845,21 @@
     galleryBtn.hidden = YES;
     shareBtn.hidden = NO;
     crossBtn.hidden = NO;
+    
+    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
+    [assetLibrary assetForURL:info[UIImagePickerControllerReferenceURL] resultBlock:^(ALAsset *asset) {
+        if (asset)
+        {
+            CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
+            if (location)
+            {
+                self.shootedLocation = location;
+            }
+        }
+    }
+                 failureBlock:^(NSError *err) {
+                     NSLog(@"Error: %@", [err localizedDescription]);
+                 }];
 }
 
 #pragma mark - UIScrollView Delegate

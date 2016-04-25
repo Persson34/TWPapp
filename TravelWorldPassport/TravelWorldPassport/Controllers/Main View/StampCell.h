@@ -18,7 +18,7 @@
     BOOL isDeleteMode;
 }
 @property (nonatomic,strong)void(^onDeleteTap)(StampCell *cell);
--(void)configureForStamp:(Stamps*)theStamp;
+-(void)configureForStamp:(id)theStamp;
 
 
 @end

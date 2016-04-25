@@ -1309,11 +1309,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)/**",
-					"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/**",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1348,11 +1343,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)/**",
-					"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/**",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = "TravelWorldPassport/TravelWorldPassport-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1436,11 +1426,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(src_root)/../braintree_ios/**",
-				);
 				INFOPLIST_FILE = "TravelWorldPassport copy-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1473,11 +1458,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TravelWorldPassport/TravelWorldPassport-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(src_root)/../braintree_ios/**",
-				);
 				INFOPLIST_FILE = "TravelWorldPassport copy-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
