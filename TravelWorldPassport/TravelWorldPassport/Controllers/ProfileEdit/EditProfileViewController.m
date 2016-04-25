@@ -46,8 +46,10 @@
     TWPShipping *currentShipping;
     UIImage *originalUserImage;
     __weak IBOutlet UIScrollView *bgscroll;
- 
 }
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
+
 - (IBAction)backBtnTapped:(id)sender;
 - (IBAction)profileImageBtnTapped:(id)sender;
 - (IBAction)saveBtnTapped:(id)sender;
@@ -68,6 +70,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self registerForKeyboardNotifications];
+
     [self startUpdatingLocation];
     [ARAnalytics pageView:@"Edit Profile View"];
 
@@ -97,13 +102,17 @@
     [[SDWebImageDownloader sharedDownloader]downloadImageWithURL:[NSURL URLWithString:theUser.userProfile] options:SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
     } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-        originalUserImage = image;
-        UIImage *roundedImage  = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(168, 168) interpolationQuality:kCGInterpolationHigh];
-        roundedImage = [roundedImage roundedCornerImage:84.0f borderSize:1.0f];
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            originalUserImage = image;
+            UIImage *roundedImage  = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(168, 168) interpolationQuality:kCGInterpolationHigh];
+            roundedImage = [roundedImage roundedCornerImage:84.0f borderSize:1.0f];
+            
+            [profileBtn setImage:roundedImage forState:UIControlStateNormal];
+            
+        });
         
-        [profileBtn setImage:roundedImage forState:UIControlStateNormal];
-     
     }];
     // Get the user address from the site.
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -150,6 +159,56 @@
     self.userLocation = [[CLLocation alloc]initWithLatitude:29.23f longitude:67.4f]; //CLLocationCoordinate2DMake(29.23f, 67.4f);
     cityStr = @"Bangalore";
     countryStr = @"IN";
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidLayoutSubviews {
+    if (self.view.frame.size.height > 623)
+    {
+        _heightConstraint.constant = self.view.frame.size.height - 50;
+    }
+    else
+    {
+        _heightConstraint.constant = 623;
+    }
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0.0, kbSize.height, 0.0);
+    bgscroll.contentInset = contentInsets;
+    bgscroll.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, currentField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0, currentField.frame.origin.y-kbSize.height);
+        [bgscroll setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    bgscroll.contentInset = contentInsets;
+    bgscroll.scrollIndicatorInsets = contentInsets;
 }
 
 - (IBAction)backBtnTapped:(id)sender {
@@ -276,23 +335,30 @@
 -(void)doneTapped{
     [pinField resignFirstResponder];
     
-    [UIView animateWithDuration:0.2 animations:^{
-        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    }];
+//    [UIView animateWithDuration:0.2 animations:^{
+//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+//    }];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     currentField = textField;
-    [self animateView];
+//    [self animateView];
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    [UIView animateWithDuration:0.2 animations:^{
-        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    }];
+    
+//    [UIView animateWithDuration:0.2 animations:^{
+//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+//    }];
+    
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    currentField = nil;
 }
 
 - (void)animateView {
