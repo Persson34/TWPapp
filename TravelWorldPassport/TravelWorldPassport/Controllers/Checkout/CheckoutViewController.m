@@ -46,15 +46,19 @@
     stampsCollectionView.allowsMultipleSelection = YES;
     
     selectedArr = [[NSMutableArray alloc] initWithCapacity:currentUser.stamps.count];
-    for (int i = 0; i < currentUser.stamps.count; i++) {
-        if (i==selectedStampNo) {
-            [selectedArr addObject:[NSNumber numberWithBool:YES]];
+    for (int i = 0; i < currentUser.stamps.count; i++)
+    {
+        if (i == selectedStampNo)
+        {
+            [selectedArr addObject:@YES];
         }
-        [selectedArr addObject:[NSNumber numberWithBool:NO]];
+        else
+        {
+            [selectedArr addObject:@NO];
+        }
     }
-//    checkoutBtn.enabled = NO;
-    checkoutBtn.alpha = 0.60;
     
+    checkoutBtn.alpha = 0.6;
 }
 
 - (IBAction)checkoutBtnTapped:(id)sender {
@@ -68,12 +72,18 @@
     
     // Get the stamps out
     NSMutableArray *stampsToOrder = [@[]mutableCopy];
-    for (NSIndexPath *anIndexPath in [stampsCollectionView indexPathsForSelectedItems]) {
-        Stamps *aStamp = [self.currentUser.stamps objectAtIndex:anIndexPath.row];
-        [stampsToOrder addObject:aStamp];
+    
+    for (int i = 0; i < [selectedArr count]; i++)
+    {
+        NSNumber *selected = (NSNumber *)selectedArr[i];
+        if ([selected boolValue] == YES)
+        {
+            Stamps *aStamp = [self.currentUser.stamps objectAtIndex:i];
+            [stampsToOrder addObject:aStamp];
+        }
     }
-    UINavigationController *paymentNavigationController =
-    [[UINavigationController alloc] initWithRootViewController:aPaymentController];
+
+    UINavigationController *paymentNavigationController = [[UINavigationController alloc] initWithRootViewController:aPaymentController];
     aPaymentController.currentUser = self.currentUser;
     aPaymentController.stampsToOrder = stampsToOrder;
     [self.navigationController pushViewController:aPaymentController animated:YES];
@@ -103,45 +113,79 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - UICollectionView methods
+#pragma mark - UICollectionViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView
-     numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [self.currentUser.stamps count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     StampCell *cell =(StampCell*) [collectionView dequeueReusableCellWithReuseIdentifier:@"StampCell" forIndexPath:indexPath];
-//    BOOL isSelected = [[selectedArr objectAtIndex:indexPath.row] boolValue];
    
     [self configureCell:cell forItemAtIndexPath:indexPath];
-    if (indexPath.row == selectedStampNo) {
+    
+    if (indexPath.row == selectedStampNo)
+    {
         [cell setSelected:YES];
     }
 
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     BOOL isSelected = [[selectedArr objectAtIndex:indexPath.row] boolValue];
-   
-    if (isSelected == NO) {
+    
+    if (isSelected == NO)
+    {
         selectedImgCount++;
     }
-    else {
+    else
+    {
         selectedImgCount--;
     }
-    if (selectedImgCount == 12) {
-        checkoutBtn.enabled = YES;
+    
+    if (selectedImgCount >= 12)
+    {
         [checkoutBtn setBackgroundImage:[UIImage imageNamed:@"checkout.png"] forState:UIControlStateNormal];
-        checkoutBtn.alpha = 1.0f;
-        return;
+        checkoutBtn.alpha = 1.0;
     }
-    [selectedArr replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:!isSelected]];
-    NSLog(@"%d",selectedImgCount);
+    else
+    {
+        [checkoutBtn setBackgroundImage:[UIImage imageNamed:@"checkout-disable.png"] forState:UIControlStateNormal];
+        checkoutBtn.alpha = 0.6;
+    }
+    
+    [selectedArr replaceObjectAtIndex:indexPath.row withObject:@(!isSelected)];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL isSelected = [[selectedArr objectAtIndex:indexPath.row] boolValue];
+    
+    if (isSelected == NO)
+    {
+        selectedImgCount++;
+    }
+    else
+    {
+        selectedImgCount--;
+    }
+    
+    if (selectedImgCount >= 12)
+    {
+        [checkoutBtn setBackgroundImage:[UIImage imageNamed:@"checkout.png"] forState:UIControlStateNormal];
+        checkoutBtn.alpha = 1.0;
+    }
+    else
+    {
+        [checkoutBtn setBackgroundImage:[UIImage imageNamed:@"checkout-disable.png"] forState:UIControlStateNormal];
+        checkoutBtn.alpha = 0.6;
+    }
+    
+    [selectedArr replaceObjectAtIndex:indexPath.row withObject:@(!isSelected)];
 }
 
 - (void)configureCell:(StampCell *)cell
