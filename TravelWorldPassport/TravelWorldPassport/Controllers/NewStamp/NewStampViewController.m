@@ -86,6 +86,22 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 @property (strong, nonatomic) NSString *customLocation;
 @property (strong, nonatomic) UIAlertView *customLocationAlerView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint0;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint1;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint2;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint3;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint4;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint5;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint6;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint7;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint8;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint9;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint10;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint11;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint12;
+
+@property (nonatomic) BOOL isCameraLoaded;
+
 - (IBAction)goBackTapped:(id)sender;
 - (IBAction)crossBtnTapped:(id)sender;
 - (IBAction)shareBtnTapped:(id)sender;
@@ -110,6 +126,26 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _isCameraLoaded = NO;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+
+    _widthConstraint0.constant = screenWidth;
+    _widthConstraint1.constant = screenWidth;
+    _widthConstraint2.constant = screenWidth;
+    _widthConstraint3.constant = screenWidth;
+    _widthConstraint4.constant = screenWidth;
+    _widthConstraint5.constant = screenWidth;
+    _widthConstraint6.constant = screenWidth;
+    _widthConstraint7.constant = screenWidth;
+    _widthConstraint8.constant = screenWidth;
+    _widthConstraint9.constant = screenWidth;
+    _widthConstraint10.constant = screenWidth;
+    _widthConstraint11.constant = screenWidth;
+    _widthConstraint12.constant = screenWidth;
+
     shareBtn.hidden = YES;
     crossBtn.hidden = YES;
     pageControlBeingUsed =NO;
@@ -122,69 +158,15 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 //    stampsScroll.contentSize=_contentView.bounds.size;
     [self startUpdatingLocation];
     [self setupLabelFonts];
-    NSInteger numOfSlides=13;
-    pageControl.numberOfPages=numOfSlides;
-    [stampsScroll setContentSize:CGSizeMake(2+numOfSlides*320, 387)]; // Need to change this.
+    
     // Do any additional setup after loading the view from its nib.
 //    swipeLabel.font = [UIFont fontWithName:@"Intro" size:16.0f];
    // [swipeLabel sizeToFit];
   //  stampsScroll.userInteractionEnabled = YES;
    // [stampsScroll setBackgroundColor:[UIColor redColor]];
     self.videoPreviewView.userInteractionEnabled = YES;
+    
     [ARAnalytics pageView:@"New Stamp View"];
-
-
-    // Start of camera code
-		captureManager = [[AVCamCaptureManager alloc] init];
-		
-        [captureManager setDelegate:self];
-      //  [self applyDefaults];
-        
-        
-        if ([captureManager setupSession])
-        {
-            AVCaptureVideoPreviewLayer *newCapture=[[AVCaptureVideoPreviewLayer alloc] initWithSession:[captureManager session]];
-            UIView *view = [self videoPreviewView];
-            CALayer *viewLayer = [view layer];
-            [viewLayer setMasksToBounds:YES];
-            CGRect bounds = [view bounds];
-            [newCapture setFrame:bounds];
-            
-            if ([newCapture respondsToSelector:@selector(connection)])
-            {
-                //            NSLog(@"video supported ios 6");
-                if ([newCapture.connection isVideoOrientationSupported])
-                {
-                    [newCapture.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-                    
-                }
-            }
-            else
-            {
-                //            NSLog(@"Deprecated earlier version");
-                // Deprecated in 6.0; here for backward compatibility
-                if ([newCapture isOrientationSupported])
-                {
-                    [newCapture setOrientation:AVCaptureVideoOrientationPortrait];
-                }
-            }
-            
-            
-            [newCapture setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-            
-            [viewLayer insertSublayer:newCapture below:[[viewLayer sublayers] objectAtIndex:0]];
-            
-            
-        }
-      //  [self initializeSubviews];
-        
-        // Do any additional setup after loading the view, typically from a nib.
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        [[captureManager session] startRunning];
-        
-        
-    });
     
     _option = Current;
     
@@ -199,6 +181,90 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
     stamp2Lbl.text = nil;
     
     // End of capture code
+}
+
+- (void)viewDidLayoutSubviews {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    CGFloat screenWidth = screenRect.size.width;
+    CGRect frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, screenWidth, screenHeight);
+    self.view.frame = frame;
+    
+    NSInteger numOfSlides=13;
+    pageControl.numberOfPages=numOfSlides;
+    [stampsScroll setContentSize:CGSizeMake(numOfSlides * self.view.frame.size.width, 387)]; // Need to change this.
+    
+
+    if (!_isCameraLoaded)
+    {
+        [self setupCamera];
+        _isCameraLoaded = YES;
+
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    _isCameraLoaded = NO;
+}
+
+- (void)setupCamera {
+    captureManager = [[AVCamCaptureManager alloc] init];
+    
+    [captureManager setDelegate:self];
+    
+    
+    if ([captureManager setupSession])
+    {
+        AVCaptureVideoPreviewLayer *newCapture=[[AVCaptureVideoPreviewLayer alloc] initWithSession:[captureManager session]];
+        UIView *view = [self videoPreviewView];
+        CALayer *viewLayer = [view layer];
+        [viewLayer setMasksToBounds:YES];
+        CGRect bounds = [view bounds];
+        [newCapture setFrame:bounds];
+        
+        if ([newCapture respondsToSelector:@selector(connection)])
+        {
+            if ([newCapture.connection isVideoOrientationSupported])
+            {
+                [newCapture.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+                
+            }
+        }
+        else
+        {
+            if ([newCapture isOrientationSupported])
+            {
+                [newCapture setOrientation:AVCaptureVideoOrientationPortrait];
+            }
+        }
+        
+        [newCapture setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        [viewLayer insertSublayer:newCapture below:[[viewLayer sublayers] objectAtIndex:0]];
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[captureManager session] startRunning];
+    });
+    
+    
+    
+    
+//    for (int i = 0; i < [[_contentView subviews] count]; i++)
+//    {
+//        if ([[[_contentView subviews] objectAtIndex:i] isKindOfClass:[UIView class]])
+//        {
+//            UIView *currentView = (UIView*)[[_contentView subviews] objectAtIndex:pageControl.currentPage];
+//            UIView *view = (UIView*)[[_contentView subviews] objectAtIndex:i];
+//            if ([view isEqual:currentView])
+//            {
+//                CGRect frame = view.frame;
+//                frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height);
+//                view.frame = frame;
+//            }
+//        }
+//    }
 }
 
 - (void)setupLabelFonts {
