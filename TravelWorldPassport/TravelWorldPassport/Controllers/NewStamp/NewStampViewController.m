@@ -429,7 +429,7 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 - (void)customLocationTapped {
     _option = Custom;
     
-    self.customLocationAlerView = [[UIAlertView alloc] initWithTitle:@"Enter new folder name"
+    self.customLocationAlerView = [[UIAlertView alloc] initWithTitle:@"Enter your location name"
                                                              message:nil
                                                             delegate:self
                                                    cancelButtonTitle:@"Cancel"
