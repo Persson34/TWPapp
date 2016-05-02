@@ -42,9 +42,11 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
     __weak IBOutlet UIButton *payBtn;
     
     TWPShipping *currentShipping;
+    UITextField *activeTextField;
 }
 
-@property(nonatomic) STPPaymentCardTextField *paymentTextField;
+@property (nonatomic) STPPaymentCardTextField *paymentTextField;
+@property (nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 
 - (IBAction)goBackTapped:(id)sender;
 - (IBAction)payTapped:(id)sender;
@@ -67,6 +69,9 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self registerForKeyboardNotifications];
+    
     // Do any additional setup after loading the view from its nib.
     [ARAnalytics pageView:@"Payment View"];
     
@@ -120,10 +125,56 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
 }
 
+- (void)viewDidLayoutSubviews {
+    self.paymentTextField.center = CGPointMake(self.view.center.x, 107 + 44 / 2);
+
+    if (self.view.frame.size.height > 568)
+    {
+        _heightConstraint.constant = self.view.frame.size.height - 60 - 57;
+    }
+    else
+    {
+        _heightConstraint.constant = 568 - 60 - 57;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0.0, kbSize.height, 0.0);
+    bgScrollView.contentInset = contentInsets;
+    bgScrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeTextField.frame.origin)) {
+        CGPoint scrollPoint = CGPointMake(0, activeTextField.frame.origin.y-kbSize.height);
+        [bgScrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    bgScrollView.contentInset = contentInsets;
+    bgScrollView.scrollIndicatorInsets = contentInsets;
 }
 
 #pragma mark - Helpers
@@ -200,20 +251,12 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
 #pragma mark - UITextFieldDelegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == cityLabel || textField == stateLabel|| textField== address2Label || textField== address1Label) {
-         // Shift the scroll view a little up
-        [bgScrollView setContentOffset:CGPointMake(0, 95)];
-    }
-    if (textField == postalCodeLabel) {
-        // Shift another level up
-         [bgScrollView setContentOffset:CGPointMake(0, 200)];// Keyboard and tool bar also
-    }
+    activeTextField = textField;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField == cityLabel || textField == stateLabel || textField == postalCodeLabel) {
-        [bgScrollView setContentOffset:CGPointMake(0, 0)];
-    }
+    activeTextField = nil;
+
     [textField resignFirstResponder];
 }
 

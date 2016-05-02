@@ -13,6 +13,7 @@
                 <outlet property="selectedImgView" destination="jY0-Jp-9gH" id="igN-ye-guE"/>
                 <outlet property="sendBtn" destination="dzP-32-2aG" id="UEV-SM-vd0"/>
                 <outlet property="stampView" destination="I8N-5i-yjw" id="OuM-Qs-dOm"/>
+                <outlet property="stampViewTopConstraint" destination="cF4-xv-kBE" id="nkM-6L-jUr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
