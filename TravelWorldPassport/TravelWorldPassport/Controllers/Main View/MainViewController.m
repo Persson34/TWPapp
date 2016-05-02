@@ -102,7 +102,6 @@
 
 - (IBAction)addBtnTapped:(id)sender {
     NewStampViewController *aNewStampController = [[NewStampViewController alloc]initWithNibName:@"NewStampViewController" bundle:nil];
-//    [aNewStampController.view setFrame:[[UIScreen mainScreen] applicationFrame]];
     [aNewStampController setTheUser:self.currentUser];
     [self presentViewController:aNewStampController animated:YES completion:nil];
 }
