@@ -151,28 +151,34 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
 
 -(void)sendAndPlaceOrder{
     
-    //     beat.test.travelworldpassport.com/app_dev.php/nl/app/placeorder
-    // userid
-    // stamps (ids array)
-    NSArray *stamIdArray=  [self.stampsToOrder valueForKeyPath:@"stampId"];
+    NSArray *stamIdArray = [self.stampsToOrder valueForKeyPath:@"stampId"];
     
     NSString *stampIdString = [stamIdArray componentsJoinedByString:@","];
     NSDictionary *params = @{@"userid":@(self.currentUser.userId),@"stamps":stampIdString };
-    // Now send it back to the server
+
     [[TWPEngine sharedEngine]placeAndSaveOrder:params onCompletion:^(NSData *responseString, NSError *theError) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
-        if ([[respDict objectForKey:@"meta"]isEqualToString:@"OK"]) {
-            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your order has been placed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [anAlert show];
-            
-        }
-        else{
-            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"Something went wrong with your order." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [anAlert show];
-        }
-        //        NSString *resp = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
         
+        if (responseString)
+        {
+            NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
+            
+            if ([[respDict objectForKey:@"meta"]isEqualToString:@"OK"])
+            {
+                UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your order has been placed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [anAlert show];
+            }
+            else
+            {
+                UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"Something went wrong with your order." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [anAlert show];
+            }
+        }
+        else
+        {
+            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"No data from server while placing and saving order" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [anAlert show];
+        }
     }];
 }
 
@@ -252,25 +258,35 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
     NSDictionary *params = @{@"user_id":@(self.currentUser.userId),@"stripe_token":token.tokenId,@"cost":@([self.stampsToOrder count]*STAMP_COST)};
     
     [[TWPEngine sharedEngine] createBackendChargeWithParameters:params onCompletion:^(NSData *responseString, NSError *theError) {
-        NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
-        if ([[respDict objectForKey:@"meta"] isEqualToString:@"OK"])
+        if (responseString)
         {
-            completion(YES);
+            NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
+            if ([[respDict objectForKey:@"meta"] isEqualToString:@"OK"])
+            {
+                completion(YES);
+            }
+            else
+            {
+                NSString *errorMessage = [NSString stringWithFormat:@"Backend code %@. ", respDict[@"code"]];
+                if (respDict[@"error_msg"])
+                {
+                    errorMessage = [errorMessage stringByAppendingString:respDict[@"error_msg"]];
+                }
+                
+                [[[UIAlertView alloc]initWithTitle:@"Error while backend charging!"
+                                           message:errorMessage
+                                          delegate:nil
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil] show];
+                
+                completion(NO);
+            }
         }
         else
         {
-            NSString *errorMessage = [NSString stringWithFormat:@"Backend code %@. ", respDict[@"code"]];
-            if (respDict[@"error_msg"])
-            {
-                errorMessage = [errorMessage stringByAppendingString:respDict[@"error_msg"]];
-            }
+            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"No data from server while creating backend charge" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [anAlert show];
             
-            [[[UIAlertView alloc]initWithTitle:@"Error while backend charging!"
-                                       message:errorMessage
-                                      delegate:nil
-                             cancelButtonTitle:@"OK"
-                             otherButtonTitles:nil] show];
-
             completion(NO);
         }
     }];
