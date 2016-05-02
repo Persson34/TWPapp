@@ -21,6 +21,20 @@
 @import AddressBook;
 #import <AssetsLibrary/AssetsLibrary.h>
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
 typedef NS_ENUM(NSUInteger, LocationOption) {
     Shooted,
     Current,
@@ -86,6 +100,28 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 @property (strong, nonatomic) NSString *customLocation;
 @property (strong, nonatomic) UIAlertView *customLocationAlerView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint0;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint1;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint2;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint3;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint4;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint5;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint6;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint7;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint8;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint9;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint10;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint11;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint12;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollHeightConstraint;
+@property (nonatomic) BOOL isCameraLoaded;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgViewHeightConstraint;
+
+@property (nonatomic) int magicNumber1;
+@property (nonatomic) int magicNumber2;
+
+
 - (IBAction)goBackTapped:(id)sender;
 - (IBAction)crossBtnTapped:(id)sender;
 - (IBAction)shareBtnTapped:(id)sender;
@@ -110,81 +146,44 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _isCameraLoaded = NO;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+
+    _widthConstraint0.constant = screenWidth;
+    _widthConstraint1.constant = screenWidth;
+    _widthConstraint2.constant = screenWidth;
+    _widthConstraint3.constant = screenWidth;
+    _widthConstraint4.constant = screenWidth;
+    _widthConstraint5.constant = screenWidth;
+    _widthConstraint6.constant = screenWidth;
+    _widthConstraint7.constant = screenWidth;
+    _widthConstraint8.constant = screenWidth;
+    _widthConstraint9.constant = screenWidth;
+    _widthConstraint10.constant = screenWidth;
+    _widthConstraint11.constant = screenWidth;
+    _widthConstraint12.constant = screenWidth;
+    
     shareBtn.hidden = YES;
     crossBtn.hidden = YES;
     pageControlBeingUsed =NO;
     selectedLblTag = 0;
     hiddenTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, -100, 0, 0)];
     hiddenTextField.delegate = self;
+    
     [self.view addSubview:hiddenTextField];
+    
     [self.view sendSubviewToBack:hiddenTextField];
-    [stampsScroll addSubview:_contentView];
-//    stampsScroll.contentSize=_contentView.bounds.size;
+    
     [self startUpdatingLocation];
+    
     [self setupLabelFonts];
-    NSInteger numOfSlides=13;
-    pageControl.numberOfPages=numOfSlides;
-    [stampsScroll setContentSize:CGSizeMake(2+numOfSlides*320, 387)]; // Need to change this.
-    // Do any additional setup after loading the view from its nib.
-//    swipeLabel.font = [UIFont fontWithName:@"Intro" size:16.0f];
-   // [swipeLabel sizeToFit];
-  //  stampsScroll.userInteractionEnabled = YES;
-   // [stampsScroll setBackgroundColor:[UIColor redColor]];
+    
     self.videoPreviewView.userInteractionEnabled = YES;
+    
     [ARAnalytics pageView:@"New Stamp View"];
-
-
-    // Start of camera code
-		captureManager = [[AVCamCaptureManager alloc] init];
-		
-        [captureManager setDelegate:self];
-      //  [self applyDefaults];
-        
-        
-        if ([captureManager setupSession])
-        {
-            AVCaptureVideoPreviewLayer *newCapture=[[AVCaptureVideoPreviewLayer alloc] initWithSession:[captureManager session]];
-            UIView *view = [self videoPreviewView];
-            CALayer *viewLayer = [view layer];
-            [viewLayer setMasksToBounds:YES];
-            CGRect bounds = [view bounds];
-            [newCapture setFrame:bounds];
-            
-            if ([newCapture respondsToSelector:@selector(connection)])
-            {
-                //            NSLog(@"video supported ios 6");
-                if ([newCapture.connection isVideoOrientationSupported])
-                {
-                    [newCapture.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
-                    
-                }
-            }
-            else
-            {
-                //            NSLog(@"Deprecated earlier version");
-                // Deprecated in 6.0; here for backward compatibility
-                if ([newCapture isOrientationSupported])
-                {
-                    [newCapture setOrientation:AVCaptureVideoOrientationPortrait];
-                }
-            }
-            
-            
-            [newCapture setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-            
-            [viewLayer insertSublayer:newCapture below:[[viewLayer sublayers] objectAtIndex:0]];
-            
-            
-        }
-      //  [self initializeSubviews];
-        
-        // Do any additional setup after loading the view, typically from a nib.
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        [[captureManager session] startRunning];
-        
-        
-    });
     
     _option = Current;
     
@@ -199,6 +198,131 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
     stamp2Lbl.text = nil;
     
     // End of capture code
+}
+
+- (void)viewDidLayoutSubviews {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    CGFloat screenWidth = screenRect.size.width;
+    CGRect frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, screenWidth, screenHeight);
+    self.view.frame = frame;
+    
+    if (!_isCameraLoaded)
+    {
+        [self setupCamera];
+        _isCameraLoaded = YES;
+    }
+    
+    if IS_IPHONE_4_OR_LESS
+    {
+        CGRect frame = imgView.frame;
+        frame = CGRectMake(frame.origin.x, frame.origin.y + 11, frame.size.width, 290);
+        imgView.frame = frame;
+        
+        _magicNumber1 = 12;
+        _magicNumber2 = 26;
+    }
+    else if (IS_IPHONE_5)
+    {
+        CGRect frame = imgView.frame;
+        frame = CGRectMake(frame.origin.x, frame.origin.y - 15, frame.size.width, 340);
+        imgView.frame = frame;
+        
+        _magicNumber1 = 12;
+        _magicNumber2 = 26;
+    }
+    else if (IS_IPHONE_6)
+    {
+        CGRect frame = imgView.frame;
+        frame = CGRectMake(frame.origin.x, frame.origin.y - 48, frame.size.width, 400);
+        imgView.frame = frame;
+        
+        _magicNumber1 = 10;
+        _magicNumber2 = 30;
+    }
+    else if (IS_IPHONE_6P)
+    {
+        CGRect frame = imgView.frame;
+        frame = CGRectMake(frame.origin.x, frame.origin.y - 75, frame.size.width, 450);
+        imgView.frame = frame;
+        
+        _magicNumber1 = 10;
+        _magicNumber2 = 32;
+    }
+    
+    NSInteger numOfSlides=13;
+    pageControl.numberOfPages=numOfSlides;
+    [stampsScroll setContentSize:CGSizeMake(numOfSlides * self.view.frame.size.width, imgView.frame.size.height + _magicNumber2)];
+    
+    _scrollHeightConstraint.constant = imgView.frame.size.height + _magicNumber2;
+    
+    _contentView.frame = CGRectMake(0, _magicNumber1, _contentView.frame.size.width, imgView.frame.size.height + _magicNumber2);
+    
+    [stampsScroll addSubview:_contentView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    _isCameraLoaded = NO;
+}
+
+- (void)setupCamera {
+    captureManager = [[AVCamCaptureManager alloc] init];
+    
+    [captureManager setDelegate:self];
+    
+    
+    if ([captureManager setupSession])
+    {
+        AVCaptureVideoPreviewLayer *newCapture=[[AVCaptureVideoPreviewLayer alloc] initWithSession:[captureManager session]];
+        UIView *view = [self videoPreviewView];
+        CALayer *viewLayer = [view layer];
+        [viewLayer setMasksToBounds:YES];
+        CGRect bounds = [view bounds];
+        [newCapture setFrame:bounds];
+        
+        if ([newCapture respondsToSelector:@selector(connection)])
+        {
+            if ([newCapture.connection isVideoOrientationSupported])
+            {
+                [newCapture.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+                
+            }
+        }
+        else
+        {
+            if ([newCapture isOrientationSupported])
+            {
+                [newCapture setOrientation:AVCaptureVideoOrientationPortrait];
+            }
+        }
+        
+        [newCapture setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        [viewLayer insertSublayer:newCapture below:[[viewLayer sublayers] objectAtIndex:0]];
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[captureManager session] startRunning];
+    });
+    
+    
+    
+    
+//    for (int i = 0; i < [[_contentView subviews] count]; i++)
+//    {
+//        if ([[[_contentView subviews] objectAtIndex:i] isKindOfClass:[UIView class]])
+//        {
+//            UIView *currentView = (UIView*)[[_contentView subviews] objectAtIndex:pageControl.currentPage];
+//            UIView *view = (UIView*)[[_contentView subviews] objectAtIndex:i];
+//            if ([view isEqual:currentView])
+//            {
+//                CGRect frame = view.frame;
+//                frame = CGRectMake(0, 0, self.view.frame.size.width, frame.size.height);
+//                view.frame = frame;
+//            }
+//        }
+//    }
 }
 
 - (void)setupLabelFonts {
@@ -680,26 +804,30 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
 }
 
 - (IBAction)shareBtnTapped:(id)sender {
-//    UIGraphicsBeginImageContext(imgView.frame.size);
-//    [imgView.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    [self uploadStamp:viewImage];
-//    UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
+
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [ARAnalytics event:@"New Stamp Share" withProperties:@{@"template_id":@(pageControl.currentPage)}];
-    for (int i = 0; i < [[_contentView subviews] count]; i++) {
-        if ([[[_contentView subviews] objectAtIndex:i] isKindOfClass:[UIView class]]) {
+    
+    for (int i = 0; i < [[_contentView subviews] count]; i++)
+    {
+        if ([[[_contentView subviews] objectAtIndex:i] isKindOfClass:[UIView class]])
+        {
             UIView *currentView = (UIView*)[[_contentView subviews] objectAtIndex:pageControl.currentPage];
+            
             UIView *view = (UIView*)[[_contentView subviews] objectAtIndex:i];
-            if ([view isEqual:currentView]) {
-//                 UIGraphicsBeginImageContext(view.frame.size);//CGSizeMake(284, 332)
+            
+            if ([view isEqual:currentView])
+            {
                 UIGraphicsBeginImageContextWithOptions(view.frame.size, FALSE, 0.0);
-               CGContextRef context = UIGraphicsGetCurrentContext();
+                CGContextRef context = UIGraphicsGetCurrentContext();
                 // Get all the subviews
-                for (id aSubView  in view.subviews) {
+                for (id aSubView  in view.subviews)
+                {
                     NSLog(@"Class %@",[aSubView class]);
-                    if ([aSubView isKindOfClass:[UILabel class]]) {
+                    
+                    if ([aSubView isKindOfClass:[UILabel class]])
+                    {
                         NSLog(@"Label got");
                         UILabel *theLabel = (UILabel*)aSubView;
                         NSString *theText = theLabel.text;
@@ -714,47 +842,45 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
                         paragraphStyle.alignment = theLabel.textAlignment;
                         [theText drawInRect:theLabel.frame withAttributes:@{NSFontAttributeName:theLabel.font,NSForegroundColorAttributeName:theLabel.textColor,NSParagraphStyleAttributeName:paragraphStyle}]; // Draw text instead of label
                     }
-                   else if ([aSubView isKindOfClass:[UIImageView class]]) {
+                    else if ([aSubView isKindOfClass:[UIImageView class]])
+                    {
                         UIImageView *theImage = (UIImageView*)aSubView;
                         UIImage *stampBg =theImage.image;
                         [stampBg drawInRect:CGRectMake(0, 0, stampBg.size.width, stampBg.size.height)];
                     }
-                   else if ([aSubView isKindOfClass:[UIView class]]) {
+                    else if ([aSubView isKindOfClass:[UIView class]])
+                    {
                         NSLog(@"UIView with some subviews"); // This case happens with only one of the templates
                         UIView *singleSubView = (UIView*)aSubView;
-                       if (aSubView == stamp6EditView) {
-                           // Get the frame and draw a rectangle with that dimension
-                           CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
-                           CGContextSetLineWidth(context, 2.0f);
-                           CGContextStrokeRect(context, singleSubView.frame);
-                       }
-                       if (aSubView == stamp7EditView) {
-                           CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
-                           CGContextSetLineWidth(context, 2.0f);
-                           CGContextFillRect(context, singleSubView.frame);
-                       }
-                       
-                        
-
+                        if (aSubView == stamp6EditView)
+                        {
+                            // Get the frame and draw a rectangle with that dimension
+                            CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+                            CGContextSetLineWidth(context, 2.0f);
+                            CGContextStrokeRect(context, singleSubView.frame);
+                        }
+                        if (aSubView == stamp7EditView)
+                        {
+                            CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
+                            CGContextSetLineWidth(context, 2.0f);
+                            CGContextFillRect(context, singleSubView.frame);
+                        }
                     }
-                    
                 }
-//                NSLog(@"view tag is %d",view.tag);
-//                NSLog(@"%@",NSStringFromCGRect(view.frame));
-               
-              //  [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//                UIImage *stampImg = [UIImage imageNamed:@"Stamp1.png"];
-//                [stampImg drawInRect:CGRectMake(0, 0, stampImg.size.width, stampImg.size.height)];
-//                UILabel *aLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 30, 100.0f, 20.0f)];
-//                aLabel.text = @"Hello";
-//                [aLabel.text drawAtPoint:CGPointMake(40, 50) withAttributes:nil];
                 UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-              
+                
                 UIGraphicsEndImageContext();
-//                UIImage *img = [self drawImage:[self imageByCropping:viewImage toRect:CGRectMake(14, 14, 284, 332)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
-                 UIImage *img = [self drawImage:[self imageByCropping2:viewImage toRect:CGRectMake(28, 28, 568, 664)] inImage:imgView.image atPoint:CGPointMake(0, 0)];
-                NSLog(@"Image size %@ and scale is %f",NSStringFromCGSize(img.size),img.scale);
-             
+                
+                UIImage *photo = imgView.image;
+                
+//                UIImage *cropped = [self imageByCropping2:viewImage toRect:CGRectMake(28, 28, 568, 664)];
+
+                UIImage *cropped = [self imageByCropping2:viewImage toRect:CGRectMake(28, 28, 600, 700)];
+                
+                UIImage *img = [self drawImage:cropped inImage:photo atPoint:CGPointMake(0, 0)];
+                
+                NSLog(@"Image size %@ and scale is %f", NSStringFromCGSize(img.size), img.scale);
+                
                 UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
                 
                 if ([TWPEngine sharedEngine].isInternetAvailable)
@@ -768,11 +894,11 @@ typedef NS_ENUM(NSUInteger, LocationOption) {
                     [[TWPEngine sharedEngine].unsavedStamps addObject:img];
                     
                     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[TWPEngine sharedEngine].unsavedStamps];
-
+                    
                     [[NSUserDefaults standardUserDefaults] setObject:data forKey:kUnsavedStamps];
                     
                     NSLog(@"[UNSAVED STAMPS]: add image, total: %lu", (unsigned long)[[TWPEngine sharedEngine].unsavedStamps count]);
-
+                    
                     [[[UIAlertView alloc] initWithTitle:@"Info" message:@"Your stamp saved locally and will be synced automatically when it will be possible" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                     
                     [self dismissViewControllerAnimated:YES completion:nil];
