@@ -646,9 +646,9 @@
 				3A63E38B18CF02930087189A /* Main View */,
 				3A63E37918CF01380087189A /* Side Menu */,
 				6EB0FAD21C915A8F001E451C /* ProfileEdit */,
+				3A160BD118EEA99A0077B8C3 /* SingleStampView */,
 				3A96A4BF19094398008CEEBD /* Payment */,
 				3A13547019064CA300D8A2E1 /* Checkout */,
-				3A160BD118EEA99A0077B8C3 /* SingleStampView */,
 				8F844B4B18DAB66B0040DC7A /* NewStamp */,
 			);
 			name = Controllers;
