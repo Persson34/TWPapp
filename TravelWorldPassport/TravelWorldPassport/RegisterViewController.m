@@ -32,8 +32,11 @@
     __weak IBOutlet UITextField *surnameField;
     __weak IBOutlet UITextField *nameField;
     UIImage* originalUserImage;
+    UITextField *activeTextField;
 }
 - (IBAction)saveTapped:(id)sender;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 
 @end
 
@@ -51,6 +54,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self registerForKeyboardNotifications];
+    
     // Do any additional setup after loading the view from its nib.
 //    self.navigationController.navigationBarHidden = NO;
     
@@ -60,9 +66,8 @@
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor ],NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Bold" size:19.0f]}];
     [self.view removeGestureRecognizer:self.menuContainerViewController.panGestureRecognizer];
-    bgScrollView.contentSize = CGSizeMake(320.0f, 580.0f);
-    
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
@@ -72,6 +77,51 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidLayoutSubviews {
+    if (self.view.frame.size.height > 568)
+    {
+        _heightConstraint.constant = self.view.frame.size.height - 44;
+    }
+    else
+    {
+        _heightConstraint.constant = 568;
+    }
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(44, 0.0, kbSize.height, 0.0);
+    bgScrollView.contentInset = contentInsets;
+    bgScrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeTextField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(44, activeTextField.frame.origin.y-kbSize.height);
+        [bgScrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(44, 0, 0, 0);
+    bgScrollView.contentInset = contentInsets;
+    bgScrollView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,19 +131,19 @@
 }
 
 #pragma mark - TextField delegate
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-     // Need to improve the scroll view.
-    if (textField == passwordField || textField == repeatPwdField) {
-        // Scroll view to get bigger
-        [bgScrollView setContentOffset:CGPointMake(0, 220) animated:YES];
-    }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeTextField = textField;
 }
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    if (textField == passwordField || textField == repeatPwdField) {
-        // Scroll view to get bigger
-        [bgScrollView setContentOffset:CGPointMake(0, -30) animated:YES];
-    }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeTextField = nil;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField  {
+    [self.view endEditing:YES];
     return YES;
 }
 

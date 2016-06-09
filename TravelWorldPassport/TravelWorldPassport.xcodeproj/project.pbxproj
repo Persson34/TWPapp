@@ -593,14 +593,14 @@
 		3A9A5EC718A0F682008034C6 /* TravelWorldPassport */ = {
 			isa = PBXGroup;
 			children = (
+				3A9A5ED018A0F682008034C6 /* AppDelegate.h */,
+				3A9A5ED118A0F682008034C6 /* AppDelegate.m */,
 				0EA73A59191CA91A000FB97C /* shareGroup */,
 				8F844B6218DAD3B10040DC7A /* Camera */,
 				8FE6C64018D870F80027DEB7 /* Models */,
 				3AB37A5918D087FC00EFCDA2 /* Network */,
 				3A63E37A18CF01700087189A /* Utils */,
 				3A9A5EF018A0F691008034C6 /* Controllers */,
-				3A9A5ED018A0F682008034C6 /* AppDelegate.h */,
-				3A9A5ED118A0F682008034C6 /* AppDelegate.m */,
 				3A9A5ED318A0F682008034C6 /* Images.xcassets */,
 				3A9A5EC818A0F682008034C6 /* Supporting Files */,
 			);
@@ -641,15 +641,15 @@
 		3A9A5EF018A0F691008034C6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6EB0FAD21C915A8F001E451C /* ProfileEdit */,
+				3A9A5EF118A0F6AD008034C6 /* Login */,
 				0EDCC455191762E70060AB28 /* Register */,
-				3A96A4BF19094398008CEEBD /* Payment */,
-				3A13547019064CA300D8A2E1 /* Checkout */,
-				3A160BD118EEA99A0077B8C3 /* SingleStampView */,
-				8F844B4B18DAB66B0040DC7A /* NewStamp */,
 				3A63E38B18CF02930087189A /* Main View */,
 				3A63E37918CF01380087189A /* Side Menu */,
-				3A9A5EF118A0F6AD008034C6 /* Login */,
+				6EB0FAD21C915A8F001E451C /* ProfileEdit */,
+				3A160BD118EEA99A0077B8C3 /* SingleStampView */,
+				3A13547019064CA300D8A2E1 /* Checkout */,
+				3A96A4BF19094398008CEEBD /* Payment */,
+				8F844B4B18DAB66B0040DC7A /* NewStamp */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

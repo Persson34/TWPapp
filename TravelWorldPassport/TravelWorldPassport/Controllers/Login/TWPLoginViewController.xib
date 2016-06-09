@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TWPLoginViewController">
@@ -136,7 +136,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ck-PJ-IJD">
-                    <rect key="frame" x="97" y="376" width="126" height="30"/>
+                    <rect key="frame" x="98.5" y="376" width="123" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="Forgot Password?">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -145,8 +145,11 @@
                         <action selector="fogotPwdBtnTapped:" destination="-1" eventType="touchUpInside" id="mVC-i5-exx"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="twpLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xKv-5d-EZ2">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twpLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xKv-5d-EZ2">
                     <rect key="frame" x="80" y="52" width="160" height="71"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="71" id="xvr-nm-Wia"/>
+                    </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fei-fV-cah">
                     <rect key="frame" x="132" y="399" width="57" height="30"/>
@@ -164,6 +167,8 @@
                 <constraint firstItem="PgH-C4-RG9" firstAttribute="height" secondItem="2eJ-ef-0Br" secondAttribute="height" id="6n7-DG-qKs"/>
                 <constraint firstAttribute="centerX" secondItem="4Ck-PJ-IJD" secondAttribute="centerX" id="CuK-JV-Z8O"/>
                 <constraint firstAttribute="centerX" secondItem="Czs-RN-05f" secondAttribute="centerX" constant="-0.5" id="D69-HM-Xbc"/>
+                <constraint firstItem="xKv-5d-EZ2" firstAttribute="centerX" secondItem="LGT-rR-pgN" secondAttribute="centerX" id="DBh-Eh-88M"/>
+                <constraint firstItem="xKv-5d-EZ2" firstAttribute="top" secondItem="LGT-rR-pgN" secondAttribute="top" constant="52" id="FGk-GV-rcv"/>
                 <constraint firstItem="2eJ-ef-0Br" firstAttribute="top" secondItem="PgH-C4-RG9" secondAttribute="bottom" constant="5" id="H1e-SK-dAx"/>
                 <constraint firstAttribute="trailing" secondItem="PgH-C4-RG9" secondAttribute="trailing" constant="40" id="I4M-JY-3W4"/>
                 <constraint firstItem="2eJ-ef-0Br" firstAttribute="centerY" secondItem="wIx-3O-cb0" secondAttribute="centerY" constant="0.5" id="Kni-Ui-k3y"/>
@@ -171,9 +176,11 @@
                 <constraint firstItem="P4u-Gf-qac" firstAttribute="top" secondItem="LGT-rR-pgN" secondAttribute="top" id="MWW-es-9Ko"/>
                 <constraint firstAttribute="centerX" secondItem="Fei-fV-cah" secondAttribute="centerX" constant="-0.5" id="Mhs-Ug-clm"/>
                 <constraint firstItem="PgH-C4-RG9" firstAttribute="width" secondItem="2eJ-ef-0Br" secondAttribute="width" id="N6r-k7-sV3"/>
+                <constraint firstItem="f5F-aL-jH2" firstAttribute="leading" secondItem="LGT-rR-pgN" secondAttribute="leading" id="OQK-Ml-SKE"/>
                 <constraint firstItem="PgH-C4-RG9" firstAttribute="centerX" secondItem="2Gg-hy-3Nl" secondAttribute="centerX" constant="-21" id="Po2-kD-odw"/>
                 <constraint firstItem="P4u-Gf-qac" firstAttribute="leading" secondItem="LGT-rR-pgN" secondAttribute="leading" id="RLV-K4-Jhf"/>
                 <constraint firstAttribute="bottom" secondItem="P4u-Gf-qac" secondAttribute="bottom" constant="-18" id="TDm-dK-pZV"/>
+                <constraint firstAttribute="trailing" secondItem="f5F-aL-jH2" secondAttribute="trailing" id="WGq-TT-qg1"/>
                 <constraint firstItem="2eJ-ef-0Br" firstAttribute="centerX" secondItem="wIx-3O-cb0" secondAttribute="centerX" constant="-21" id="a4b-xa-iTa"/>
                 <constraint firstAttribute="centerX" secondItem="6Os-uY-Ih6" secondAttribute="centerX" id="eAf-67-bk0"/>
                 <constraint firstItem="4Ck-PJ-IJD" firstAttribute="top" secondItem="Czs-RN-05f" secondAttribute="bottom" constant="6" id="fVw-SX-mF4"/>
@@ -206,9 +213,4 @@
         <image name="signInPwd" width="240" height="46"/>
         <image name="twpLogo" width="160" height="71"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

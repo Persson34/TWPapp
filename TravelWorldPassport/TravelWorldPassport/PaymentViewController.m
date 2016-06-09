@@ -42,9 +42,11 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
     __weak IBOutlet UIButton *payBtn;
     
     TWPShipping *currentShipping;
+    UITextField *activeTextField;
 }
 
-@property(nonatomic) STPPaymentCardTextField *paymentTextField;
+@property (nonatomic) STPPaymentCardTextField *paymentTextField;
+@property (nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 
 - (IBAction)goBackTapped:(id)sender;
 - (IBAction)payTapped:(id)sender;
@@ -67,6 +69,9 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self registerForKeyboardNotifications];
+    
     // Do any additional setup after loading the view from its nib.
     [ARAnalytics pageView:@"Payment View"];
     
@@ -120,10 +125,56 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
 }
 
+- (void)viewDidLayoutSubviews {
+    self.paymentTextField.center = CGPointMake(self.view.center.x, 107 + 44 / 2);
+
+    if (self.view.frame.size.height > 568)
+    {
+        _heightConstraint.constant = self.view.frame.size.height - 60 - 57;
+    }
+    else
+    {
+        _heightConstraint.constant = 568 - 60 - 57;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0.0, kbSize.height, 0.0);
+    bgScrollView.contentInset = contentInsets;
+    bgScrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeTextField.frame.origin)) {
+        CGPoint scrollPoint = CGPointMake(0, activeTextField.frame.origin.y-kbSize.height);
+        [bgScrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    bgScrollView.contentInset = contentInsets;
+    bgScrollView.scrollIndicatorInsets = contentInsets;
 }
 
 #pragma mark - Helpers
@@ -151,28 +202,34 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
 
 -(void)sendAndPlaceOrder{
     
-    //     beat.test.travelworldpassport.com/app_dev.php/nl/app/placeorder
-    // userid
-    // stamps (ids array)
-    NSArray *stamIdArray=  [self.stampsToOrder valueForKeyPath:@"stampId"];
+    NSArray *stamIdArray = [self.stampsToOrder valueForKeyPath:@"stampId"];
     
     NSString *stampIdString = [stamIdArray componentsJoinedByString:@","];
     NSDictionary *params = @{@"userid":@(self.currentUser.userId),@"stamps":stampIdString };
-    // Now send it back to the server
+
     [[TWPEngine sharedEngine]placeAndSaveOrder:params onCompletion:^(NSData *responseString, NSError *theError) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
-        if ([[respDict objectForKey:@"meta"]isEqualToString:@"OK"]) {
-            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your order has been placed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [anAlert show];
-            
-        }
-        else{
-            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"Something went wrong with your order." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [anAlert show];
-        }
-        //        NSString *resp = [[NSString alloc]initWithData:responseString encoding:NSUTF8StringEncoding];
         
+        if (responseString)
+        {
+            NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
+            
+            if ([[respDict objectForKey:@"meta"]isEqualToString:@"OK"])
+            {
+                UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Success!" message:@"Your order has been placed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [anAlert show];
+            }
+            else
+            {
+                UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"Something went wrong with your order." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [anAlert show];
+            }
+        }
+        else
+        {
+            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"No data from server while placing and saving order" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [anAlert show];
+        }
     }];
 }
 
@@ -194,20 +251,12 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
 #pragma mark - UITextFieldDelegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField == cityLabel || textField == stateLabel|| textField== address2Label || textField== address1Label) {
-         // Shift the scroll view a little up
-        [bgScrollView setContentOffset:CGPointMake(0, 95)];
-    }
-    if (textField == postalCodeLabel) {
-        // Shift another level up
-         [bgScrollView setContentOffset:CGPointMake(0, 200)];// Keyboard and tool bar also
-    }
+    activeTextField = textField;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField == cityLabel || textField == stateLabel || textField == postalCodeLabel) {
-        [bgScrollView setContentOffset:CGPointMake(0, 0)];
-    }
+    activeTextField = nil;
+
     [textField resignFirstResponder];
 }
 
@@ -252,25 +301,35 @@ static NSString* const kLiveServerURL=@"http://www.travelworldpassport.com/webap
     NSDictionary *params = @{@"user_id":@(self.currentUser.userId),@"stripe_token":token.tokenId,@"cost":@([self.stampsToOrder count]*STAMP_COST)};
     
     [[TWPEngine sharedEngine] createBackendChargeWithParameters:params onCompletion:^(NSData *responseString, NSError *theError) {
-        NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
-        if ([[respDict objectForKey:@"meta"] isEqualToString:@"OK"])
+        if (responseString)
         {
-            completion(YES);
+            NSDictionary *respDict = [NSJSONSerialization JSONObjectWithData:responseString options:NSJSONReadingAllowFragments error:nil];
+            if ([[respDict objectForKey:@"meta"] isEqualToString:@"OK"])
+            {
+                completion(YES);
+            }
+            else
+            {
+                NSString *errorMessage = [NSString stringWithFormat:@"Backend code %@. ", respDict[@"code"]];
+                if (respDict[@"error_msg"])
+                {
+                    errorMessage = [errorMessage stringByAppendingString:respDict[@"error_msg"]];
+                }
+                
+                [[[UIAlertView alloc]initWithTitle:@"Error while backend charging!"
+                                           message:errorMessage
+                                          delegate:nil
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil] show];
+                
+                completion(NO);
+            }
         }
         else
         {
-            NSString *errorMessage = [NSString stringWithFormat:@"Backend code %@. ", respDict[@"code"]];
-            if (respDict[@"error_msg"])
-            {
-                errorMessage = [errorMessage stringByAppendingString:respDict[@"error_msg"]];
-            }
+            UIAlertView *anAlert = [[UIAlertView alloc]initWithTitle:@"Error!" message:@"No data from server while creating backend charge" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [anAlert show];
             
-            [[[UIAlertView alloc]initWithTitle:@"Error while backend charging!"
-                                       message:errorMessage
-                                      delegate:nil
-                             cancelButtonTitle:@"OK"
-                             otherButtonTitles:nil] show];
-
             completion(NO);
         }
     }];

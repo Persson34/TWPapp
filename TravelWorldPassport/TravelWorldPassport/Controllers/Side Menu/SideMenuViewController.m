@@ -59,6 +59,13 @@
     }
 }
 
+- (void)viewDidLayoutSubviews {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    CGRect frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, screenHeight);
+    self.view.frame = frame;
+}
+
 -(void)configureForUser:(TWPUser *)theUser{
     currentUser = theUser;
 
